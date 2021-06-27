@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register School | WeMeet</title>
+    {% load static %}
+    <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
+   
+    <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesstylesheet" type="text/css" />
+    <link href="{% static 'css/register_admin.css'%}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon/favicon.ico' %}">
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">  </head>
+  <body>
+
+
+{% include "bgone.html" %}
+
+
+
+   
+<div class="container">
+  <div class="navbartwo">
+    <!-- <a href="/home">
+      <img style="z-index:100"src="{% static 'IMAGE/LOGO/WeMeet_text.png'%}" >
+      
+    </a> -->
+
+    <div class="div-img" style="z-index:100;padding-top: 18px;">
+    <a href="/" style="width: 100%;z-index:100">
+     
+    <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
+    </a>
+  </div>
+</div>
+
+
+<form action="{% url 'register_school' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}  
+<div class="main__admin" >
+  <div class="container-admin">
+  <div class="register-admin-container" style="width: 400px;">
+    <!-- <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/School.png" ></div> -->
+    <div class="input">
+      <input class="input_input" name="noOfBatches" type="text" placeholder="NO.OF BATCHES"></input>
+      <input class="input_input" name="batchStrength" type="text" placeholder="BATCH STRENGTH"></input>
+      <input class="input_input" name="batchStd" type="text" placeholder="BATCH STD"></input>
+      <textarea class="input_input" name="batchDescription" style="height:400px;; word-wrap: break-word;" type="text" placeholder="BATCH DISCRIPTION"></textarea>
+
+
+
+    </div>
+    <!-- <button class="">REGISTER</button> -->
+  </div>
+
+  <div class="register-admin-container">
+    <div class="heading_school">    <img style="z-index:100;margin-left: 36px;"src="/static/IMAGE/LOGO/School_title.svg" ></div>
+    <div class="input">
+      <input class="input_input" name="schoolName" style='margin: 16px;' type="text" placeholder="SCHOOL NAME"></input>
+      <input class="input_input" name="schoolEmail" style='margin: 16px;' type="email" placeholder="EMAIL"></input>
+      <input class="input_input" name="schoolPassword" style='margin: 16px;' type="password" placeholder="PASSWORD"></input>
+      <input class="input_input" name="schoolConfirmPassword" style='margin: 16px;' type="password" placeholder="CONFIRM PASSWORD"></input>
+      <input class="input_input" name="schoolState" style='margin: 16px;' type="text" placeholder="STATE"></input>
+      <input class="input_input" name="schoolDistrict" style='margin: 16px;' type="text" placeholder="DISTRICT-PINCODE"></input>
+      <input class="input_input" name="schoolArea" style='margin: 16px;' type="text" placeholder="AREA"></input>
+
+
+    </div>
+  </div>
+  <div class="register-admin-container" style="width: 400px;">
+    <!-- <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/School.png" ></div> -->
+    <div class="input" >
+      <!-- <img></img> -->
+
+      <input class="input_input_picture" name="schoolProfilePicture" style='border:none;' accept="image/*"    type="file" placeholder="TEXT"></input>
+      <img class="propicadd"  src="{% static 'IMAGE/LOGO/PropicSchool.svg'%}" >
+      <button onclick='resetpropicbtnbtn()'class="resetpropicbtn">X</button>
+
+      <input class="input_input" name="yrsOfSchooling" type="text" placeholder="YEARS OF SCHOOLING"></input>
+      <input class="input_input" name="yrStartes" type="text" placeholder="YEAR STARTED"></input>
+      <textarea class="input_input" name="schoolDescription" style="height:258px;; word-wrap: break-word;" type="text" placeholder="DISCRIPTION"></textarea>
+
+
+    </div>
+    <!-- <button class="">REGISTER</button> -->
+  </div>
+
+</div>
+<div class="btn-align" style='display: flex; justify-content: center;'>
+  <button style="z-index:100;margin:10px;" class="">REGISTER<img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></button>
+  <input type="reset" onclick="resetbtm();"  value="X">
+</div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+  <script src="{% static 'JS/register.js'%}"></script>
+
+  </body>
+</html>

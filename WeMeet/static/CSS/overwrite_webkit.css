@@ -1,0 +1,238 @@
+:root{
+    --WeMeet-pri: #FF002B;
+}
+
+
+button{
+    width: 170px;
+    height: 46.3px;
+    
+    background: var(--WeMeet-pri);
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6.8565px;
+    font-family: 'Montserrat',sans-serif;;
+    font-weight: 800;
+    display: flex;
+    color: #0C1014;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+buttonsmall{
+    width: 170px;
+    height: 46.3px;
+    
+    background: var(--WeMeet-pri);
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6.8565px;
+    /* font-family: montserrat; */
+    font-weight: 800;
+    padding-left: 24px;
+    width: 73px;
+    z-index: 1;
+    margin: 10px;
+    height: 41px;
+    border-radius: 10px;
+}
+
+input {
+    height: 97%;
+    width: 100%;
+    height: 53px;
+    border-radius: 20px;
+    background: none;
+    color: var(--WeMeet-pri);
+    outline: none;
+    border: 1px var(--WeMeet-pri) solid;
+    font-family: courier;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 30px;
+    margin: 10px;
+    text-align: center;
+
+    font-weight: 700;
+
+}
+input::placeholder{
+    text-align: center;
+}
+button:hover{
+    color: var(--WeMeet-pri);
+    border:1px solid var(--WeMeet-pri);
+    background:#0C1014;
+}
+buttonsmall:hover{
+    color: var(--WeMeet-pri);
+    border:1px solid var(--WeMeet-pri);
+    background:#0C1014;
+}
+
+button:focus{
+    color: var(--WeMeet-pri);
+    border:1px solid var(--WeMeet-pri);
+    background:#0C1014;
+}
+buttonsmall:focus{
+    color: var(--WeMeet-pri);
+    border:1px solid var(--WeMeet-pri);
+    background:#0C1014;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  /* border: 1px solid green; */
+  -webkit-text-fill-color: var(--WeMeet-pri);
+  -webkit-box-shadow: 0 0 0px 1000px #0C1014 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+error{
+    text-align: center;
+    z-index: 1;
+    font-family: montserrat;
+    font-weight: 1000;
+    color: #ff0000;
+    margin-bottom: 10px;
+    background-color: #000;
+}
+input[type='file' i] {
+    width: 200px;
+    height: 200px;
+    /* margin: 81px; */
+    justify-content: center;
+    border-radius: 100px;
+    border: 1px #FF0032 solid;
+    align-items: center;
+    display: inline-block;
+    z-index: 100;
+    /* width: 100%; */
+    /* padding: 120px 0 0 0; */
+    line-height: 511px;
+    /* height: 100px; */
+    overflow: hidden;
+    /* opacity:0; */
+    /* background: #FF0032; */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* background: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png') center center no-repeat #e4e4e4; */
+    /* border-radius: 20px; */
+    /* background-siz   e: 60px 60px; */
+  }
+  input[type='reset' i] {
+    width: 170px;
+    height: 46.3px;
+    
+    background: #FF0211;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6.8565px;
+    color:#0C1014;
+    /* font-family: montserrat; */
+    font-weight: 800;
+    /* padding-left: 24px; */
+    width: 48px;
+    line-height: 15px;
+    z-index: 1;
+    margin: 10px;
+    height: 46.3px;
+    border-radius: 157px;
+  }
+
+  input[type='reset' i]:hover {
+    color: #FF0211;
+    border:1px #FF0211 solid;
+    background:#0C1014;
+  }
+
+  input[type='reset' i]:focus {
+    color: #FF0211;
+    border:1px #FF0211 solid;
+    background:#0C1014;
+  }
+
+  input[type='submit' i] {
+    width: 170px;
+    height: 46.3px;
+    
+    background: var(--WeMeet-pri);
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6.8565px;
+    font-family: 'Montserrat',sans-serif;;
+    font-weight: 800;
+    display: flex;
+    color: #0C1014;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input[type='submit' i]:hover {
+    color: var(--WeMeet-pri);
+    border:1px solid var(--WeMeet-pri);
+    background:#0C1014;
+  }
+
+  input[type='submit' i]:focus {
+    color: var(--WeMeet-pri);
+    border:1px solid var(--WeMeet-pri);
+    background:#0C1014;}
+
+
+input[type='file-upload-button' i] {
+    display:none;
+}
+
+
+textarea {
+    height: 97%;
+    width: 100%;
+    height: 53px;
+    border-radius: 20px;
+    background: none;
+    resize: none;
+
+    color: var(--WeMeet-pri);
+    outline: none;
+    border: 1px var(--WeMeet-pri) solid;
+    font-family: courier;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 30px;
+    margin: 10px;
+    text-align: center;
+
+    font-weight: 700;
+
+}
+textarea::placeholder{
+    text-align: center;
+}
+
+
+::-moz-selection { /* Code for Firefox */
+    color: #0C1014;
+    background: var(--WeMeet-pri);
+  }
+  
+::selection {
+    color: #0C1014;
+    border-radius:40px;
+    background: var(--WeMeet-pri);
+  }

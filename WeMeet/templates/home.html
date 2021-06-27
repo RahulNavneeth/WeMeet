@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | WeMeet</title>
+    {% load static %}
+    <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon/favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@400;700&display=swap" rel="stylesheet">    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">     
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">  </head>
+  <body style="margin: 0px; margin-top: 8px;">
+
+    {% include "bgone.html" %}
+    
+
+
+   
+<div class="container">
+  <div class="navbar">
+    <input type="email" style="z-index: 1;"class="logIn_email" placeholder="EMAIL">
+
+    <div class="div-img" style="z-index:100">
+      <a href="/" style="width: 100%;z-index:100">
+       
+      <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100'>
+      </a>
+    </div>
+
+    <input class="logIn_password"style="z-index: 1;" type="password"  placeholder="PASSWORD">
+
+  </div>
+  <div class="main__home" style='display: flex; flex-direction: column;'>
+  <error class='error_auth'></error>
+<div class="buttonFlex">
+  <buttonsmall class="submit btnadmin" onclick="btnadminbtn()" onmouseenter="btnadminbtnEnter()" onmouseleave="btnadminbtnout()" ><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/admin.svg" ></buttonsmall> 
+  <buttonsmall class="submit btnschool" onclick="btnschoolnbtn()" onmouseenter="btnschoolnbtnEnter()" onmouseleave="btnschoolnbtnout()"><img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></buttonsmall> 
+  <buttonsmall class="submit btnstudent" onclick="btnstudentbtn()" onmouseenter="btnstudentbtnEnter()" onmouseleave="btnstudentbtnout()"><img style="z-index:100;width: 24px;padding-top: 9px;" src="/static/IMAGE/LOGO/Student.svg" ></buttonsmall> 
+  
+
+</div>
+<div class="buttonName">
+<div class='buttonNameAdmin'></div>
+<div class='buttonNameSchool'></div>
+<div class='buttonNameStudent'></div>
+</div>
+<div class="main__">
+
+  <div class="schoolInfo">
+    <div class="heading_school">    <img style="z-index:100;margin-left: 50px;"src="/static/IMAGE/LOGO/School_title.svg" ></div>
+    <div class="description_school">Register to make your school public! </div>
+    <button onclick="window.location.href='/register/school'" class="btn">REGISTER NOW<img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></button>
+  </div>
+  <div class="studentInfo">
+    <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/Student_title.svg" ></div>
+    <div class="description_student">Register to Join your school!</div>
+    <button onclick="window.location.href='/register/student'" class="btn">REGISTER NOW <img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/student.svg" ></button>
+  </div>
+  </div>
+</div>
+
+</div>
+
+
+
+  <script src="{% static 'JS/Home.js'%}"></script>
+  </body>
+</html>
