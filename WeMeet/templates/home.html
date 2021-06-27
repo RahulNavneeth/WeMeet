@@ -27,8 +27,20 @@
 
    
 <div class="container">
+  <form action="{% url 'login' %}" method='POST'>
+    {% csrf_token %}  
   <div class="navbar">
-    <input type="email" style="z-index: 1;"class="logIn_email" placeholder="EMAIL">
+    {% if request.user.is_authenticated %}
+
+
+    <div class="div-img" style="z-index:100">
+      <a href="/" style="width: 100%;z-index:100">
+       
+      <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100'>
+      </a>
+    </div>
+    {% else %}
+    <input name="emailEmail" type="text" style="z-index: 1;"class="logIn_email" placeholder="USERNAME">
 
     <div class="div-img" style="z-index:100">
       <a href="/" style="width: 100%;z-index:100">
@@ -37,18 +49,30 @@
       </a>
     </div>
 
-    <input class="logIn_password"style="z-index: 1;" type="password"  placeholder="PASSWORD">
+    <input name='password' class="logIn_password"style="z-index: 1;" type="password"  placeholder="PASSWORD">
+    {% endif %}
+
 
   </div>
   <div class="main__home" style='display: flex; flex-direction: column;'>
   <error class='error_auth'></error>
+  {% if request.user.is_authenticated %}
+  <div class="buttonFlex">
+    .YOU ARE LOGED IN .
+    <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="window.location.href='/AdminUser'; return false;">Page</button> 
+
+  </div>
+  {% else %}
 <div class="buttonFlex">
-  <buttonsmall class="submit btnadmin" onclick="btnadminbtn()" onmouseenter="btnadminbtnEnter()" onmouseleave="btnadminbtnout()" ><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/admin.svg" ></buttonsmall> 
-  <buttonsmall class="submit btnschool" onclick="btnschoolnbtn()" onmouseenter="btnschoolnbtnEnter()" onmouseleave="btnschoolnbtnout()"><img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></buttonsmall> 
-  <buttonsmall class="submit btnstudent" onclick="btnstudentbtn()" onmouseenter="btnstudentbtnEnter()" onmouseleave="btnstudentbtnout()"><img style="z-index:100;width: 24px;padding-top: 9px;" src="/static/IMAGE/LOGO/Student.svg" ></buttonsmall> 
+  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="btnadminbtn()" onmouseenter="btnadminbtnEnter()" onmouseleave="btnadminbtnout()" ><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/admin.svg" ></button> 
+  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnschool" onclick="btnschoolnbtn()" onmouseenter="btnschoolnbtnEnter()" onmouseleave="btnschoolnbtnout()"><img style="z-index:100;    width: 24px;" src="/static/IMAGE/LOGO/school.svg" ></button> 
+  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnstudent" onclick="btnstudentbtn()" onmouseenter="btnstudentbtnEnter()" onmouseleave="btnstudentbtnout()"><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/Student.svg" ></button> 
   
 
 </div>
+{% endif %}
+
+</form>
 <div class="buttonName">
 <div class='buttonNameAdmin'></div>
 <div class='buttonNameSchool'></div>
@@ -59,12 +83,12 @@
   <div class="schoolInfo">
     <div class="heading_school">    <img style="z-index:100;margin-left: 50px;"src="/static/IMAGE/LOGO/School_title.svg" ></div>
     <div class="description_school">Register to make your school public! </div>
-    <button onclick="window.location.href='/register/school'" class="btn">REGISTER NOW<img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></button>
+    <button onclick="window.location.href='/register/school'; return false;" class="btn">REGISTER NOW<img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></button>
   </div>
   <div class="studentInfo">
     <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/Student_title.svg" ></div>
     <div class="description_student">Register to Join your school!</div>
-    <button onclick="window.location.href='/register/student'" class="btn">REGISTER NOW <img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/student.svg" ></button>
+    <button onclick="window.location.href='/register/student'; return false;" class="btn">REGISTER NOW <img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/student.svg" ></button>
   </div>
   </div>
 </div>

@@ -1,15 +1,13 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
 
 # from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 # from django.db.models.deletion import CASCADE
 
 
 class school(models.Model):
-    school_name = models.CharField(max_length=100,null=False)
-    school_email = models.EmailField(max_length=50,null=False)
-    school_joined_WeMeet = models.DateTimeField(auto_now_add=True)
-    school_password = models.CharField(max_length=15,null=False)
+    user = models.OneToOneField(User,related_name="user_school",on_delete=models.CASCADE,null=False)
     school_url = models.CharField(max_length=30,null=False)
     school_propic = models.ImageField()
     school_address_state = models.CharField(max_length=100,null=False)
@@ -19,7 +17,8 @@ class school(models.Model):
     school_noof_batch = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)])
 
     def __str__(self):
-        return self.school_name
+        return self.user.username
+
 
 
 class batch(models.Model):

@@ -131,9 +131,7 @@ body{
 
 
 
-.bg1    {
-    position:fixed;
-}
+
 
 
 .bg1 img{
@@ -144,8 +142,8 @@ body{
     /* height: 37px; */
     top: -63px;
     left: 50%;
-    z-index: 99;
-    /* transform: translate(-50%,0%); */
+    z-index: -1;
+    transform: translate(-50%,0%);
     animation: bg1 110s infinite;    
 }
 @keyframes bg1{
@@ -166,10 +164,15 @@ body{
 .buttonFlex{
     flex: 25%;
     max-width: 100%;
+    z-index: 100;
+    color: #ff002d;
     height: 101%;
+    font-size: 20px;
+    font-weight: 600;
     display: flex;
     /* padding-bottom: 4rem; */
     border-radius: 20px;
+    font-family: 'Montserrat';
     margin-top: -9px;
     max-width: 121%;
     justify-content: center;

@@ -2,11 +2,15 @@
     --WeMeet-pri: #FF002B;
 }
 
+body{
+  background-color:#0C1014;
+
+}
 
 button{
     width: 170px;
     height: 46.3px;
-    
+    margin: 10px;
     background: var(--WeMeet-pri);
     border: none;
     box-sizing: border-box;

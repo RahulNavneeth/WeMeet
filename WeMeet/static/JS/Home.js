@@ -29,18 +29,18 @@ function btnstudentbtnout(){
 
 //================================AuthError Method for ajax================================//
 
-function btnadminbtn(){
-    error_auth.innerHTML="Admin Login is not Authenticated"
+// function btnadminbtn(){
+//     error_auth.innerHTML="Admin Login is not Authenticated"
 
-    setTimeout(function(){ error_auth.innerHTML='' }, 2000);
-}
-function btnschoolnbtn(){
-    error_auth.innerHTML="School Login is not Authenticated"
+//     setTimeout(function(){ error_auth.innerHTML='' }, 2000);
+// }
+// function btnschoolnbtn(){
+//     error_auth.innerHTML="School Login is not Authenticated"
 
-    setTimeout(function(){ error_auth.innerHTML='' }, 2000);
-}
-function btnstudentbtn(){
-    error_auth.innerHTML="Student Login is not Authenticated"
+//     setTimeout(function(){ error_auth.innerHTML='' }, 2000);
+// }
+// function btnstudentbtn(){
+//     error_auth.innerHTML="Student Login is not Authenticated"
 
-    setTimeout(function(){ error_auth.innerHTML='' }, 2000);
-}
+//     setTimeout(function(){ error_auth.innerHTML='' }, 2000);
+// }

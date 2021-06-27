@@ -23,7 +23,9 @@ from WeMeet.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.HomePage),
-    path('register/school', views.register_school_page),
+    path('register/school', views.register_school_page,name='registerSchool'),
     path('register/student', views.register_student_page),
-    path('registered_school',views.register_school,name='register_school')
+    path('login',views.loginPage,name='login'),
+    path('logout',views.logoutUser,name='logout'),
+    path('AdminUser',views.AdminUser),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
