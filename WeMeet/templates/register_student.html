@@ -57,7 +57,9 @@
       <input class="input_input" style='margin: 16px;' type="text" name='studentState' placeholder="STATE"></input>
       <input class="input_input" style='margin: 16px;' type="text" name='studentDistrict' placeholder="DISTRICT-PINCODE"></input>
       <input class="input_input" style='margin: 16px;' type="text" name='studentArea' placeholder="AREA"></input>
-
+      {% for message in messages %}
+      <error class='error_auth'>{{message|striptags}}</error>
+      {% endfor %}
 
     </div>
   </div>
@@ -83,7 +85,7 @@
       <button onclick='resetpropicbtnbtn()'class="resetpropicbtn">X</button>
 
       <input class="input_input" type="text" name='studentStandard'placeholder="STANDARD"></input>
-      <textarea class="input_input" style="height: 62px; word-wrap: break-word;" name='studentDescription' type="text" placeholder="DISCRIPTION"></textarea>
+      <textarea class="input_input" style="height: 62px; word-wrap: break-word;" name='studentDescription' type="text" placeholder="DESCRIPTION"></textarea>
 
 
     </div>

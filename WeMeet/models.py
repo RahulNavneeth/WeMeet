@@ -54,10 +54,10 @@ class student(models.Model):
     student_address_district = models.CharField(max_length=100,null=False)
     student_address_area = models.CharField(max_length=100,null=False)
     student_description = models.CharField(max_length=300)
-    school_reference_id_student = models.ForeignKey(school,on_delete=models.CASCADE)
-    batch_reference_id_student = models.ForeignKey(batch,on_delete=models.CASCADE)
+    school_reference_id_student = models.ForeignKey(school,related_name="student_school",on_delete=models.CASCADE)
+    batch_reference_id_student = models.ForeignKey(batch,related_name="student_batch",on_delete=models.CASCADE)
 
     def __str__(self):
-        return 'Name: '+str(self.user.username)+' , '+'Pet Name: '+str(self.student_aka_name)    
+        return 'School: '+ str(self.school_reference_id_student)+ ' , Name: '+str(self.user.username)+' , '+'Pet Name: '+str(self.student_aka_name)    
     def __unicode__(self): 
         return self.batch_reference_id_student

@@ -75,7 +75,7 @@
       {% elif request.user.is_authenticated and request.user.groups.all.0.name  == "Student" %}
       <div class="buttonFlex">
         .YOU ARE LOGED IN .
-        <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="window.location.href='/school'; return false;">{{request.user.groups.all.0}}</button> 
+        <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="window.location.href='/student'; return false;">{{request.user.groups.all.0}}</button> 
 
 
     </div>

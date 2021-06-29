@@ -13,19 +13,6 @@
     font-weight: 700;
 
 }
-
-.welcomee{
-    width: 100%;
-    color: #FF002B;
-    font-family: courier;
-    text-align: center;
-    font-size: 30px;
-    height: 100%;
-    padding: 0%;
-    font-weight: 700;
-
-}
-
 .main{
     width: 90%;
     padding: 20px;
@@ -133,16 +120,31 @@
     align-items: center;
 }
 
-
+.m{
+    background: #ff002b;
+    z-index: 100;
+    width: 400px;
+    display: flex;
+    height: 230px;
+    /* backdrop-filter: drop-shadow(2px 19px 16px black); */
+    padding: 20px;
+    box-shadow: -44px 9px 53px rgb(0 0 0 / 25%);
+    margin: 30px;
+    border-radius: 30px;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    transition: 0.1s all ease-in-out;
+}
 
 .b{
     text-align: center;
     z-index: 1;
     font-family: courier;
     font-weight: 1000;
-    display: flex;
     font-size: 23px;
-
+    color: #FF002B;
     /* border-radius: 60px; */
     padding: 10px;
     margin-bottom: 8px;
@@ -150,15 +152,6 @@
     /* border: 0.82797px solid #D41341; */
     box-sizing: border-box;
     backdrop-filter: blur(3px);
-    justify-content: center;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
-}
-
-.btx{
-    color: #FF002B;
-    font-size: 23px;
 }
 
 .batchs{
@@ -191,3 +184,4 @@
     color:#ff002b;
     border:1px #ff002b solid;
 }
+

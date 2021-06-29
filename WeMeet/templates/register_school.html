@@ -42,7 +42,7 @@
       <input class="input_input" name="noOfBatches" type="text" placeholder="NO.OF BATCHES"></input>
       <input class="input_input" name="batchStrength" type="text" placeholder="BATCH STRENGTH"></input>
       <input class="input_input" name="batchStd" type="text" placeholder="BATCH STD"></input>
-      <textarea class="input_input" name="batchDescription" style="height:400px;; word-wrap: break-word;" type="text" placeholder="BATCH DISCRIPTION"></textarea>
+      <textarea class="input_input" name="batchDescription" style="height:400px;; word-wrap: break-word;" type="text" placeholder="BATCH DESCRIPTION"></textarea>
 
 
 
@@ -67,10 +67,10 @@
         <input class="input_input" name="schoolDistrict" style='margin: 16px;' type="text" placeholder="DISTRICT-PINCODE"></input>
         <input class="input_input" name="schoolArea" style='margin: 16px;' type="text" placeholder="AREA"></input>
 
-
-
-
-
+    
+        {% for message in messages %}
+        <error class='error_auth'>{{message|striptags}}</error>
+        {% endfor %}
 
 
 
@@ -95,7 +95,7 @@
 
       <input class="input_input" name="yrsOfSchooling" type="text" placeholder="YEARS OF SCHOOLING"></input>
       <input class="input_input" name="yrStartes" type="text" placeholder="YEAR STARTED"></input>
-      <textarea class="input_input" name="schoolDescription" style="height:258px;; word-wrap: break-word;" type="text" placeholder="DISCRIPTION"></textarea>
+      <textarea class="input_input" name="schoolDescription" style="height:258px;; word-wrap: break-word;" type="text" placeholder="DESCRIPTION"></textarea>
 
 
     </div>
@@ -114,6 +114,10 @@
 
 
   <script src="{% static 'JS/register.js'%}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+  
 
+  
+  </script>
   </body>
 </html>

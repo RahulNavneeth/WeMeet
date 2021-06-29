@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School | {{request.user}}</title>
+    <title>Student | {{request.user}}</title>
     <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesstylesheet" type="text/css" />
     <link href="{% static 'css/school.css'%}" rel="stylesheet" type="text/css" />
     <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
@@ -17,16 +17,11 @@
         <div class="navi">
             
             <button style='margin-top: 21px;;' onclick="window.location.href='/'">Home</button>
-
-
-
             <div class="div-img" style="z-index:100;padding-top: 18px;">
             <a href="/" style="width: 100%;z-index:100">
                  <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
             </a>
           </div>
-
-
           <button style='margin-top: 21px;;'onclick="window.location.href='/logout'">LOGOUT</button>
         </div>
         <div class="Mmain___">
@@ -34,36 +29,29 @@
      
     <div  class="main">
         <div class='welcome' style="border-radius:30px;color:#FF002B">{{request.user }}</div>
-        <img style='border-radius:1000px;width: 150px;height: 150px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
+        <img style='border-radius:1000px;width: 150px;height: 150px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
         <div class='welcome' style="border-radius:30px;color:#FF002B">MEMBER: {{request.user.groups.all.0 }}</div>
-        <div class='welcome' style="border-radius:30px;color:#FF002B">{{request.user.user_school.school_url}}</div>
-
-
-
-
-        
-
+        <div class='welcome' style="border-radius:30px;color:#FF002B">STD: {{request.user.user_student.student_std}}</div>
     </div>
 
     </div>
-    <div class="infoFlex b">
-        <div class='welcome btx' style="border-radius:30px;color:#FF002B">BATCH: {{ request.user.user_school.school_batch.count }}</div>
-
-        <div class='welcome btx'>.BATCHES.</div>
-
-        <div class='welcome btx' style="border-radius:30px;color:#FF002B">STUDENTS: {{ request.user.user_school.student_school.count }}</div>
-    </div>
+    <div class='welcome b'>.SCHOOL.</div>
 
     <div class="batch_container">
-    {% for i in request.user.user_school.school_batch.all %}
-    <div class="batch">
-        <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{i.batch_year.year}} </div>
-        <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{i.batch_std}} </div>
-        <div class='welcome' style="font-size:20px;font-weight:1000;border-radius:30px;color:#0C1014;"> {{i.batch_url}} </div>
+    <div class="batch" onclick='ShowBatch()'>
+        <div onclick='ShowBatch()' class='welcome' style="border-radius:30px;color:#0C1014;"> {{request.user.user_student.school_reference_id_student.user.username}} </div>
+        <!-- <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{request.user.user_student.student_std}} </div> -->
+        <!-- <div class='welcome' style="font-size:20px;font-weight:1000;border-radius:30px;color:#0C1014;"> {{i.batch_url}} </div> -->
     </div>
-    {% endfor %}
+    <!-- <div class="batch bt">
+        <div onclick='ShowBatch()' class='welcome' style="border-radius:30px;color:#0C1014;"> {{request.user.user_student.school_reference_id_student.user.username}} </div>
+        <!-- <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{request.user.user_student.student_std}} </div> -->
+        <!-- <div class='welcome' style="font-size:20px;font-weight:1000;border-radius:30px;color:#0C1014;"> {{i.batch_url}} </div> -->
+    </div> -->
     </div>
     </div>
 
-</body>
+
+
+    <script src="{% static 'JS/student.js'%}"></script></body>
 </html>
