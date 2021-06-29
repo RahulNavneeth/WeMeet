@@ -105,13 +105,22 @@ select:-webkit-autofill:focus {
 }
 
 error{
-    text-align: center;
-    z-index: 1;
-    font-family: montserrat;
-    font-weight: 1000;
-    color: #ff0000;
-    margin-bottom: 10px;
-    background-color: #000;
+  text-align: center;
+  z-index: 1;
+  font-family: courier;
+  font-weight: 1000;
+  font-size: 22px;
+  color: #FF0009;
+  /* border-radius: 60px; */
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  /* border: 0.82797px solid #D41341; */
+  box-sizing: border-box;
+  backdrop-filter: blur(3px);
+  -webkit-animation: cssAnimation 5s forwards; 
+  animation: cssAnimation 5s forwards;
+  /* background-color: rgba(7, 10, 14);*/
 }
 input[type='file' i] {
     width: 200px;
@@ -240,3 +249,15 @@ textarea::placeholder{
     border-radius:40px;
     background: var(--WeMeet-pri);
   }
+
+
+  @keyframes cssAnimation {
+    0%   {visibility: visible;}
+    90%  {visibility: visible;}
+    100% {visibility: hidden;}
+}
+@-webkit-keyframes cssAnimation {
+    0%   {visibility: visible;}
+    90%  {visibility: visible;}
+    100% {visibility: hidden;}
+}

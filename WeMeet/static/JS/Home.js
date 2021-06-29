@@ -6,7 +6,7 @@ const buttonNameAdmin = document.querySelector(".buttonNameAdmin")
 const buttonNameSchool = document.querySelector(".buttonNameSchool")
 const buttonNameStudent = document.querySelector(".buttonNameStudent")
 
-const error_auth = document.querySelector(".error_auth")
+// const error_auth = document.querySelector(".error_auth")
 
 function btnadminbtnEnter(){
     buttonNameAdmin.innerHTML='.Admin.'
@@ -26,6 +26,10 @@ function btnschoolnbtnout(){
 function btnstudentbtnout(){
     buttonNameStudent.innerHTML=''
 }
+
+setTimeout(function() {
+    document.querySelector(".error_auth").style.display='none'
+}, 5000);
 
 //================================AuthError Method for ajax================================//
 

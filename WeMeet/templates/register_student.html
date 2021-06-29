@@ -38,55 +38,59 @@
 </div>
 
 
-<form>
+
+<form action="{% url 'registerStudent' %}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}  
 <div class="main__admin" >
   <div class="container-admin">
-  <div class="register-admin-container" style="width: 400px;">
-    <!-- <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/School.png" ></div> -->
-    <div class="input">
-      <input class="input_input" type="text" placeholder="NO.OF BATCHES"></input>
-      <input class="input_input" type="text" placeholder="BATCH STRENGTH"></input>
-      <input class="input_input" type="text" placeholder="BATCH STD"></input>
-      <textarea class="input_input" style="height:400px;; word-wrap: break-word;" type="text" placeholder="BATCH DISCRIPTION"></textarea>
-
-
-
-    </div>
-    <!-- <button class="">REGISTER</button> -->
-  </div>
 
   <div class="register-admin-container">
     <div class="heading_school">    <img style="z-index:100;margin-left: 36px;"src="/static/IMAGE/LOGO/Student_title.svg" ></div>
     <div class="input">
-      <input class="input_input" style='margin: 16px;' type="text" placeholder="SCHOOL NAME"></input>
+      <!-- <input class="input_input" style='margin: 16px;' type="text" placeholder="SCHOOL NAME"></input>
       <input class="input_input" style='margin: 16px;' type="email" placeholder="EMAIL"></input>
       <input class="input_input" style='margin: 16px;' type="password" placeholder="PASSWORD"></input>
-      <input class="input_input" style='margin: 16px;' type="password" placeholder="CONFIRM PASSWORD"></input>
-      <input class="input_input" style='margin: 16px;' type="text" placeholder="STATE"></input>
-      <input class="input_input" style='margin: 16px;' type="text" placeholder="DISTRICT-PINCODE"></input>
-      <input class="input_input" style='margin: 16px;' type="text" placeholder="AREA"></input>
+      <input class="input_input" style='margin: 16px;' type="password" placeholder="CONFIRM PASSWORD"></input> -->
+      {% for field in form %}
+      {{field}}
+      {% endfor %}
+      <input class="input_input" style='margin: 16px;' type="text" name='studentState' placeholder="STATE"></input>
+      <input class="input_input" style='margin: 16px;' type="text" name='studentDistrict' placeholder="DISTRICT-PINCODE"></input>
+      <input class="input_input" style='margin: 16px;' type="text" name='studentArea' placeholder="AREA"></input>
 
 
     </div>
   </div>
-  <div class="register-admin-container" style="width: 400px;">
+  <div class="regstudent">
+    <div class="register-admin-container" style="width: 400px;height: 250px;">
+      <!-- <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/School.png" ></div> -->
+      <div class="input" >
+        <!-- <img></img> -->
+        <div class="mandate">**MANDATORY**</div>
+        <input class="input_input" style='margin: 16px;' type="text" name='studentSchoolCode' placeholder="SCHOOL CODE"></input>
+        <input class="input_input" style='margin: 16px;' type="text" name='studentBatchCode' placeholder="BATCH CODE"></input>
+  
+      </div>
+      <!-- <button class="">REGISTER</button> -->
+    </div>
+  <div class="register-admin-container" style="width: 400px;    height: 500px;">
     <!-- <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/School.png" ></div> -->
     <div class="input" >
       <!-- <img></img> -->
 
-      <input class="input_input_picture" style='border:none;' accept="image/*"    type="file" placeholder="TEXT"></input>
-      <img class="propicadd"  src="{% static 'IMAGE/LOGO/PropicSchool.svg'%}" >
+      <input class="input_input_picture" style='border:none;' accept="image/*" name='studentProfilePicture'    type="file" placeholder="TEXT"></input>
+      <img class="propicadd"  src="{% static 'IMAGE/LOGO/PropicStudent.svg'%}" >
       <button onclick='resetpropicbtnbtn()'class="resetpropicbtn">X</button>
 
-      <input class="input_input" type="text" placeholder="YEARS OF SCHOOLING"></input>
-      <input class="input_input" type="text" placeholder="YEAR STARTED"></input>
-      <textarea class="input_input" style="height:258px;; word-wrap: break-word;" type="text" placeholder="DISCRIPTION"></textarea>
+      <input class="input_input" type="text" name='studentStandard'placeholder="STANDARD"></input>
+      <textarea class="input_input" style="height: 62px; word-wrap: break-word;" name='studentDescription' type="text" placeholder="DISCRIPTION"></textarea>
 
 
     </div>
     <!-- <button class="">REGISTER</button> -->
   </div>
 
+</div>
 </div>
 <div class="btn-align" style='display: flex; justify-content: center;'>
   <button style="z-index:100;margin:10px;" class="">REGISTER<img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></button>

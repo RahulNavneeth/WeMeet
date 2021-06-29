@@ -183,3 +183,12 @@
         height: 100%;
         width: 410px;  }
 } */
+
+
+.mandate{
+    font-family: courier;
+    font-size: 25px;
+    font-weight: 1000;
+    margin-top: 14px;
+    color: #FF002B;
+}

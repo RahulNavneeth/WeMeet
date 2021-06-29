@@ -55,18 +55,35 @@
 
   </div>
   <div class="main__home" style='display: flex; flex-direction: column;'>
-  <error class='error_auth'></error>
-  {% if request.user.is_authenticated %}
+  {% for message in messages %}
+    <error class='error_auth'>{{message}}</error>
+    {% endfor %}
+
+
+  {% if request.user.is_authenticated and request.user.groups.all.0.name  == "Admin" %}
   <div class="buttonFlex">
     .YOU ARE LOGED IN .
-    <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="window.location.href='/AdminUser'; return false;">Page</button> 
-
+    <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="window.location.href='/admin/'; return false;">{{request.user.groups.all.0}}</button> 
   </div>
+
+    {% elif request.user.is_authenticated and request.user.groups.all.0.name  == "School" %}
+    <div class="buttonFlex">
+      .YOU ARE LOGED IN .
+      <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="window.location.href='/school'; return false;">{{request.user.groups.all.0}}</button> 
+   </div>
+
+      {% elif request.user.is_authenticated and request.user.groups.all.0.name  == "Student" %}
+      <div class="buttonFlex">
+        .YOU ARE LOGED IN .
+        <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="window.location.href='/school'; return false;">{{request.user.groups.all.0}}</button> 
+
+
+    </div>
   {% else %}
 <div class="buttonFlex">
-  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="btnadminbtn()" onmouseenter="btnadminbtnEnter()" onmouseleave="btnadminbtnout()" ><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/admin.svg" ></button> 
-  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnschool" onclick="btnschoolnbtn()" onmouseenter="btnschoolnbtnEnter()" onmouseleave="btnschoolnbtnout()"><img style="z-index:100;    width: 24px;" src="/static/IMAGE/LOGO/school.svg" ></button> 
-  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnstudent" onclick="btnstudentbtn()" onmouseenter="btnstudentbtnEnter()" onmouseleave="btnstudentbtnout()"><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/Student.svg" ></button> 
+  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="btnadminbtn()" onmouseenter="btnadminbtnEnter()" onmouseleave="btnadminbtnout()" name='btnadmin'><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/admin.svg" ></button> 
+  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnschool" onclick="btnschoolnbtn()" onmouseenter="btnschoolnbtnEnter()" onmouseleave="btnschoolnbtnout()" name='btnschool'><img style="z-index:100;    width: 24px;" src="/static/IMAGE/LOGO/school.svg" ></button> 
+  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnstudent" onclick="btnstudentbtn()" onmouseenter="btnstudentbtnEnter()" onmouseleave="btnstudentbtnout()" name='btnstudent'><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/Student.svg" ></button> 
   
 
 </div>
@@ -98,5 +115,10 @@
 
 
   <script src="{% static 'JS/Home.js'%}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+
+
+  </script>
   </body>
 </html>
