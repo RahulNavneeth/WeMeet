@@ -1,5 +1,6 @@
 
 import json
+from django.db.models.aggregates import Count
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -80,9 +81,13 @@ def register_school_page(request):
                 for batches in range(int(noOfBatches)):
                     skl=school.objects.get(user=profile.id)
                     randomurl=""+str(batches)
+                    
+
+
                     urlsrandomschool = random.choices(url,k=29)
                     for randomurlloop in urlsrandomschool:
                         randomurl+=randomurlloop
+
                     batchSave=batch.objects.create(
                                         batch_year=str(2021-batches)+'-06-14',
                                         batch_std=batchStd,
@@ -165,6 +170,7 @@ def register_student_page(request):
                             studentSave = student.objects.create(
                                                             user=profile,
                                                             student_aka_name=user,
+                                                            student_url=randomurl,
                                                             student_propic=studentProfilePicture,
                                                             student_address_state=studentState,
                                                             student_address_district=studentDistrict,
@@ -207,13 +213,26 @@ def register_student_page(request):
 
 
 @login_required(login_url='/')
-def schoolUser(request):
-    return render(request,'school.html')
+def schoolUser(request,schoolname):
+    if User.objects.filter(username=schoolname, groups__name='School').exists():
+        if request.user.username == schoolname:
+            return render(request,'school.html')
+        else:
+            return HttpResponse("Your are Not authorized to this school")
+    else:
+        return render(request,'404.html')
+
 
 
 @login_required(login_url='/')
-def studentUser(request):
-    return render(request,'student.html')
+def studentUser(request,studentname):
+    if User.objects.filter(username=studentname, groups__name='Student').exists():
+        if request.user.username == studentname:
+            return render(request,'student.html')
+        else:
+            return HttpResponse("Your are Not authorized to this student")
+    else:
+        return render(request,'404.html')
 
 
 def loginPage(request):
@@ -228,7 +247,7 @@ def loginPage(request):
                 if user.groups.filter(name__in=['School']).exists():
                     login(request,user)
                     print('working')
-                    return redirect('/school')
+                    return redirect('/school/'+request.user.username)
                 else:
                     messages.info(request,username+' Is Not A School')
                     return redirect('/')
@@ -269,7 +288,7 @@ def loginPage(request):
                 if user.groups.filter(name__in=['Student']).exists():
                     login(request,user)
                     print('working')
-                    return redirect('/student')
+                    return redirect('/student/'+request.user.username)
                 else:
                     messages.info(request,username+' Is Not A Student')
                     return redirect('/')
@@ -279,6 +298,245 @@ def loginPage(request):
                 return redirect('/')
 
 
+
+
+
+
+@login_required(login_url='/')
+def batchView(request,schoolname,batchurl):
+    if request.user.username == schoolname:
+        from .models import school
+        skl = school.objects.get(user=request.user)
+        if batch.objects.filter(school_reference=skl,batch_url=batchurl).exists():
+            if User.objects.filter(username=schoolname, groups__name='School').exists():
+                skl= school.objects.get(user=request.user)
+                if batch.objects.filter(school_reference=skl,batch_url=batchurl).exists():
+                    skl= school.objects.get(user=request.user)
+                    batchs= batch.objects.get(school_reference=skl,batch_url=batchurl)
+                    students= student.objects.filter(school_reference_id_student=skl,batch_reference_id_student=batchs).all()
+                    
+                    y=[]
+                    stdCount=len(students)
+                    data=[
+                        {'BATCH_ID':batchs.id,
+                            'BATCH':[{
+
+                                    'School':request.user.username,
+                                    'batch_url':batchs.batch_url,
+                                    'batch_year':str(batchs.batch_year.year),
+                                    'batch_strength':batchs.batch_strength,
+                                    'batch_description':batchs.batch_description,
+                                    'students_set':{
+                                        'students_count':stdCount,
+                                        'students_all':y
+                                    }
+                                }]
+                        
+                    }]
+                    stdCount=Count(students)
+                    for i in students:
+                        x = dict(student_id=i.id,
+                                student_details=dict(
+                                                    student_url=i.student_url,
+                                                    student_name=i.user.username,
+                                                    student_aka_name=i.student_aka_name,
+                                                    student_profilePicture=i.student_propic.url,
+                                                    student_std=i.student_std,
+                                                    student_address=dict(
+                                                                    address_state=i.student_address_state,
+                                                                    address_district=i.student_address_district,
+                                                                    address_area=i.student_address_area,
+                                                                    ),
+                                                    student_description=i.student_description
+                                                    )
+                                                    )
+                        y.append(x)
+                    s1 = json.dumps(data)
+                            
+                    json_object = json.loads(s1)
+
+                    json_formatted_str = json.dumps(json_object, indent=2)
+
+                    return render(request,'batch.html',{'data':data})
+                    # return HttpResponse(json_formatted_str, content_type="application/json")
+                else:
+                    print("1")
+            else:
+                return HttpResponse("You are not a")
+        else:
+            return HttpResponse("batch doesnt exists")
+
+    else:
+        return HttpResponse("Your are Not authorized to this School and batch")
+
+
+
+
+
+
 def logoutUser(request):
     logout(request)
     return redirect('/')
+
+def NotFoundPage404(request):
+    return render(request,'404.html')
+
+
+def adminDataBatch(request,schoolId,batchId):
+    if request.user in User.objects.filter(groups__name='Admin').all():
+        skl= school.objects.get(id=schoolId)
+        batchs= batch.objects.get(school_reference=skl,id=batchId)
+        students= student.objects.filter(school_reference_id_student=skl,batch_reference_id_student=batchs).all()
+        
+        y=[]
+        stdCount=len(students)
+        data=[{'SCHOOL':skl.user.username,
+                'BATCH':
+                {'BATCH_ID':batchs.id,
+                'BATCH_DETAILS':[{
+
+                        'batch_url':batchs.batch_url,
+                        'batch_year':batchs.batch_year.year,
+                        'batch_strength':batchs.batch_strength,
+                        'batch_description':batchs.batch_description,
+                        'students_set':{
+                            'students_count':stdCount,
+                            'students_all':y
+                        }
+                    }]
+            
+        }}]
+        stdCount=Count(students)
+        for i in students:
+            x = dict(student_id=i.id,
+                   student_details=dict(
+                                        student_url=i.student_url,
+                                        student_name=i.user.username,
+                                        student_aka_name=i.student_aka_name,
+                                        student_profilePicture=i.student_propic.url,
+                                        student_std=i.student_std,
+                                        student_address=dict(
+                                                        address_state=i.student_address_state,
+                                                        address_district=i.student_address_district,
+                                                        address_area=i.student_address_area,
+                                                        ),
+                                        student_description=i.student_description
+                                        )
+                                        )
+            y.append(x)
+        s1 = json.dumps(data)
+                
+        json_object = json.loads(s1)
+
+        json_formatted_str = json.dumps(json_object, indent=2)
+
+        return HttpResponse(json_formatted_str, content_type="application/json")
+
+    else:
+        return HttpResponse("This is only for admins")
+
+
+def adminDataSchool(request,schoolId):
+    if request.user in User.objects.filter(groups__name='Admin').all():
+        skl= school.objects.get(id=schoolId)
+        batchs= batch.objects.filter(school_reference=skl).all()
+
+        
+        y=[]
+
+        data=[
+        { 'School':skl.user.username,
+                'SCHOOL_ID':skl.id,
+                'SCHOOL':[{
+
+                        'school_url':skl.school_url,
+                        'School_ProfilePicture':skl.school_propic.url,
+                        'School_Description':skl.School_description,
+                        'School_Address':{
+                            'Address_State':skl.school_address_state,
+                            'Address_District':skl.school_address_district,
+                            'Address_Area':skl.school_address_area,
+                        },
+                        'No_Of_Batchs':skl.school_noof_batch,
+                        'BATCHS':y
+
+                    }]
+            
+        }]
+
+        for i in batchs:
+            noofstud = len(student.objects.filter(batch_reference_id_student=i.id).all())
+
+            x = dict(Batch_id=i.id,
+                    Batch_Details=dict(
+                                        Batch_url=i.batch_url,
+                                        batch_year=i.batch_year.year,
+                                        batch_std=i.batch_std,
+                                        batch_strength=i.batch_strength,
+                                        batch_description=i.batch_description,
+                                        No_of_students=noofstud,
+                                        ),
+                    link = 'http://192.168.0.5:8000/admin/data/school/'+str(skl.id)+'/batch/'+str(i.id)
+
+                                        )
+            y.append(x)
+        s1 = json.dumps(data)
+                
+        json_object = json.loads(s1)
+
+        json_formatted_str = json.dumps(json_object, indent=2)
+
+        return HttpResponse(json_formatted_str, content_type="application/json")
+
+    else:
+        return HttpResponse("This is only for admins") 
+
+
+
+def adminDataAllSchool(request):
+    if request.user in User.objects.filter(groups__name='Admin').all():
+        skl= school.objects.filter().all()
+        cntskl =len(skl)
+        
+        y=[]
+
+        data=[{
+                'No_Of_School':cntskl,
+                'SCHOOL':y
+             }]
+        
+        for i in skl:
+            noofstud = len(student.objects.filter(school_reference_id_student=i.id).all())
+            x = dict(School_id=i.id,
+                    School_Details=dict(
+                                        school_name=i.user.username,
+                                        school_url=i.school_url,
+                                        school_propic=i.school_propic.url,
+                                        School_description=i.School_description,
+                                        school_noof_batchs=i.school_noof_batch,
+                                        school_noof_students=noofstud,
+                                        School_address=dict(
+                                            address_state=i.school_address_state,
+                                            address_district=i.school_address_district,
+                                            address_area=i.school_address_area,
+                                            )
+                                        ),
+                    link = 'http://192.168.0.5:8000/admin/data/school/'+str(i.id)
+                                    
+                                        )
+            y.append(x)
+        s1 = json.dumps(data)
+                
+        json_object = json.loads(s1)
+
+        json_formatted_str = json.dumps(json_object, indent=2)
+
+        return HttpResponse(json_formatted_str, content_type="application/json")
+
+    else:
+        return HttpResponse("This is only for admins") 
+
+
+
+
+        

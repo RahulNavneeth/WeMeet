@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="{% static 'css/batch.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/batch.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/batch.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/batch.css'%}" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{data.0.BATCH.0.School}} | {{data.0.BATCH.0.batch_year}}</title>
+</head>
+<body style='margin:0px'>
+    
+    {% include "bgone.html" %}
+
+
+
+    <div class="container">
+<!-- <div style='color:#fff;' class="datachk">{{data.0.BATCH}}</div> -->
+        <div class="navbar" style="z-index:100">
+    
+          
+          <a href="/" style="z-index:100">
+           
+          <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100; margin: 6px; margin-top: 14px;'>
+          </a>
+        </div>
+        <div class="rightprofile">
+          
+          <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
+    
+          {% if request.user.groups.all.0.name  == "Student" %}
+          <a style='z-index: 100;' href="/student/{{request.user.username}}">
+    
+          
+    
+        <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
+          </a>  
+        {% elif request.user.groups.all.0.name  == "School" %}
+        <a style='z-index: 100;' href="/school/{{request.user.username}}">
+    
+        <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
+        </a> 
+        {% else %}
+    
+        <a style='z-index: 100;' href="/admin">
+    
+          <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
+          </a> 
+    
+        {% endif %}
+        </div>
+
+        <div class="mainBatch">
+
+        <img class="batchProfilePicture" src= "{% static 'IMAGE/media/batchDefaults/'|add:data.0.BATCH.0.batch_year|add:'.png' %}">
+        
+
+        <div class="studentslist">
+          <div class="flexpropic">
+            <img class="studentprofilePicture" src={{request.user.user_school.school_propic.url}}>
+              <div class="sep">|</div>
+        {% for i in data.0.BATCH.0.students_set.students_all %}
+          <img src='{{i.student_details.student_profilePicture}}' class="studentprofilePicture">
+        {% endfor %}
+      </div>
+
+        </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+    
+    
+</body>
+</html>

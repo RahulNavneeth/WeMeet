@@ -10,7 +10,7 @@ from django.conf import settings
 class school(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="user_school",on_delete=models.CASCADE,null=False)
     school_url = models.CharField(max_length=30,null=False)
-    school_propic = models.ImageField()
+    school_propic = models.ImageField(upload_to='ProfilePicture/')
     school_address_state = models.CharField(max_length=100,null=False)
     school_address_district = models.CharField(max_length=100,null=False)
     school_address_area = models.CharField(max_length=100,null=False)
@@ -47,7 +47,7 @@ class student(models.Model):
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="user_student",on_delete=models.CASCADE,null=False)
     student_aka_name = models.CharField(max_length=30,null=False)
-    student_propic = models.ImageField()
+    student_propic = models.ImageField(upload_to='ProfilePicture/')
     student_std = models.IntegerField(choices=std_choice,null=False)
     student_url =models.CharField(max_length=30,null=False)
     student_address_state = models.CharField(max_length=100,null=False)

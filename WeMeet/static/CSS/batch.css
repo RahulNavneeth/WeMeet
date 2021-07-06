@@ -1,0 +1,83 @@
+
+.mainBatch{
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.batchProfilePicture{
+
+    border-radius: 100%;
+    background:#ff002b;
+    width:135px;
+    margin: 10px;
+    height:135px;
+
+}
+
+
+.studentprofilePicture{
+
+    border-radius: 100%;
+    background:#ff002b;
+    width:45px;
+    margin: 10px;
+    height:45px;
+
+}
+
+/* .studentprofilePicture:hover{
+    margin-top: 3px;
+    border: 1px #ff002b solid;
+
+} */
+
+.studentslist{
+    border: 1px #ff002b solid;
+    z-index: 100;
+    border-radius: 100px;
+    /* display: flex; */
+    /* position: fixed; */
+    margin:10px;
+    width: 99%;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.flexpropic{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.sep{
+    color: #ff002b;
+    font-family: courier;
+    font-size: 40px;
+}
+
+
+@media screen and (max-width: 618px) {
+    .batchProfilePicture{
+        width: 105px;
+        height: 105px;
+    }
+    .studentslist{
+        height: 45px;
+    }
+    .studentprofilePicture{
+        margin:0px;
+        width:33px;
+        height:33px;
+
+        margin-left: 10px;
+    }
+}

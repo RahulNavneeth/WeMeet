@@ -95,13 +95,18 @@
 }
 
 
-@media screen and (max-width: 554px) {
+@media screen and (max-width: 557px) {
     .navi{
         flex-direction: column;
     }
 }
 
-
+.tt{
+    font-size:20px;
+    font-weight:1000;
+    border-radius:30px;
+    color:#0C1014;
+}
 .batch{
     background: #ff002b;
     z-index: 100;
@@ -190,4 +195,50 @@
     backdrop-filter: blur(3px);
     color:#ff002b;
     border:1px #ff002b solid;
+}
+
+@media screen and (max-width: 610px) {
+    .t {
+        font-size:19px;
+  }
+  
+}
+
+@media screen and (max-width: 610px) {
+    .tt {
+        font-size:18px;
+  }
+  .batch{
+      width:100%;
+  }
+}
+
+@media screen and (max-width: 376px) {
+    .t {
+        font-size:17px;
+  }
+  .tt {
+    font-size:17px;
+}
+  
+}
+
+@media screen and (max-width: 320px) {
+    .t {
+        font-size:14px;
+  }
+  .tt {
+    font-size:14px;
+}
+  
+}
+
+@media screen and (max-width: 280px) {
+    .t {
+        font-size:12px;
+  }
+  .tt {
+    font-size:12px;
+}
+  
 }

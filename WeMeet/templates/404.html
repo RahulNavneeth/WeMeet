@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | WeMeet </title>
+    <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesstylesheet" type="text/css" />
+    <link href="{% static 'css/school.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
+
+</head>
+<style>
+
+.f404{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.navit{
+    background: #e8e8e9;
+    flex: 25%;
+    max-width: 100%;
+    height: 101%;
+    display: flex;
+    padding-bottom: 4rem;
+    /* border-radius: 20px; */
+    margin-top: -13px;
+    background: rgba(7, 10, 14, 0.75);
+    /* border: 0.82797px solid #D41341; */
+    box-sizing: border-box;
+    backdrop-filter: blur(5px);
+    margin-bottom: 10px;
+    z-index: 1;
+    max-width: 121%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    /* padding: 9px; */
+    flex-wrap: wrap;
+}
+</style>
+
+<body style='margin:0px;' >
+    {% include "bgone.html" %}
+    <div class="f404">
+    <div style='width: 100%;' class="navit">
+        <div class="div-img" style="z-index:100;padding-top: 18px;">
+        <a href="/" style="width: 100%;z-index:100">
+             <img  src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
+        </a>
+      </div>
+    </div>
+    <img style='width: 50%;' src="{% static 'IMAGE/LOGO/404.svg'%}" alt="">
+    </div>  
+</body>
+</html>

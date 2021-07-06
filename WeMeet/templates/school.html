@@ -36,7 +36,7 @@
         <div class='welcome' style="border-radius:30px;color:#FF002B">{{request.user }}</div>
         <img style='border-radius:1000px;width: 150px;height: 150px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
         <div class='welcome' style="border-radius:30px;color:#FF002B">MEMBER: {{request.user.groups.all.0 }}</div>
-        <div class='welcome' style="border-radius:30px;color:#FF002B">{{request.user.user_school.school_url}}</div>
+        <div class='welcome t' style="border-radius:30px;color:#FF002B">{{request.user.user_school.school_url}}</div>
 
 
 
@@ -47,20 +47,23 @@
 
     </div>
     <div class="infoFlex b">
-        <div class='welcome btx' style="border-radius:30px;color:#FF002B">BATCH: {{ request.user.user_school.school_batch.count }}</div>
+        <div class='welcome tt btx' style="border-radius:30px;color:#FF002B">BATCH: {{ request.user.user_school.school_batch.count }}</div>
 
-        <div class='welcome btx'>.BATCHES.</div>
+        <div class='welcome tt btx'>.BATCHES.</div>
 
-        <div class='welcome btx' style="border-radius:30px;color:#FF002B">STUDENTS: {{ request.user.user_school.student_school.count }}</div>
+        <div class='welcome tt btx' style="border-radius:30px;color:#FF002B">STUDENTS: {{ request.user.user_school.student_school.count }}</div>
     </div>
 
     <div class="batch_container">
     {% for i in request.user.user_school.school_batch.all %}
-    <div class="batch">
+    
+    <div onclick='window.location.href="/school/{{request.user.username}}/batch/{{i.batch_url}}"' class="batch">
+       
         <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{i.batch_year.year}} </div>
         <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{i.batch_std}} </div>
-        <div class='welcome' style="font-size:20px;font-weight:1000;border-radius:30px;color:#0C1014;"> {{i.batch_url}} </div>
+        <div class='welcome tt ' > {{i.batch_url}} </div>
     </div>
+    </a>
     {% endfor %}
     </div>
     </div>
