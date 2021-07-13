@@ -124,8 +124,60 @@
     align-items: center;
     transition: 0.1s all ease-in-out;
 }
+.redirectTop{
+    background: #0c1014;
+    color: #ff002b;
+    margin: 0px;
+}
+.redirectTop:hover{
+    background:#ff002b;
+    color:#0c1014;
+    border:1px solid #0c1014;
+}
+.batchstudent{
+        margin: 10px;
+    background: #0C1014;
+    width: 100%;
+    height: 340%;
+    border-radius: 30px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.batchstud{
+    background: #ff002b;
+    z-index: 100;
+    width: 302px;
+    display: flex;
+    height: 328px;
+    /* backdrop-filter: drop-shadow(2px 19px 16px black); */
+    padding: 20px;
+    box-shadow: -44px 9px 53px rgb(0 0 0 / 25%);
+    margin: -10px;
+    border-radius: 30px;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    transition: 0.1s all ease-in-out;
+}
 .batch:hover{
     transform: translate(0px, -10px);
+}
+
+.Mbatch{
+     width: 75%;
+    margin: 20px;
+    height: 23rem;
+    background: rgba(9, 12, 16, 0.66);
+    border: 1px solid #FF002B;
+    box-sizing: border-box;
+    border-radius: 23px;
 }
 
 .batch_container{
@@ -208,11 +260,24 @@
     .tt {
         font-size:18px;
   }
-  .batch{
+    .batch{
       width:100%;
   }
+
 }
 
+@media screen and (max-width: 1502px) {
+
+  .batchstud{
+      width:100%;
+  }
+  .Mbatch{
+      width:100%;
+        margin: 0px;
+        margin-top:20px;
+    
+  }
+}
 @media screen and (max-width: 376px) {
     .t {
         font-size:17px;
