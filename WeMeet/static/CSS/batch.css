@@ -23,7 +23,7 @@
 
 .studentprofilePicture{
 
-    border-radius: 100%;
+    border-radius: 100px;
     background:#ff002b;
     width:45px;
     margin: 10px;
@@ -31,11 +31,17 @@
 
 }
 
-/* .studentprofilePicture:hover{
-    margin-top: 3px;
-    border: 1px #ff002b solid;
+.studentprofilePicture:hover{
+    border-radius: 15px;
 
-} */
+
+}
+
+.studentprofilePicture:focus{
+    border-radius: 15px;
+
+
+}
 
 .studentslist{
     border: 1px #ff002b solid;
@@ -65,6 +71,98 @@
 }
 
 
+
+
+
+.leftMain{
+    background: rgba(9, 12, 16, 0.66);
+    border: 1px solid #FF002B;
+    box-sizing: border-box;
+    border-radius: 23px;
+    width: 22%;
+    margin: 10px;
+    height: 610px;
+    background-clip: padding-box;
+
+    display: flex;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    /* margin-bottom: 1.5rem; */
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+}
+.buttonsmallre{
+      /* width: 170px; */
+    height: 46.3px;
+    background: var(--WeMeet-pri);
+    border: none;
+    box-sizing: border-box;
+    border-radius: 6.8565px;
+    font-family: montserrat;
+    font-weight: 800;
+    padding: 4px;
+    color:#0C1014;
+    /* width: 73px; */
+    text-align: center;
+    z-index: 1;
+    margin: 10px;
+    height: 41px;
+    border-radius: 10px;
+}
+.middleMain{
+    background: rgba(9, 12, 16, 0.66);
+    border: 1px solid #FF002B;
+    box-sizing: border-box;
+    border-radius: 23px;
+    /* width: 393px; */
+    height: 610px;
+    width: 50%;
+    margin: 10px;
+    background-clip: padding-box;
+
+    display: flex;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    /* margin-bottom: 1.5rem; */
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+}
+
+.rightMain{
+    background: rgba(9, 12, 16, 0.66);
+    border: 1px solid #FF002B;
+    box-sizing: border-box;
+    border-radius: 23px;
+    width: 22%;
+    margin: 10px;
+    height: 610px;
+    background-clip: padding-box;
+
+    display: flex;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    /* margin-bottom: 1.5rem; */
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+}
+
+.mainMain{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+
 @media screen and (max-width: 618px) {
     .batchProfilePicture{
         width: 105px;
@@ -80,4 +178,25 @@
 
         margin-left: 10px;
     }
+
+}
+
+@media screen and (max-width: 1004px) {
+
+    .mainMain{
+        flex-direction: column;
+    
+        }
+        .leftMain{
+            width: 90%;    }
+        .middleMain{
+            width: 90%;    }
+        .rightMain{
+            width: 90%;    }
+            ::-webkit-scrollbar {
+    
+                display: none;
+            }
+
+
 }

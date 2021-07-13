@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     {% load static %}
     <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
    
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon/favicon.ico' %}">
+    <link rel="shortcut icon"  href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -37,7 +38,8 @@
     <div class="navbar" style="z-index:100">
 
       
-      <a href="/" style="z-index:100">
+      <a class='logoflex' href="/" style="z-index:100">
+      <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    width: 60px;'>
        
       <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;    margin: 6px;'>
       </a>
@@ -47,14 +49,14 @@
       <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
 
       {% if request.user.groups.all.0.name  == "Student" %}
-      <a style='z-index: 100;' href="/student/{{request.user.username}}">
+      <a style='z-index: 100;' href="u/student/{{request.user.username}}">
 
       
 
     <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
       </a>  
     {% elif request.user.groups.all.0.name  == "School" %}
-    <a style='z-index: 100;' href="/school/{{request.user.username}}">
+    <a style='z-index: 100;' href="u/school/{{request.user.username}}">
 
     <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
     </a> 
@@ -73,8 +75,8 @@
     <div class="navbar" style="z-index:100">
     <input name="emailEmail" type="text" style="z-index: 1;"class="logIn_email" placeholder="USERNAME">
 
-      <a href="/" style="z-index:100">
-       
+    <a class='logoflex' href="/" style="z-index:100">
+      <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    margin-top: 10px;    width: 60px;'>
       <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100'>
       </a>
     <input name='password' class="logIn_password"style="z-index: 1;" type="password"  placeholder="PASSWORD">

@@ -14,7 +14,7 @@ SECRET_KEY = '$45r&4hj_$@u1vm&ts#itdgoln78rxf69c%7^j1-s3p)5b_*hy'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.5', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -129,3 +129,13 @@ CLOUDINARY_STORAGE = {
 }
 MEDIA_URL = '/media/ProfilePicture/'  # or any prefix you choose
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'wemeetweb@gmail.com'
+EMAIL_HOST_PASSWORD ='RahulNavneeth.'

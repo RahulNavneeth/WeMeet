@@ -3,6 +3,6 @@
 
 
 function ShowBatch(){
-    document.querySelector('.batch').style.width='100%';
-    document.querySelector('.batch').style.height='23rem'
+    document.querySelector('.batchstud').style.width='100%';
+    document.querySelector('.batchstud').style.height='23rem'
 }

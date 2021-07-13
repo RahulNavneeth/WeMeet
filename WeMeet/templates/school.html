@@ -3,6 +3,8 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School | {{request.user}}</title>
@@ -14,15 +16,17 @@
 <body style='margin:0px;' >
     {% include "bgone.html" %}
     <div class="container">
-        <div class="navi">
+
+        <div style='padding-top:14px;' class="navi">
             
             <button style='margin-top: 21px;;' onclick="window.location.href='/'">Home</button>
 
 
 
             <div class="div-img" style="z-index:100;padding-top: 18px;">
-            <a href="/" style="width: 100%;z-index:100">
-                 <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
+                <a class='logoflex' href="/" style="z-index:100">
+                    <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;     margin-top: -18px; margin-right: 12px;   width: 60px;'>
+                 <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100; margin-top:-18px;'>
             </a>
           </div>
 
@@ -57,16 +61,24 @@
     <div class="batch_container">
     {% for i in request.user.user_school.school_batch.all %}
     
-    <div onclick='window.location.href="/school/{{request.user.username}}/batch/{{i.batch_url}}"' class="batch">
-       
+
+    <a href=''></a>
+    <div  class="batch">
+       <button onclick='window.location.href="/school/{{request.user.username}}/batch/{{i.batch_url}}"' style='    margin: 0px;'>REDIRECT</button>
         <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{i.batch_year.year}} </div>
         <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{i.batch_std}} </div>
-        <div class='welcome tt ' > {{i.batch_url}} </div>
+       
+        <div id="hashed_{{ i.batch_year.year }}" onclick='style.display = "none";document.querySelector("#nothashed_{{ i.batch_year.year }}").style.display = "block";'  class='welcome tt hashed ' > ****************************** </div>
+        <div id="nothashed_{{ i.batch_year.year }}" style='display:none' onclick='style.display = "none";document.querySelector("#hashed_{{ i.batch_year.year }}").style.display = "block";' class='welcome tt nothashed '  > {{i.batch_url}} </div>
+    
     </div>
     </a>
     {% endfor %}
     </div>
     </div>
+
+
+    <script src="{% static 'JS/school.js'%}"></script></body>
 
 </body>
 </html>

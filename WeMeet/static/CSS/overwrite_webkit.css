@@ -43,6 +43,9 @@ buttonsmall{
     border-radius: 10px;
 }
 
+
+
+
 input {
     height: 97%;
     width: 95%;
@@ -283,4 +286,18 @@ textarea::placeholder{
   background: #706265;
   /* box-shadow: inset 0 0 5px grey; */
   border-radius: 10px;
+}
+
+.logoflex{
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+}
+
+
+title{
+  color:#ff002b;
 }

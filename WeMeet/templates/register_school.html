@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register School | WeMeet</title>
     {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
+
     <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
    
     <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesstylesheet" type="text/css" />
@@ -25,7 +27,8 @@
 <div class="container">
   <div class="navbartwo">
     <div class="div-img" style="z-index:100;padding-top: 18px;">
-    <a href="/" style="width: 100%;z-index:100">
+      <a class='logoflex' href="/" style="z-index:100">
+        <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    width: 60px;'>
          <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
     </a>
   </div>
