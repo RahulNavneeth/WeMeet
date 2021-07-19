@@ -7,6 +7,7 @@
     <title>Home | WeMeet</title>
     {% load static %}
     <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesheet" type="text/css" />
    
     <link rel="shortcut icon"  href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -90,13 +91,14 @@
   <div class="main__home" style='display: flex; flex-direction: column;'>
     {% for message in messages %}
     <error class='error_auth'>{{message}}</error>
+
+      <div  onclick='forgetPassword()' style='cursor: pointer;font-family:courier;margin:4px;    font-size: 18px;font-weight: 1000;' class="buttonFlex">.FORGET PASSWORD?? .</div>
+
     {% endfor %}
 
   {% if request.user.is_authenticated %}
 
-  <div style='margin:10px;' class="buttonFlex">
-    .YOU ARE LOGED IN .
-  </div>
+  <div style='margin:10px;' class="buttonFlex">.YOU ARE LOGED IN .</div>
 
 {% else %}
 <div class="buttonFlex">
@@ -126,6 +128,24 @@
     <div class="description_student">Register to Join your school!</div>
     <button onclick="window.location.href='/register/student'; return false;" class="btn">REGISTER NOW <img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/student.svg" ></button>
   </div>
+  <div class="forgetPassBg">
+    <form  action="{% url 'mailacc' %}" method='POST'>
+      {% csrf_token %}  
+<div id="mail" class='formmail'>
+  <input name='mail' type="email" class="enterEmail" placeholder='EMAIl'></input>
+  <button name="mailsubm" onclick='maill()' type="submit" style='    background: #0C1014; color: #ff002b;' class="submitEmail" >Submit</button>
+</div>
+
+  <div id="code" class='formmail'> 
+<input name='code' type="texet" class="enterEmail" placeholder='CODE'></input>
+<button name='codesubm'type="submit" style='    background: #0C1014; color: #ff002b;' class="submitEmail" >Submit</button>
+</div>
+</form>
+</div>
+
+
+
+
   </div>
 </div>
 

@@ -6,7 +6,6 @@ const buttonNameAdmin = document.querySelector(".buttonNameAdmin")
 const buttonNameSchool = document.querySelector(".buttonNameSchool")
 const buttonNameStudent = document.querySelector(".buttonNameStudent")
 
-// const error_auth = document.querySelector(".error_auth")
 
 function btnadminbtnEnter(){
     buttonNameAdmin.innerHTML='.Admin.'
@@ -31,20 +30,19 @@ setTimeout(function() {
     document.querySelector(".error_auth").style.display='none'
 }, 5000);
 
-//================================AuthError Method for ajax================================//
+function forgetPassword(){
+    document.querySelector(".studentInfo").style.display='none'
+    document.querySelector(".schoolInfo").style.display='none'
+    document.querySelector(".forgetPassBg").style.display='flex'
 
-// function btnadminbtn(){
-//     error_auth.innerHTML="Admin Login is not Authenticated"
 
-//     setTimeout(function(){ error_auth.innerHTML='' }, 2000);
-// }
-// function btnschoolnbtn(){
-//     error_auth.innerHTML="School Login is not Authenticated"
 
-//     setTimeout(function(){ error_auth.innerHTML='' }, 2000);
-// }
-// function btnstudentbtn(){
-//     error_auth.innerHTML="Student Login is not Authenticated"
+}
 
-//     setTimeout(function(){ error_auth.innerHTML='' }, 2000);
-// }
+
+function maill(){
+    document.querySelector("#mail").style.display='none'
+    document.querySelector("#code").style.display='flex'
+
+
+}

@@ -108,6 +108,28 @@ def register_school_page(request):
                     # btc=batch.objects.create(school_reference = skl.id)
                     # btc.save()
                 messages.info(request,"Hey "+user+", Appreciate Your Registration, Now Please LOGIN To Continue")
+                
+                mail = request.POST.get('email')
+                u = User.objects.get(email=mail)
+                skl =  school.objects.get(user=u)
+                recipient_list = [mail]
+                data = {
+                    'username': user,
+                    'profilePicture': skl.school_propic.url,
+                }
+
+                msg_plain ='Test'
+                msg_html = render_to_string('Mail/RegisterSucess.html',{'data':data})
+
+                email_from = settings.EMAIL_HOST_USER
+                send_mail(
+                    user+', Register Succesfull --WeMeet',
+                    msg_plain,
+                    email_from,
+                    recipient_list,
+                    html_message=msg_html,
+                )
+                
                 return redirect('/')
 
             else:
@@ -196,13 +218,26 @@ def register_student_page(request):
                             studentSave.save()
                             my_group = Group.objects.get(name='Student') 
                             my_group.user_set.add(profile)
-                            messages.info(request,"Hey "+user+", Appreciate Your Registration, Now Please LOGIN To Continue")
-                            subject = 'welcome to WeMeet'
-                            message = f'Hi '+ usernameusername+', Appreciate Your Registration in WeMeet.'
+                            mail = request.POST.get('email')
+                            u = User.objects.get(email=mail)
+                            skl =  student.objects.get(user=u)
+                            recipient_list = [mail]
+                            data = {
+                                'username': user,
+                                'profilePicture': skl.school_propic.url,
+                            }
+
+                            msg_plain ='Test'
+                            msg_html = render_to_string('Mail/RegisterSucess.html',{'data':data})
+
                             email_from = settings.EMAIL_HOST_USER
-                            
-                            recipient_list = [emailemail]
-                            send_mail( subject, message, email_from, recipient_list )
+                            send_mail(
+                                user+', Register Succesfull --WeMeet',
+                                msg_plain,
+                                email_from,
+                                recipient_list,
+                                html_message=msg_html,
+                            )   
                             return redirect('/')
 
                         else:
@@ -337,7 +372,7 @@ def batchView(request,schoolname,batchurl):
                         data=[
                             {'BATCH_ID':batchs.id,
                                 'BATCH':[{
-
+                                        'school_profilePicture':skl.school_propic.url,
                                         'School':request.user.username,
                                         'batch_url':batchs.batch_url,
                                         'batch_year':str(batchs.batch_year.year),
@@ -675,26 +710,82 @@ def adminDataAllSchool(request):
 
 
 def mailTest(request):
-    return render(request,'mailTest.html')
+    return render(request,'Mail/RegisterSucess.html')
 
-def mailTemplate(request):
-    return render(request,'mailTemplate.html')
+def submitCode(request,codee):
+    if request.POST.get('code') == '':
+        print(codee)
+        return HttpResponse(status=204)
+    else:
+        print(codee)
+        code = request.POST.get('code')
+        if code == codee:
+            return HttpResponse(code)
+        else:
+            return HttpResponse(status=204)
+
 
 def mailacc(request):
+
+
+    ResetCode = ascii_uppercase+'1234567890'
+    urlsrandomschool = random.choices(ResetCode,k=7)
+    randomResetCode=""
+    for randomurlloop in urlsrandomschool:
+        randomResetCode+=randomurlloop
+
+
     mail = request.POST.get('mail')
+
+    user = User.objects.get(email=mail)
+    recipient_list = [mail]
+    data = {
+        'username': user.username,
+        'code': randomResetCode,
+    }
+
     msg_plain ='Test'
-    msg_html = render_to_string('mailTemplate.html')
+    msg_html = render_to_string('Mail/PasswordResetMail.html',{'data':data})
 
     email_from = settings.EMAIL_HOST_USER
+
+
+
+
+  
     
-    recipient_list = [mail]
 
-    send_mail(
-        'Hiyall',
-        msg_plain,
-        email_from,
-        recipient_list,
-        html_message=msg_html,
-    )
 
-    return HttpResponse(request,'ye')
+    if 'mailsubm' in request.POST:
+
+        send_mail(
+            user.username+', Password Reset --WeMeet',
+            msg_plain,
+            email_from,
+            recipient_list,
+            html_message=msg_html,
+        )
+        if user in User.objects.filter(groups__name='School').all():
+            school.objects.filter(user=user).update(code=randomResetCode)
+            return HttpResponse(status=204)
+        if user in User.objects.filter(groups__name='Student').all():
+            student.objects.filter(user=user).update(code=randomResetCode)
+            return HttpResponse(status=204)
+        return HttpResponse(status=204)
+
+
+    
+    elif 'codesubm' in request.POST:
+        skl = school.objects.get(user=user)
+
+        if request.POST.get('code') == '':
+            return HttpResponse(status=204)
+        else:
+            code = request.POST.get('code')
+            print(skl.code)
+            if code == skl.code:
+                return HttpResponse(code)
+            else:
+                return HttpResponse(status=204)
+
+

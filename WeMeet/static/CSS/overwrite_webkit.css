@@ -301,3 +301,7 @@ textarea::placeholder{
 title{
   color:#ff002b;
 }
+
+a{
+  text-decoration:none;
+}

@@ -8,7 +8,6 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = '$45r&4hj_$@u1vm&ts#itdgoln78rxf69c%7^j1-s3p)5b_*hy'
 
 
@@ -27,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'WeMeet',
+    'django_inlinecss',
     'channels',
     'cloudinary_storage',
     'cloudinary',
@@ -62,6 +62,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 
 
@@ -121,7 +122,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
 STATIC_URL = '/static/'
+STATIC_ROOT = str(os.path.join(BASE_DIR, 'WeMeet/static'),)
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'wemeetweb',
     'API_KEY': '652496293865574',
@@ -130,7 +133,7 @@ CLOUDINARY_STORAGE = {
 MEDIA_URL = '/media/ProfilePicture/'  # or any prefix you choose
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
+##RahulNavneeth@12345 -- cloudinary
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

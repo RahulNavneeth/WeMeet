@@ -15,6 +15,7 @@ class school(models.Model):
     school_address_district = models.CharField(max_length=100,null=False)
     school_address_area = models.CharField(max_length=100,null=False)
     School_description = models.CharField(max_length=300)
+    code= models.CharField(max_length=30)
     school_noof_batch = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)])
 
     def __str__(self):
@@ -55,6 +56,7 @@ class student(models.Model):
     student_address_area = models.CharField(max_length=100,null=False)
     student_description = models.CharField(max_length=300)
     school_reference_id_student = models.ForeignKey(school,related_name="student_school",on_delete=models.CASCADE)
+    code= models.CharField(max_length=30)
     batch_reference_id_student = models.ForeignKey(batch,related_name="student_batch",on_delete=models.CASCADE)
 
     def __str__(self):

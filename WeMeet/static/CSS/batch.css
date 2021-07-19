@@ -26,6 +26,7 @@
     border-radius: 100px;
     background:#ff002b;
     width:45px;
+    transition: 0.2s all ;
     margin: 10px;
     height:45px;
 
@@ -35,10 +36,12 @@
     border-radius: 15px;
 
 
+
 }
 
 .studentprofilePicture:focus{
     border-radius: 15px;
+
 
 
 }
@@ -50,7 +53,7 @@
     /* display: flex; */
     /* position: fixed; */
     margin:10px;
-    width: 99%;
+    width: 97%;
     justify-content: center;
     align-items: center;
     overflow: auto;
