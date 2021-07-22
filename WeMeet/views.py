@@ -824,7 +824,72 @@ def passreset(request,code,user):
             # skl= school.objects.get(user=user,code=code)
             return render(request,'passwordReset.html',{'data':data})
 
+def updatepage(request,userid,userurl):
+    if request.user.id==userid:
+        user = User.objects.get(id=userid)
 
+        if request.method == 'POST':
+            propic = request.FILES.get('propic')
+            username = request.POST.get('username')
+            # password = request.POST.get('password')
+            description = request.POST.get('description')
+            if user in User.objects.filter(groups__name='School').all():
+                if propic is None:
+                    from .models import school
+                    
+                    User.objects.filter(id=userid).update(username=username)
+                    school.objects.filter(school_url=userurl).update(School_description=description)
+                else:
+                    from .models import school
+                    
+                    User.objects.filter(id=userid).update(username=username)
+                    school.objects.filter(school_url=userurl).update(School_description=description)
+                    school.objects.filter(school_url=userurl).update(school_propic=propic)
+
+                return redirect('/u/school/'+username)
+            if user in User.objects.filter(groups__name='Student').all():
+                if propic is None:
+
+                    from .models import student
+
+                    
+                    User.objects.filter(id=userid).update(username=username)
+                    student.objects.filter(student_url=userurl).update(student_description=description)
+                else:
+                    from .models import student
+
+                    
+                    User.objects.filter(id=userid).update(username=username)
+                    student.objects.filter(student_url=userurl).update(student_description=description)
+                    student.objects.filter(student_url=userurl).update(student_propic=propic)
+                return redirect('/u/student/'+username)
+
+        
+        else:
+            if user in User.objects.filter(groups__name='School').all():
+                from .models import school
+                user = User.objects.get(id=userid)
+                school = school.objects.get(school_url=userurl)
+                data = {
+                    'user':user.username,
+                    'userpass':user.password,
+                    'profilepic':school.school_propic.url,
+                    'desc':school.School_description
+                }
+
+                return render(request,"profileupdate.html",{'data':data})
+            if user in User.objects.filter(groups__name='Student').all():
+                from .models import student
+                user = User.objects.get(id=userid)
+                student = student.objects.get(student_url=userurl)
+
+                data = {
+                    'user':user.username,
+                    'userpass':user.password,
+                    'profilepic':student.student_propic.url,
+                    'desc':student.student_description
+                }
+                return render(request,"profileupdate.html",{'data':data})
   
         
 

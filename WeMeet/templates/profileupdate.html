@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {% if request.user.groups.all.0.name  == "School" %} 
+    <div class="flexbox">
+    <form style="    display: flex;
+                    flex-direction: column;
+                    align-content: center;
+                    justify-content: center;
+                    align-items: center;"
+     method="POST" action="/update/{{request.user.id}}/{{request.user.user_school.school_url}}" enctype="multipart/form-data">
+    {% csrf_token %}  
+
+        <img style='margin:10px;width: 50px;height: 50px;border-radius: 100px;'src="{{data.profilepic}}" alt="">
+        <input style='margin:10px;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
+        <input style='margin:10px;' type="text" name="username" value="{{data.user}}">
+        <!-- <input type="password" name="password" value="{{data.userpass}}"> -->
+        <input style='margin:10px;' type="text" name="description" value="{{data.desc}}">
+        <input style='margin:10px;' type="submit">
+
+       </form>
+
+       {% elif request.user.groups.all.0.name  == "Student" %}
+       <div class="flexbox">
+        <form style="    display: flex;
+                        flex-direction: column;
+                        align-content: center;
+                        justify-content: center;
+                        align-items: center;"
+         method="POST" action="/update/{{request.user.id}}/{{request.user.user_student.student_url}}" enctype="multipart/form-data">
+        {% csrf_token %}  
+    
+            <img style='margin:10px;width: 50px;height: 50px;border-radius: 100px;'src="{{data.profilepic}}" alt="">
+            <input style='margin:10px;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
+            <input style='margin:10px;' type="text" name="username" value="{{data.user}}">
+            <!-- <input type="password" name="password" value="{{data.userpass}}"> -->
+            <input style='margin:10px;' type="text" name="description" value="{{data.desc}}">
+            <input style='margin:10px;' type="submit">
+    
+           </form>
+
+        {% endif %}
+    </div>
+</body>
+</html>
