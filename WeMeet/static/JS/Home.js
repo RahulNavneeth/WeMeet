@@ -34,6 +34,11 @@ function forgetPassword(){
     document.querySelector(".studentInfo").style.display='none'
     document.querySelector(".schoolInfo").style.display='none'
     document.querySelector(".forgetPassBg").style.display='flex'
+    document.querySelector(".buttonFlex").style.display='none'
+    document.querySelector("#btnlog").style.display='none'
+    document.querySelector(".error_auth").style.display='none'
+    document.querySelector(".logIn_password").style.display='none'
+    document.querySelector(".logIn_email").style.display='none'
 
 
 

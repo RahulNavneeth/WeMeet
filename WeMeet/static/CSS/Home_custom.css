@@ -134,9 +134,27 @@ body{
 }
 
 
+.password{
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    background: #ff002b;
+    align-content: center;
+    border-radius: 30px;
+}
 
+.passwordResetBg{
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+
+}
 
 
 

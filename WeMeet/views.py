@@ -107,7 +107,6 @@ def register_school_page(request):
                     # skl = school.objects.get(school_name=schoolName)
                     # btc=batch.objects.create(school_reference = skl.id)
                     # btc.save()
-                messages.info(request,"Hey "+user+", Appreciate Your Registration, Now Please LOGIN To Continue")
                 
                 mail = request.POST.get('email')
                 u = User.objects.get(email=mail)
@@ -129,6 +128,7 @@ def register_school_page(request):
                     recipient_list,
                     html_message=msg_html,
                 )
+                messages.info(request,"Hey "+user+", Appreciate Your Registration, Now Please LOGIN To Continue")
                 
                 return redirect('/')
 
@@ -224,20 +224,22 @@ def register_student_page(request):
                             recipient_list = [mail]
                             data = {
                                 'username': user,
-                                'profilePicture': skl.school_propic.url,
+                                'profilePicture': skl.student_propic.url,
                             }
 
-                            msg_plain ='Test'
+                            msg_plain ='Registration Successfull'
                             msg_html = render_to_string('Mail/RegisterSucess.html',{'data':data})
 
                             email_from = settings.EMAIL_HOST_USER
                             send_mail(
-                                user+', Register Succesfull --WeMeet',
+                                user+', Registered Succesfull --WeMeet',
                                 msg_plain,
                                 email_from,
                                 recipient_list,
                                 html_message=msg_html,
                             )   
+                            messages.info(request,"Hey "+user+", Appreciate Your Registration, Now Please LOGIN To Continue")
+
                             return redirect('/')
 
                         else:
@@ -776,16 +778,53 @@ def mailacc(request):
 
     
     elif 'codesubm' in request.POST:
-        skl = school.objects.get(user=user)
+        if user in User.objects.filter(groups__name='School').all():
+            skl = school.objects.get(user=user)
 
-        if request.POST.get('code') == '':
-            return HttpResponse(status=204)
-        else:
-            code = request.POST.get('code')
-            print(skl.code)
-            if code == skl.code:
-                return HttpResponse(code)
+            if request.POST.get('code') == '':
+                return HttpResponse(status=204)
+            else:
+                code = request.POST.get('code')
+                if code == skl.code:
+                    return redirect('/passwordreset/'+str(code)+'/'+str(user.id))
+                else:
+                    return HttpResponse(status=204)
+        if user in User.objects.filter(groups__name='Student').all():
+            stud = student.objects.get(user=user)
+
+            if request.POST.get('code') == '':
+                return HttpResponse(status=204)
+            else:
+                code = request.POST.get('code')
+                
+                if code == stud.code:
+                    return redirect('/passwordreset/'+str(code)+'/'+str(user.id))
+                else:
+                    return HttpResponse(status=204)
+
+def passreset(request,code,user):
+
+
+    if school.objects.filter(user=user,code=code).exists() or student.objects.filter(user=user,code=code).exists():
+        if 'passs' in request.POST:
+            passwd = request.POST.get('passwordReset')
+            conpasswd = request.POST.get('conpasswordReset')
+            print(passwd,conpasswd)
+            if conpasswd == passwd:
+                user=User.objects.get(id=user)
+                user.set_password(passwd)
+                user.save()
+                messages.info(request,' Password Changed Succesfully')
+
+                return redirect('/')
             else:
                 return HttpResponse(status=204)
+        else:
+            data={'code':code,'user':user}
+            # skl= school.objects.get(user=user,code=code)
+            return render(request,'passwordReset.html',{'data':data})
 
+
+  
+        
 

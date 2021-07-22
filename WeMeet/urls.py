@@ -13,6 +13,7 @@ urlpatterns = [
     path('login',views.loginPage,name='login'),
     path('404',views.NotFoundPage404),
     path('logout',views.logoutUser,name='logout'),
+    path('passwordreset/<str:code>/<int:user>',views.passreset),
     # path('mailTest',views.mailTest),
     path('mailTest/acc',views.mailacc,name='mailacc'),
     path('mailTest/code',views.submitCode,name='submitCode'),
