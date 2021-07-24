@@ -66,8 +66,8 @@
         <div class="studentslist">
           <div class="flexpropic">
 
-          <a href='u/school/{{data.0.BATCH.0.School}}'>
-            <img class="studentprofilePicture" src={{data.0.BATCH.0.school_profilePicture}}>
+          <a href='/school/{{data.0.BATCH.0.School}}'>
+            <img style="background:none;" class="studentprofilePicture" src={{data.0.BATCH.0.school_profilePicture}}>
 
           </a>
 
@@ -76,7 +76,7 @@
 
         <a href='/student/{{i.student_details.student_url}}'>
 
-          <img onclick='enterProfile()' src='{{i.student_details.student_profilePicture}}' class="studentprofilePicture {{i.student_details.student_name}}{{i.student_id}}">
+          <img style="background:none;" onclick='enterProfile()' src='{{i.student_details.student_profilePicture}}' class="studentprofilePicture {{i.student_details.student_name}}{{i.student_id}}">
         
         </a>
           {% endfor %}

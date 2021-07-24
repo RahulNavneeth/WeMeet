@@ -132,7 +132,11 @@ CLOUDINARY_STORAGE = {
 }
 MEDIA_URL = '/media/ProfilePicture/'  # or any prefix you choose
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+import cloudinary
 
+cloudinary.config(cloud_name='wemeetweb',
+                  api_key='652496293865574',
+                  api_secret='ciUDj7hvzZpRHdF06WVjF6Z3w2E')
 ##RahulNavneeth@12345 -- cloudinary
 
 

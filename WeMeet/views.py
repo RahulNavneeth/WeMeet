@@ -2,7 +2,7 @@
 import json
 from django.core import mail
 from django.db.models.aggregates import Count
-from django.shortcuts import render,redirect
+from django.shortcuts import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -824,6 +824,9 @@ def passreset(request,code,user):
             # skl= school.objects.get(user=user,code=code)
             return render(request,'passwordReset.html',{'data':data})
 
+
+import cloudinary.uploader
+
 def updatepage(request,userid,userurl):
     if request.user.id==userid:
         user = User.objects.get(id=userid)
@@ -839,14 +842,26 @@ def updatepage(request,userid,userurl):
                     
                     User.objects.filter(id=userid).update(username=username)
                     school.objects.filter(school_url=userurl).update(School_description=description)
+                    return redirect('/u/school/'+username)
+                
                 else:
                     from .models import school
                     
                     User.objects.filter(id=userid).update(username=username)
                     school.objects.filter(school_url=userurl).update(School_description=description)
-                    school.objects.filter(school_url=userurl).update(school_propic=propic)
+                    skl=school.objects.get(school_url=userurl)
+                    url =skl.school_propic.url
+                    print(url)
+                    url = url.replace('https://res.cloudinary.com/wemeetweb/image/upload/v1/media/ProfilePicture/ProfilePicture/','')
+                    cloudinary.uploader.destroy("media/ProfilePicture/ProfilePicture/"+url)
+                    # cloudinary.uploader.destroy(url)
 
-                return redirect('/u/school/'+username)
+                    print(url)
+                    imageupload = get_object_or_404(school, school_url=userurl)
+                    imageupload.school_propic = propic
+                    imageupload.save()
+
+                    return redirect('/u/school/'+username)
             if user in User.objects.filter(groups__name='Student').all():
                 if propic is None:
 
@@ -855,27 +870,43 @@ def updatepage(request,userid,userurl):
                     
                     User.objects.filter(id=userid).update(username=username)
                     student.objects.filter(student_url=userurl).update(student_description=description)
+                    return redirect('/u/student/'+username)
+
+
+
                 else:
                     from .models import student
 
                     
                     User.objects.filter(id=userid).update(username=username)
                     student.objects.filter(student_url=userurl).update(student_description=description)
-                    student.objects.filter(student_url=userurl).update(student_propic=propic)
-                return redirect('/u/student/'+username)
+                    # student.objects.filter(student_url=userurl).update(student_propic=propic)
+                    skl=student.objects.get(student_url=userurl)
+                    url =skl.student_propic.url
+                    print(url)
+                    url = url.replace('https://res.cloudinary.com/wemeetweb/image/upload/v1/media/ProfilePicture/ProfilePicture/','')
+                    cloudinary.uploader.destroy("media/ProfilePicture/ProfilePicture/"+url)
+                    # cloudinary.uploader.destroy(url)
 
+                    print(url)
+                    imageupload = get_object_or_404(student, student_url=userurl)
+                    imageupload.student_propic = propic
+                    imageupload.save()
         
         else:
             if user in User.objects.filter(groups__name='School').all():
                 from .models import school
                 user = User.objects.get(id=userid)
                 school = school.objects.get(school_url=userurl)
+                url=school.school_propic.url
+                # url =url.replace('v1','v1626931405')
                 data = {
                     'user':user.username,
                     'userpass':user.password,
-                    'profilepic':school.school_propic.url,
+                    'profilepic':url,
                     'desc':school.School_description
                 }
+
 
                 return render(request,"profileupdate.html",{'data':data})
             if user in User.objects.filter(groups__name='Student').all():

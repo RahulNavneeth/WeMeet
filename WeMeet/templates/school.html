@@ -34,13 +34,16 @@
 
           <button style='margin-top: 21px;;'onclick="window.location.href='/logout'">LOGOUT</button>
         </div>
+        <div class="des">
+            <div class='welcome t' style="color:#0C1014;background: #ff002b;width: 95%;border-radius:30px">.{{request.user.user_school.School_description}}.</div>
+        </div>
         <div class="Mmain___">
         <!-- <img style='width: 200px;margin-bottom:20px;' src="{% static 'IMAGE/LOGO/School_title.svg'%}"> -->
      
     <div  class="main">
-        <div class='welcome' style="border-radius:30px;color:#FF002B">{{request.user }}</div>
+        <div class='welcome' style="font-size: 22px;border-radius:30px;color:#FF002B">{{request.user }}</div>
         <img style='border-radius:1000px;width: 150px;height: 150px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
-        <div class='welcome' style="border-radius:30px;color:#FF002B">MEMBER: {{request.user.groups.all.0 }}</div>
+        <div class='welcome' style="font-size: 22px;border-radius:30px;color:#FF002B">{{request.user.user_school.school_address_state}}</div>
         <div class='welcome t' style="border-radius:30px;color:#FF002B">{{request.user.user_school.school_url}}</div>
 
 
@@ -59,7 +62,7 @@
         <div class='welcome tt btx' style="border-radius:30px;color:#FF002B">STUDENTS: {{ request.user.user_school.student_school.count }}</div>
     </div>
 
-    <div class="batch_container">
+    <div class="batch_containerOg">
     {% for i in request.user.user_school.school_batch.all %}
     
 

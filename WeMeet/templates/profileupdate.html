@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon"  href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
+    
+    <title>{{request.user}} | Profile Update</title>
 </head>
-<body>
+<body style='margin: 0px;
+margin-top: 8px;'>
+    {% include "bgone.html" %}
 
+    <div class="navbar" style="z-index:100">
+
+      
+        <a class='logoflex' href="/" style="z-index:100">
+        <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    width: 60px;'>
+         
+        <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;    margin: 6px;'>
+        </a>
+      </div>
+      <div class="rightprofile">
+        
+        <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
+  
+        {% if request.user.groups.all.0.name  == "Student" %}
+        <a style='z-index: 100;' href="/u/student/{{request.user.username}}">
+  
+        
+  
+      <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
+        </a>  
+      {% elif request.user.groups.all.0.name  == "School" %}
+      <a style='z-index: 100;' href="/u/school/{{request.user.username}}">
+  
+      <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
+      </a> 
+      {% else %}
+  
+      <a style='z-index: 100;' href="/admin">
+  
+        <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
+        </a> 
+  
+      {% endif %}
+      </div>
+    </div>
     {% if request.user.groups.all.0.name  == "School" %} 
     <div class="flexbox">
     <form style="    display: flex;
@@ -16,13 +58,14 @@
                     align-items: center;"
      method="POST" action="/update/{{request.user.id}}/{{request.user.user_school.school_url}}" enctype="multipart/form-data">
     {% csrf_token %}  
+        
+        <!-- <img style='margin:10px;width: 50px;height: 50px;border-radius: 100px;'src="{{data.profilepic}}" alt=""> -->
+        <input class="input_picture"  style='margin:10px;background: url({{data.profilepic}});background-size: contain;    background-repeat: round;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
 
-        <img style='margin:10px;width: 50px;height: 50px;border-radius: 100px;'src="{{data.profilepic}}" alt="">
-        <input style='margin:10px;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
-        <input style='margin:10px;' type="text" name="username" value="{{data.user}}">
+        <input class="input_inputt" type="text" name="username" value="{{data.user}}">
         <!-- <input type="password" name="password" value="{{data.userpass}}"> -->
-        <input style='margin:10px;' type="text" name="description" value="{{data.desc}}">
-        <input style='margin:10px;' type="submit">
+        <input class="input_inputt"  type="text" name="description" value="{{data.desc}}">
+        <input  style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
 
        </form>
 
@@ -36,16 +79,21 @@
          method="POST" action="/update/{{request.user.id}}/{{request.user.user_student.student_url}}" enctype="multipart/form-data">
         {% csrf_token %}  
     
-            <img style='margin:10px;width: 50px;height: 50px;border-radius: 100px;'src="{{data.profilepic}}" alt="">
-            <input style='margin:10px;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
-            <input style='margin:10px;' type="text" name="username" value="{{data.user}}">
-            <!-- <input type="password" name="password" value="{{data.userpass}}"> -->
-            <input style='margin:10px;' type="text" name="description" value="{{data.desc}}">
-            <input style='margin:10px;' type="submit">
+        <input class="input_picture"  style='margin:10px;background: url({{data.profilepic}});background-size: contain;    background-repeat: round;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
+
+        <input class="input_inputt" type="text" name="username" value="{{data.user}}">
+        <!-- <input type="password" name="password" value="{{data.userpass}}"> -->
+        <input class="input_inputt"  type="text" name="description" value="{{data.desc}}">
+        <input value="Save" style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
+
+       
     
            </form>
 
         {% endif %}
     </div>
+
+  <script src="{% static 'JS/updateprofile.js' %}"></script>
+  <script></script>
 </body>
 </html>

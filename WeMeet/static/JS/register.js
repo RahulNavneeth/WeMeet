@@ -7,7 +7,7 @@ input_input_picture.addEventListener("change", function(){
       const reader = new FileReader();
   
       reader.addEventListener("load", function(){
-        console.log(this);
+        // console.log(this);
         
         document.querySelector('.propicadd').setAttribute("src", this.result);
         document.querySelector('.resetpropicbtn').style.display ='block';
@@ -18,6 +18,8 @@ input_input_picture.addEventListener("change", function(){
   
     }
   });
+
+
 
 function resetbtm(){
     document.querySelector('.propicadd').src ="/static/IMAGE/LOGO/PropicSchool.svg"
