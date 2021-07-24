@@ -215,6 +215,30 @@ body{
 .heading_school{
     margin: 11px;
 }
+.upd{
+    font-size: 12px;
+    border-radius: 30px;
+    color: #FF002B;
+    font-family: 'Montserrat';
+    /* font-style: italic; */
+    margin-bottom: -18px;
+    background: #0C1014;
+    z-index: 100;
+    width: 7%;
+    text-align: center;
+}
+.updbg{
+    font-size: 12px;
+    border-radius: 30px;
+    color: #FF002B;
+    font-family: 'Montserrat';
+    /* font-style: italic; */
+    margin-bottom: -18px;
+    background: #0C1014;
+    z-index: 100;
+    width: 9%;
+    text-align: center;
+}
 
 .description_school{
 
@@ -296,6 +320,12 @@ body{
     align-items: center;
     align-content: center;
     flex-direction: row;
+  }
+  .upd{
+    width: 24%;
+  }
+  .updbg{
+    width: 27%;
   }
   .hm{
       display:none;

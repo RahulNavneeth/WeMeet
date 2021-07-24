@@ -834,6 +834,7 @@ def updatepage(request,userid,userurl):
         if request.method == 'POST':
             propic = request.FILES.get('propic')
             username = request.POST.get('username')
+            displayname = request.POST.get('displayname')
             # password = request.POST.get('password')
             description = request.POST.get('description')
             if user in User.objects.filter(groups__name='School').all():
@@ -869,7 +870,7 @@ def updatepage(request,userid,userurl):
 
                     
                     User.objects.filter(id=userid).update(username=username)
-                    student.objects.filter(student_url=userurl).update(student_description=description)
+                    student.objects.filter(student_url=userurl).update(student_description=description,student_aka_name=displayname)
                     return redirect('/u/student/'+username)
 
 
@@ -879,7 +880,7 @@ def updatepage(request,userid,userurl):
 
                     
                     User.objects.filter(id=userid).update(username=username)
-                    student.objects.filter(student_url=userurl).update(student_description=description)
+                    student.objects.filter(student_url=userurl).update(student_description=description,student_aka_name=displayname)
                     # student.objects.filter(student_url=userurl).update(student_propic=propic)
                     skl=student.objects.get(student_url=userurl)
                     url =skl.student_propic.url
@@ -913,10 +914,10 @@ def updatepage(request,userid,userurl):
                 from .models import student
                 user = User.objects.get(id=userid)
                 student = student.objects.get(student_url=userurl)
-
+                print(student.student_aka_name)
                 data = {
                     'user':user.username,
-                    'userpass':user.password,
+                    'displayName':student.student_aka_name,
                     'profilepic':student.student_propic.url,
                     'desc':student.student_description
                 }
