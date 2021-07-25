@@ -19,3 +19,13 @@ input_picture.addEventListener("change", function(){
   
     }
   });
+
+function updshowpass(){
+  document.querySelector('.passwordVerify').style.display='flex';
+  document.querySelector('.input_inputt').readOnly = true;
+  document.querySelector('.input_inputtdes').readOnly = true;
+  document.querySelector('.input_inputtDun').readOnly = true;
+  document.querySelector('.input_picture').style.pointerEvents = "none";
+  document.querySelector('.saveUpd').disabled = true;
+}
+

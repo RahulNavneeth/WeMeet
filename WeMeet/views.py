@@ -834,65 +834,72 @@ def updatepage(request,userid,userurl):
         if request.method == 'POST':
             propic = request.FILES.get('propic')
             username = request.POST.get('username')
+            password = request.POST.get('password')
             displayname = request.POST.get('displayname')
             # password = request.POST.get('password')
             description = request.POST.get('description')
-            if user in User.objects.filter(groups__name='School').all():
-                if propic is None:
-                    from .models import school
+            passchk = user.check_password(password)
+            if passchk:
+                if user in User.objects.filter(groups__name='School').all():
+                    if propic is None:
+                        from .models import school
+                        
+                        User.objects.filter(id=userid).update(username=username)
+                        school.objects.filter(school_url=userurl).update(School_description=description)
+                        return redirect('/u/school/'+username)
                     
-                    User.objects.filter(id=userid).update(username=username)
-                    school.objects.filter(school_url=userurl).update(School_description=description)
-                    return redirect('/u/school/'+username)
-                
-                else:
-                    from .models import school
-                    
-                    User.objects.filter(id=userid).update(username=username)
-                    school.objects.filter(school_url=userurl).update(School_description=description)
-                    skl=school.objects.get(school_url=userurl)
-                    url =skl.school_propic.url
-                    print(url)
-                    url = url.replace('https://res.cloudinary.com/wemeetweb/image/upload/v1/media/ProfilePicture/ProfilePicture/','')
-                    cloudinary.uploader.destroy("media/ProfilePicture/ProfilePicture/"+url)
-                    # cloudinary.uploader.destroy(url)
+                    else:
+                        from .models import school
+                        
+                        User.objects.filter(id=userid).update(username=username)
+                        school.objects.filter(school_url=userurl).update(School_description=description)
+                        skl=school.objects.get(school_url=userurl)
+                        url =skl.school_propic.url
+                        print(url)
+                        url = url.replace('https://res.cloudinary.com/wemeetweb/image/upload/v1/media/ProfilePicture/ProfilePicture/','')
+                        cloudinary.uploader.destroy("media/ProfilePicture/ProfilePicture/"+url)
+                        # cloudinary.uploader.destroy(url)
 
-                    print(url)
-                    imageupload = get_object_or_404(school, school_url=userurl)
-                    imageupload.school_propic = propic
-                    imageupload.save()
+                        print(url)
+                        imageupload = get_object_or_404(school, school_url=userurl)
+                        imageupload.school_propic = propic
+                        imageupload.save()
 
-                    return redirect('/u/school/'+username)
-            if user in User.objects.filter(groups__name='Student').all():
-                if propic is None:
+                        return redirect('/u/school/'+username)
+                if user in User.objects.filter(groups__name='Student').all():
+                    if propic is None:
 
-                    from .models import student
+                        from .models import student
 
-                    
-                    User.objects.filter(id=userid).update(username=username)
-                    student.objects.filter(student_url=userurl).update(student_description=description,student_aka_name=displayname)
-                    return redirect('/u/student/'+username)
+                        
+                        User.objects.filter(id=userid).update(username=username)
+                        student.objects.filter(student_url=userurl).update(student_description=description,student_aka_name=displayname)
+                        return redirect('/u/student/'+username)
 
 
 
-                else:
-                    from .models import student
+                    else:
+                        from .models import student
 
-                    
-                    User.objects.filter(id=userid).update(username=username)
-                    student.objects.filter(student_url=userurl).update(student_description=description,student_aka_name=displayname)
-                    # student.objects.filter(student_url=userurl).update(student_propic=propic)
-                    skl=student.objects.get(student_url=userurl)
-                    url =skl.student_propic.url
-                    print(url)
-                    url = url.replace('https://res.cloudinary.com/wemeetweb/image/upload/v1/media/ProfilePicture/ProfilePicture/','')
-                    cloudinary.uploader.destroy("media/ProfilePicture/ProfilePicture/"+url)
-                    # cloudinary.uploader.destroy(url)
+                        
+                        User.objects.filter(id=userid).update(username=username)
+                        student.objects.filter(student_url=userurl).update(student_description=description,student_aka_name=displayname)
+                        # student.objects.filter(student_url=userurl).update(student_propic=propic)
+                        skl=student.objects.get(student_url=userurl)
+                        url =skl.student_propic.url
+                        print(url)
+                        url = url.replace('https://res.cloudinary.com/wemeetweb/image/upload/v1/media/ProfilePicture/ProfilePicture/','')
+                        cloudinary.uploader.destroy("media/ProfilePicture/ProfilePicture/"+url)
+                        # cloudinary.uploader.destroy(url)
 
-                    print(url)
-                    imageupload = get_object_or_404(student, student_url=userurl)
-                    imageupload.student_propic = propic
-                    imageupload.save()
+                        print(url)
+                        imageupload = get_object_or_404(student, student_url=userurl)
+                        imageupload.student_propic = propic
+                        imageupload.save()
+                        return redirect('/u/student/'+username)
+            else:
+                messages.info(request,request.user.username+", Invalid Password")
+                return redirect('/update/'+str(userid)+'/'+userurl)
         
         else:
             if user in User.objects.filter(groups__name='School').all():

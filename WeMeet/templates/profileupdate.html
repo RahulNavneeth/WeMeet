@@ -49,6 +49,7 @@ margin-top: 8px;'>
       {% endif %}
       </div>
     </div>
+
     {% if request.user.groups.all.0.name  == "School" %} 
     <div class="flexbox">
     <form style="    display: flex;
@@ -58,7 +59,9 @@ margin-top: 8px;'>
                     align-items: center;"
      method="POST" action="/update/{{request.user.id}}/{{request.user.user_school.school_url}}" enctype="multipart/form-data">
     {% csrf_token %}  
-        
+    {% for message in messages %}
+    <error style='width: 100%;' class='error_auth'>{{message}}</error>
+    {% endfor %}
         <!-- <img style='margin:10px;width: 50px;height: 50px;border-radius: 100px;'src="{{data.profilepic}}" alt=""> -->
         <input class="input_picture"  style='margin:10px;background: url({{data.profilepic}});background-size: contain;    background-repeat: round;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
         <div class='welcome upd' style="border-radius:30px;color:#FF002B">USERNAME</div>
@@ -69,10 +72,15 @@ margin-top: 8px;'>
         <!-- <input type="password" name="password" value="{{data.userpass}}"> -->
         <div class='welcome upd' style="border-radius:30px;color:#FF002B">DESCRIPTION</div>
 
-        <input class="input_inputt"  type="text" name="description" value="{{data.desc}}">
-        <input value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
-
-       </form>
+        <input class="input_inputtdes"  type="text" name="description" value="{{data.desc}}">
+        <button class='saveUpd' onclick="updshowpass() ;return false;" value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' >Save</button>
+        <div  class="passwordVerify">
+        <div class='welcome upd ' style="background-color:#0F1418;border-radius:30px;color:#FF002B">PASSWORD</div>
+        
+        <input class="input_inputt tt"  type="password" name="password" value="">
+        <input value='Submit'   style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
+        </div>
+      </form>
 
        {% elif request.user.groups.all.0.name  == "Student" %}
        <div class="flexbox">
@@ -83,24 +91,32 @@ margin-top: 8px;'>
                         align-items: center;"
          method="POST" action="/update/{{request.user.id}}/{{request.user.user_student.student_url}}" enctype="multipart/form-data">
         {% csrf_token %}  
+        {% for message in messages %}
+        <error style='width: 100%;' class='error_auth'>{{message}}</error>
+        {% endfor %}
+            <!-- <img style='margin:10px;width: 50px;height: 50px;border-radius: 100px;'src="{{data.profilepic}}" alt=""> -->
+            <input class="input_picture"  style='margin:10px;background: url({{data.profilepic}});background-size: contain;    background-repeat: round;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
+            <div class='welcome upd' style="border-radius:30px;color:#FF002B">USERNAME</div>
     
-        <input class="input_picture"  style='margin:10px;background: url({{data.profilepic}});background-size: contain;    background-repeat: round;' name="propic" style='border:none;' accept="image/*"    type="file" ></input>
-        <div class='welcome upd' style="border-radius:30px;color:#FF002B">USERNAME</div>
-
-        <input class="input_inputt" type="text" name="username" value="{{data.user}}">
-        
-        <div class='welcome updbg' style="border-radius:30px;color:#FF002B">DISPLAY NAME</div>
-
-        <input class="input_inputt" type="text" name="displayname" value="{{data.displayName}}">
-        <div class='welcome upd' style="background-color:#0F1418;border-radius:30px;color:#FF002B">DESCRIPTION</div>
-        
-        <input class="input_inputt"  type="text" name="description" value="{{data.desc}}">
-        <input value="Save" style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
-
-       
+            <input class="input_inputt" type="text" name="username" value="{{data.user}}">
+          
+            <div class='welcome updbg' style="border-radius:30px;color:#FF002B">DISPLAY USERNAME</div>
     
-           </form>
-
+            <input class="input_inputtDun" type="text" name="displayname" value="{{data.displayName}}">
+    
+    
+            <!-- <input type="password" name="password" value="{{data.userpass}}"> -->
+            <div class='welcome upd' style="border-radius:30px;color:#FF002B">DESCRIPTION</div>
+    
+            <input class="input_inputtdes"  type="text" name="description" value="{{data.desc}}">
+            <button class='saveUpd' onclick="updshowpass() ;return false;" value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' >Save</button>
+            <div  class="passwordVerify">
+            <div class='welcome upd ' style="background-color:#0F1418;border-radius:30px;color:#FF002B">PASSWORD</div>
+            
+            <input class="input_inputt tt"  type="password" name="password" value="">
+            <input value='Submit'   style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
+            </div>
+          </form>
         {% endif %}
     </div>
 

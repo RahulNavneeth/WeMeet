@@ -76,13 +76,22 @@
 
         <a href='/student/{{i.student_details.student_url}}'>
 
-          <img style="background:none;" onclick='enterProfile()' src='{{i.student_details.student_profilePicture}}' class="studentprofilePicture {{i.student_details.student_name}}{{i.student_id}}">
+          <img style="background:none;cursor:pointer;" onmouseenter='
+          
+          document.querySelector(".showname").innerHTML = "{{i.student_details.student_aka_name}}"
+          
+          '
+          onmouseleave='
+          document.querySelector(".showname").innerHTML = ""
+
+          ' src='{{i.student_details.student_profilePicture}}' value='{{i.student_details.student_name}}' class="studentprofilePicture {{i.student_details.student_name}}{{i.student_id}}">
         
         </a>
           {% endfor %}
       </div>
 
         </div>
+
         <!-- <div class='welcome tt btx'>
         {% for i in data.0.BATCH.0.students_set.students_all %}
         <div class="studname{{i.student_id}}"></div>
@@ -91,8 +100,13 @@
         {% endfor %}
       </div> -->
       <div class="mainMain">
-        <div class="leftMain"></div>
-        <div class="middleMain"></div>
+        <div class="leftMain">
+
+        </div>
+        <div class="middleMain">
+        <div class='welcome showname' style="font-size: 22px;border-radius:30px;color:#FF002B"></div>
+
+        </div>
         <div class="rightMain"></div>
       </div>
         </div>

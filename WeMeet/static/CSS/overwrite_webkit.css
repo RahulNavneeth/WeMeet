@@ -7,6 +7,31 @@ body{
 
 }
 
+.copybtn{
+  background: #0c1014;
+  color: #ff002b;
+  width: 50px;
+  height: 46.3px;
+  margin: 10px;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 6.8565px;
+  font-family: 'Montserrat',sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  cursor: copy;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: 0.1s all ease-in-out;
+
+}
+.copybtn:hover{
+  background: #ff002b;
+  color: #0c1014;
+  border:1px solid #0c1014;
+}
 button{
     width: 170px;
     height: 46.3px;
@@ -24,7 +49,10 @@ button{
     align-items: center;
     
 }
-
+button:disabled{
+  background-color: #d9002c;
+  color: #202020;
+}
 buttonsmall{
     width: 170px;
     height: 46.3px;
@@ -69,7 +97,7 @@ input {
 input::placeholder{
     text-align: center;
 }
-button:hover{
+button:hover:enabled{
     color: var(--WeMeet-pri);
     border:1px solid var(--WeMeet-pri);
     background:#0C1014;
@@ -80,7 +108,7 @@ buttonsmall:hover{
     background:#0C1014;
 }
 
-button:focus{
+button:focus:enabled{
     color: var(--WeMeet-pri);
     border:1px solid var(--WeMeet-pri);
     background:#0C1014;

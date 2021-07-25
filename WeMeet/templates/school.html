@@ -71,7 +71,24 @@
        <button onclick='window.location.href="/school/{{request.user.username}}/batch/{{i.batch_url}}"' style='    margin: 0px;'>REDIRECT</button>
         <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{i.batch_year.year}} </div>
         <div class='welcome' style="border-radius:30px;color:#0C1014;"> {{i.batch_std}} </div>
-       
+            <button onclick='
+
+            copyToClipboard("#nothashed_{{ i.batch_year.year }}")
+            
+            style.background="#750920";
+            style.color="#0c1014";
+            innerHTML="COPIED"
+            style.width="66px"
+            setTimeout(function(){ 
+
+            style.background="#0c1014";
+            style.color="#ff002b";
+            innerHTML="COPY"
+            style.width="50px"
+
+             }, 2000);
+
+            ' class='copybtn'>COPY</button>
         <div style='cursor: pointer;' id="hashed_{{ i.batch_year.year }}" onclick='style.display = "none";document.querySelector("#nothashed_{{ i.batch_year.year }}").style.display = "block";'  class='welcome tt hashed ' > ****************************** </div>
         <div id="nothashed_{{ i.batch_year.year }}" style='cursor: pointer;display:none' onclick='style.display = "none";document.querySelector("#hashed_{{ i.batch_year.year }}").style.display = "block";' class='welcome tt nothashed '  > {{i.batch_url}} </div>
     
@@ -81,8 +98,21 @@
     </div>
     </div>
 
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
     <script src="{% static 'JS/school.js'%}"></script></body>
+    <script>
 
+    function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+    
+    }
+
+
+    </script>
 </body>
 </html>
