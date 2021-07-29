@@ -184,7 +184,12 @@
     flex-wrap: wrap;
 }
 
-
+.msgsubmit{
+    font-size: 14px;
+    width: 100px;
+    border-radius: 100px;
+    height: 52px;
+}
 @media screen and (max-width: 618px) {
     .batchProfilePicture{
         width: 105px;
@@ -199,6 +204,18 @@
         height:33px;
 
         margin-left: 10px;
+    }
+    .msg-batch{
+        height:40px;
+    }
+    .msgsubmit{
+        width:30px;
+        height:26px;
+        padding-bottom: 8px;
+
+    }
+    .Chatinfo{
+        width: 60%;
     }
 
 }

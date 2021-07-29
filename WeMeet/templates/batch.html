@@ -115,7 +115,7 @@
             {% csrf_token %}
               <div class="middleMain-Chat">
             <input placeholder='Message {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} ' style='width: 90%;' type="text" name="msg" class="msg-batch">
-            <input onclick='console.log("Working")' value='Send' style=" font-size: 14px;width: 100px;border-radius: 100px;height: 52px;" type="submit" name="msg-submit" class="msg-submit">
+            <button onclick='console.log("Working")' value='Send'  type="submit" name="msg-submit" class="msgsubmit">Send</button>
           </div>
         </form>
           </div>
@@ -167,18 +167,20 @@ success: function(response){
     // console.log(response)
     // console.log(response.msgs.msgContent)
     document.querySelector(".chats").innerHTML=""
-    document.querySelector(".chats").innerHTML="<div class='chatinfoflex'><div class='Chatinfo'>---Welcome All, Chat to Begin..!!---</div></div>"
+    document.querySelector(".chats").innerHTML="<div class='chatinfoflex'><div class='Chatinfo'>---Welcome {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} Batch , Chat to Begin..!!---</div></div>"
     
 
     for (const data of response.msgs.msgContent){
-            if(data.msgUser=='{{request.user}}'){
+      // console.log(data.msgUserPfp)
 
+            if(data.msgUser=='{{request.user}}'){
     $('.chats').append(
       
 
-    '<div class="chat-container">'+
+    '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
       '<div class="chatContainer" style="background:#0C1014;color:#ff002b;border:1px solid #ff002b;">'+data.msgMsg+
-        '<div class="chatUser" style="color:#CC0022;">@'+data.msgUser+' you</div></div>'
+        '<div class="chatUser" style="color:#CC0022;">@'+data.msgUser+' you</div></div>'+
+        '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'
 
       
     )
@@ -186,7 +188,8 @@ success: function(response){
       $('.chats').append(
       '<div class="chat-container-flex">'+
 
-    '<div class="chat-container">'+
+    '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
+      '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'+
       '<div class="chatContainerLeft" >'+data.msgMsg+
         '<div class="chatUserLeft">@'+data.msgUser+'</div></div></div>'
 
@@ -203,7 +206,17 @@ window.addEventListener('load', function() {
   $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 500);
 })
 
+function myFunction(x) {
+  if (x.matches) { 
+    document.querySelector('.msgsubmit').innerHTML="."
+  } else {
+    document.querySelector('.msgsubmit').innerHTML="Send"
+  }
+}
 
+var x = window.matchMedia("(max-width: 618px)")
+myFunction(x) // Call listener function at run time
+x.addListener(myFunction)
     </script>
 </body>
 </html>

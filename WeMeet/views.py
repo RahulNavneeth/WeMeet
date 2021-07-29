@@ -1008,7 +1008,7 @@ def msgView(request,schoolname,batchurl):
     skl = school.objects.get(user=schoolName)
     batchs= batch.objects.get(school_reference=skl,batch_url=batchurl)
     msgs= ChatBatch.objects.filter(school_reference_id_chat=skl,batch_reference_id_chat=batchs).all()
-    
+    std = student.objects.filter(school_reference_id_student=skl,batch_reference_id_student=batchs).all()
     z=[]
     msgCount=len(msgs)
 
@@ -1020,8 +1020,21 @@ def msgView(request,schoolname,batchurl):
         
 
     for b in msgs:
+        # if schoolName in User.objects.filter(groups__name='School').all():
+            # propic=''
+
+        if b.user==schoolName:
+            skl = school.objects.get(user=schoolName)
+            propic = skl.school_propic.url
+        else:
+            # propic=''
+            for i in std:
+                if i.user.username == b.user.username:
+                    propic = i.student_propic.url
+        # print(propic)
         a= dict(msgid=int(b.id),
                 msgUser=b.user.username,
+                msgUserPfp = propic,
                 msgMsg=b.chat,
                 msgDate=str(b.date),
                 msgEdit=b.edited
