@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
-from django.conf import settings
+from django.conf import *
+from django.utils.timezone import datetime
 
 # from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 # from django.db.models.deletion import CASCADE
@@ -63,3 +64,15 @@ class student(models.Model):
         return 'School: '+ str(self.school_reference_id_student)+ ' , Name: '+str(self.user.username)+' , '+'Pet Name: '+str(self.student_aka_name)    
     def __unicode__(self): 
         return self.batch_reference_id_student
+
+
+
+class ChatBatch(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name="chat_batch",on_delete=models.CASCADE)
+    chat= models.CharField(max_length=3000)
+    school_reference_id_chat = models.ForeignKey(school,related_name="chat_school",on_delete=models.CASCADE)
+    batch_reference_id_chat = models.ForeignKey(batch,related_name="chat_batch",on_delete=models.CASCADE)
+    date = models.DateTimeField(default=datetime.now)
+    edited = models.BooleanField(default=False)
+    def __str__(self):
+        return 'user: '+ str(self.user.username) + ' chat: '+ str(self.chat) + ' school: '+ str(self.school_reference_id_chat.user.username) + ' batch: '+ str(self.batch_reference_id_chat.batch_year)

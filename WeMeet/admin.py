@@ -5,6 +5,7 @@ from .models import *
 admin.site.register(school)
 admin.site.register(batch)
 admin.site.register(student)
+admin.site.register(ChatBatch)
 
 
 

@@ -103,11 +103,28 @@
         <div class="leftMain">
 
         </div>
-        <div class="middleMain">
-        <div class='welcome showname' style="font-size: 22px;border-radius:30px;color:#FF002B"></div>
 
+        <div class="middleMain">
+          <div class="chats">
+
+            <!-- <div class="chat-container">
+            <div class="chatContainer">{{i.msgMsg}}
+              <div class="chatUser">@{{i.msgUser}}</div>
+            </div> -->
+          </div>
+          <form id='msgSend' style="width:100%" action="" method="POST" >
+            {% csrf_token %}
+              <div class="middleMain-Chat">
+            <input placeholder='Message {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} ' style='width: 90%;' type="text" name="msg" class="msg-batch">
+            <input onclick='console.log("Working")' value='Send' style=" font-size: 14px;width: 100px;border-radius: 100px;height: 52px;" type="submit" name="msg-submit" class="msg-submit">
+          </div>
+        </form>
+          </div>
+          
+        <!-- </div> -->
+        <div class="rightMain">
+          <div class='welcome showname' style="font-size: 22px;border-radius:30px;color:#FF002B"></div>
         </div>
-        <div class="rightMain"></div>
       </div>
         </div>
 
@@ -116,6 +133,60 @@
 
     </div>
     
-  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+
+
+// <=====================Msg Send=====================> //
+
+$('#msgSend').submit(function(e){
+
+$.ajax({
+url: "/ajax/msg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}",
+type: "POST",
+dataType: 'json',
+data: $('#msgSend').serialize(),
+async: true,
+success: function(response){
+    console.log(response.data)
+    document.querySelector(".msg-batch").value ='';
+
+}
+});
+e.preventDefault();
+});
+
+
+setInterval(function(){
+$.ajax({
+url: "/ajax/showmsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}",
+type: "GET",
+dataType: 'json',
+async: true,
+success: function(response){
+    // console.log(response)
+    // console.log(response.msgs.msgContent)
+    document.querySelector(".chats").innerHTML=""
+
+    for (const data of response.msgs.msgContent){
+    $('.chats').append(
+    '<div class="chat-container">'+
+      '<div class="chatContainer">'+data.msgMsg+
+        '<div class="chatUser">@'+data.msgUser+'</div></div>'
+
+
+    )
+      }
+}
+});
+
+}, 1000);
+    </script>
 </body>
 </html>
+
+<!-- <div class="chat-container">
+  <div class="chatContainer">{{i.msgMsg}}
+    <div class="chatUser">@{{i.msgUser}}</div>
+  </div>
+</div> -->

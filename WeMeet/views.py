@@ -368,9 +368,13 @@ def batchView(request,schoolname,batchurl):
                         skl= school.objects.get(user=request.user)
                         batchs= batch.objects.get(school_reference=skl,batch_url=batchurl)
                         students= student.objects.filter(school_reference_id_student=skl,batch_reference_id_student=batchs).all()
+                        msgs= ChatBatch.objects.filter(school_reference_id_chat=skl,batch_reference_id_chat=batchs).all()
                         
                         y=[]
+                        z=[]
                         stdCount=len(students)
+                        msgCount=len(msgs)
+
                         data=[
                             {'BATCH_ID':batchs.id,
                                 'BATCH':[{
@@ -382,8 +386,12 @@ def batchView(request,schoolname,batchurl):
                                         'batch_description':batchs.batch_description,
                                         'students_set':{
                                             'students_count':stdCount,
-                                            'students_all':y
-                                        }
+                                            'students_all':y,
+                                        },
+                                        'msgs':{
+                                            'msgCount':msgCount,
+                                            'msgContent':z,
+                                        },
                                     }]
                             
                         }]
@@ -405,6 +413,14 @@ def batchView(request,schoolname,batchurl):
                                                         )
                                                         )
                             y.append(x)
+                        for b in msgs:
+                            a= dict(msgid=int(b.id),
+                                    msgUser=b.user.username,
+                                    msgMsg=b.chat,
+                                    msgDate=str(b.date),
+                                    msgEdit=b.edited
+                            )
+                            z.append(a)
                         s1 = json.dumps(data)
                                 
                         json_object = json.loads(s1)
@@ -439,14 +455,17 @@ def batchView(request,schoolname,batchurl):
                                 skl= school.objects.get(user=request.user.user_student.school_reference_id_student.user)
                                 batchs= batch.objects.get(school_reference=skl,batch_url=batchurl)
                                 students= student.objects.filter(school_reference_id_student=skl,batch_reference_id_student=batchs).all()
-                            
+                                msgs= ChatBatch.objects.filter(school_reference_id_chat=skl,batch_reference_id_chat=batchs).all()
+                                
                                 y=[]
+                                z=[]
                                 stdCount=len(students)
+                                msgCount=len(msgs)
                                 data=[
                                     {'BATCH_ID':batchs.id,
                                         'BATCH':[{
                                                 'school_profilePicture':skl.school_propic.url,
-                                                'School':request.user.username,
+                                                'School':skl.user.username,
                                                 'batch_url':batchs.batch_url,
                                                 'batch_year':str(batchs.batch_year.year),
                                                 'batch_strength':batchs.batch_strength,
@@ -454,7 +473,11 @@ def batchView(request,schoolname,batchurl):
                                                 'students_set':{
                                                     'students_count':stdCount,
                                                     'students_all':y
-                                                }
+                                                },
+                                                'msgs':{
+                                                    'msgCount':msgCount,
+                                                    'msgContent':z,
+                                                },
                                             }]
                                     
                                 }]
@@ -476,6 +499,14 @@ def batchView(request,schoolname,batchurl):
                                                                 )
                                                                 )
                                     y.append(x)
+                                for b in msgs:
+                                    a= dict(msgid=int(b.id),
+                                            msgUser=b.user.username,
+                                            msgMsg=b.chat,
+                                            msgDate=str(b.date),
+                                            msgEdit=b.edited
+                                    )
+                                    z.append(a)
                                 s1 = json.dumps(data)
                                         
                                 json_object = json.loads(s1)
@@ -559,9 +590,12 @@ def adminDataBatch(request,schoolId,batchId):
         skl= school.objects.get(id=schoolId)
         batchs= batch.objects.get(school_reference=skl,id=batchId)
         students= student.objects.filter(school_reference_id_student=skl,batch_reference_id_student=batchs).all()
+        msgs= ChatBatch.objects.filter(school_reference_id_chat=skl,batch_reference_id_chat=batchs).all()
         
         y=[]
+        z=[]
         stdCount=len(students)
+        msgCount=len(msgs)
         data=[{'SCHOOL':skl.user.username,
                 'BATCH':
                 {'BATCH_ID':batchs.id,
@@ -574,7 +608,12 @@ def adminDataBatch(request,schoolId,batchId):
                         'students_set':{
                             'students_count':stdCount,
                             'students_all':y
-                        }
+                        },
+                        'msgs':{
+                            'msg-count':msgCount,
+                            'msg-content':z,
+                        },
+                    
                     }]
             
         }}]
@@ -596,6 +635,15 @@ def adminDataBatch(request,schoolId,batchId):
                                         )
                                         )
             y.append(x)
+
+        for b in msgs:
+            a= dict(msgid=int(b.id),
+                    msgUser=b.user.username,
+                    msgMsg=b.chat,
+                    msgDate=str(b.date),
+                    msgEdit=b.edited
+            )
+            z.append(a)
         s1 = json.dumps(data)
                 
         json_object = json.loads(s1)
@@ -930,5 +978,53 @@ def updatepage(request,userid,userurl):
                 }
                 return render(request,"profileupdate.html",{'data':data})
   
+    
+def batchMsg(request,schoolname,batchurl):
+    if request.method == 'POST':
+        schoolName = User.objects.get(username=schoolname)
+        user = User.objects.get(username=request.user.username)
+        skl = school.objects.get(user=schoolName)
+        btch = batch.objects.get(school_reference=skl,batch_url=batchurl)
+        msgChat = request.POST.get('msg')
+        if msgChat != '':
+            msg = ChatBatch.objects.create(
+
+                                        user=user,
+                                        chat=msgChat,
+                                        school_reference_id_chat=skl,
+                                        batch_reference_id_chat=btch,                                 
+
+            )
+            msg.save()
+            data={'data':'working '+msgChat}
+            return HttpResponse(json.dumps(data))
+
+
+        else:
+            return HttpResponse(status=204)
+
+def msgView(request,schoolname,batchurl):
+    schoolName = User.objects.get(username=schoolname)
+    skl = school.objects.get(user=schoolName)
+    batchs= batch.objects.get(school_reference=skl,batch_url=batchurl)
+    msgs= ChatBatch.objects.filter(school_reference_id_chat=skl,batch_reference_id_chat=batchs).all()
+    
+    z=[]
+    msgCount=len(msgs)
+
+    data={        'msgs':{
+                        'msgCount':msgCount,
+                        'msgContent':z,
+                    },
+                }
         
 
+    for b in msgs:
+        a= dict(msgid=int(b.id),
+                msgUser=b.user.username,
+                msgMsg=b.chat,
+                msgDate=str(b.date),
+                msgEdit=b.edited
+        )
+        z.append(a)
+    return HttpResponse(json.dumps(data))

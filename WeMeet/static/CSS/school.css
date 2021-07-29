@@ -13,7 +13,13 @@
     font-weight: 700;
 
 }
-
+.sklurl{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
 .welcomee{
     width: 100%;
     color: #FF002B;
@@ -110,7 +116,11 @@
     .navi{
         flex-direction: column;
     }
+    .sklurl{
+        flex-direction: column;
+    }
 }
+
 
 .tt{
     font-size:20px;

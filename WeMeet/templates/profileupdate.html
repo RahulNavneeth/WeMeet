@@ -67,6 +67,10 @@ margin-top: 8px;'>
         <div class='welcome upd' style="border-radius:30px;color:#FF002B">USERNAME</div>
 
         <input class="input_inputt" type="text" name="username" value="{{data.user}}">
+      
+        <div class='welcome updbg' style="display:none; border-radius:30px;color:#FF002B">DISPLAY USERNAME</div>
+
+        <input style='display:none;' class="input_inputtDun" type="text" name="displayname" value="{{data.displayName}}">
 
 
         <!-- <input type="password" name="password" value="{{data.userpass}}"> -->
@@ -109,7 +113,15 @@ margin-top: 8px;'>
             <div class='welcome upd' style="border-radius:30px;color:#FF002B">DESCRIPTION</div>
     
             <input class="input_inputtdes"  type="text" name="description" value="{{data.desc}}">
-            <button class='saveUpd' onclick="updshowpass() ;return false;" value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' >Save</button>
+            <button class='saveUpd' onclick="
+              document.querySelector('.passwordVerify').style.display='flex';
+              document.querySelector('.input_inputt').readOnly = true;
+              document.querySelector('.input_inputtdes').readOnly = true;
+              document.querySelector('.input_inputtDun').readOnly = true;
+              document.querySelector('.input_picture').style.pointerEvents = 'none';
+              document.querySelector('.saveUpd').disabled = true;
+            
+            return false;" value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' >Save</button>
             <div  class="passwordVerify">
             <div class='welcome upd ' style="background-color:#0F1418;border-radius:30px;color:#FF002B">PASSWORD</div>
             

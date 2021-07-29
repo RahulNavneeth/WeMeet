@@ -44,9 +44,29 @@
         <div class='welcome' style="font-size: 22px;border-radius:30px;color:#FF002B">{{request.user }}</div>
         <img style='border-radius:1000px;width: 150px;height: 150px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
         <div class='welcome' style="font-size: 22px;border-radius:30px;color:#FF002B">{{request.user.user_school.school_address_state}}</div>
-        <div class='welcome t' style="border-radius:30px;color:#FF002B">{{request.user.user_school.school_url}}</div>
+        <div class='sklurl'>
+        <div class='welcome t sklurllink' style="border-radius:30px;color:#FF002B">{{request.user.user_school.school_url}}</div>
+        <button  style='height: 20px;background:#ff002b;color:#0c1014;' onclick='
 
+        copyToClipboard(".sklurllink")
+        
+        style.background="#0c1014";
+        style.color="#ff002b";
+        innerHTML="COPIED"
+        style.border = "1px solid #ff002b";
 
+        style.width="66px"
+        setTimeout(function(){ 
+
+        style.background="#ff002b";
+        style.color="#0c1014";
+        innerHTML="COPY"
+        style.width="50px"
+
+         }, 2000);
+
+        ' class='copybtn'>COPY</button>
+</div>
 
 
         
@@ -75,9 +95,10 @@
 
             copyToClipboard("#nothashed_{{ i.batch_year.year }}")
             
-            style.background="#750920";
+            style.background="#ff002b";
             style.color="#0c1014";
             innerHTML="COPIED"
+            style.border = "1px solid #0c1014";
             style.width="66px"
             setTimeout(function(){ 
 

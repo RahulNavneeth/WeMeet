@@ -14,6 +14,8 @@ urlpatterns = [
     path('404',views.NotFoundPage404),
     path('logout',views.logoutUser,name='logout'),
     path('update/<int:userid>/<str:userurl>',views.updatepage),
+    path('ajax/msg/<str:schoolname>/<str:batchurl>',views.batchMsg),
+    path('ajax/showmsg/<str:schoolname>/<str:batchurl>',views.msgView),
 
     path('passwordreset/<str:code>/<int:user>',views.passreset),
     # path('mailTest',views.mailTest),
