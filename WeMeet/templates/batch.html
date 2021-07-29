@@ -106,7 +106,6 @@
 
         <div class="middleMain">
           <div class="chats">
-
             <!-- <div class="chat-container">
             <div class="chatContainer">{{i.msgMsg}}
               <div class="chatUser">@{{i.msgUser}}</div>
@@ -150,6 +149,7 @@ async: true,
 success: function(response){
     console.log(response.data)
     document.querySelector(".msg-batch").value ='';
+    $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 1000);
 
 }
 });
@@ -167,20 +167,43 @@ success: function(response){
     // console.log(response)
     // console.log(response.msgs.msgContent)
     document.querySelector(".chats").innerHTML=""
+    document.querySelector(".chats").innerHTML="<div class='chatinfoflex'><div class='Chatinfo'>---Welcome All, Chat to Begin..!!---</div></div>"
+    
 
     for (const data of response.msgs.msgContent){
+            if(data.msgUser=='{{request.user}}'){
+
     $('.chats').append(
+      
+
     '<div class="chat-container">'+
-      '<div class="chatContainer">'+data.msgMsg+
-        '<div class="chatUser">@'+data.msgUser+'</div></div>'
+      '<div class="chatContainer" style="background:#0C1014;color:#ff002b;border:1px solid #ff002b;">'+data.msgMsg+
+        '<div class="chatUser" style="color:#CC0022;">@'+data.msgUser+' you</div></div>'
 
-
+      
     )
+    }else{
+      $('.chats').append(
+      '<div class="chat-container-flex">'+
+
+    '<div class="chat-container">'+
+      '<div class="chatContainerLeft" >'+data.msgMsg+
+        '<div class="chatUserLeft">@'+data.msgUser+'</div></div></div>'
+
+      
+    )
+    }
       }
 }
 });
 
 }, 1000);
+
+window.addEventListener('load', function() {
+  $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 500);
+})
+
+
     </script>
 </body>
 </html>
