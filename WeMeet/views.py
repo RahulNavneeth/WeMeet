@@ -1020,23 +1020,18 @@ def msgView(request,schoolname,batchurl):
         
 
     for b in msgs:
-        # if schoolName in User.objects.filter(groups__name='School').all():
-            # propic=''
-
         if b.user==schoolName:
             skl = school.objects.get(user=schoolName)
             propic = skl.school_propic.url
         else:
-            # propic=''
             for i in std:
                 if i.user.username == b.user.username:
                     propic = i.student_propic.url
-        # print(propic)
         a= dict(msgid=int(b.id),
                 msgUser=b.user.username,
                 msgUserPfp = propic,
                 msgMsg=b.chat,
-                msgDate=str(b.date),
+                msgDate=str(b.date.hour)+':'+str(b.date.minute)+' '+str(b.date.date()),
                 msgEdit=b.edited
         )
         z.append(a)

@@ -106,16 +106,12 @@
 
         <div class="middleMain">
           <div class="chats">
-            <!-- <div class="chat-container">
-            <div class="chatContainer">{{i.msgMsg}}
-              <div class="chatUser">@{{i.msgUser}}</div>
-            </div> -->
           </div>
           <form id='msgSend' style="width:100%" action="" method="POST" >
             {% csrf_token %}
               <div class="middleMain-Chat">
             <input placeholder='Message {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} ' style='width: 90%;' type="text" name="msg" class="msg-batch">
-            <button onclick='console.log("Working")' value='Send'  type="submit" name="msg-submit" class="msgsubmit">Send</button>
+            <button value='Send'  type="submit" name="msg-submit" class="msgsubmit">Send</button>
           </div>
         </form>
           </div>
@@ -135,6 +131,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
 
+window.addEventListener('load', function() {
+  $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 500);
+})
 
 // <=====================Msg Send=====================> //
 
@@ -147,7 +146,7 @@ dataType: 'json',
 data: $('#msgSend').serialize(),
 async: true,
 success: function(response){
-    console.log(response.data)
+    
     document.querySelector(".msg-batch").value ='';
     $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 1000);
 
@@ -156,6 +155,7 @@ success: function(response){
 e.preventDefault();
 });
 
+// <=====================Msg Display=====================> //
 
 setInterval(function(){
 $.ajax({
@@ -164,37 +164,55 @@ type: "GET",
 dataType: 'json',
 async: true,
 success: function(response){
-    // console.log(response)
-    // console.log(response.msgs.msgContent)
+
     document.querySelector(".chats").innerHTML=""
     document.querySelector(".chats").innerHTML="<div class='chatinfoflex'><div class='Chatinfo'>---Welcome {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} Batch , Chat to Begin..!!---</div></div>"
     
 
     for (const data of response.msgs.msgContent){
-      // console.log(data.msgUserPfp)
 
-            if(data.msgUser=='{{request.user}}'){
+
+    if(data.msgUser=='{{request.user}}'){
     $('.chats').append(
       
 
     '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
-      '<div class="chatContainer" style="background:#0C1014;color:#ff002b;border:1px solid #ff002b;">'+data.msgMsg+
-        '<div class="chatUser" style="color:#CC0022;">@'+data.msgUser+' you</div></div>'+
-        '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'
+        '<div class="chatFlex" >'+
+      '<div class="chatContainer" style="background:#0C1014;color:#ff002b;border:1px solid #ff002b;" >'+data.msgMsg+
+        '<div class="chatUser" style="color:#CC0022;">@'+data.msgUser+'</div></div><div  class="chatTime {{data.msgid}}date">'+data.msgDate+'</div></div>'+
+        '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img></div>'
 
       
     )
     }else{
+
+      if(data.msgMsg.indexOf('@{{request.user.username}}') !== -1){
+
+  $('.chats').append(
+        '<div style="border-radius:100px;width:100%;background:#13131C;"  class="chat-container-flex">'+
+
+      '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
+        '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'+
+        '<div class="chatFlexLeft" >'+
+      '<div class="chatContainerLeft"  >'+data.msgMsg+
+        '<div class="chatUserLeft">@'+data.msgUser+'</div></div><div  class="chatTimeLeft {{data.msgid}}date">'+data.msgDate+'</div></div></div>'
+
+        
+      )
+
+
+      }else{
       $('.chats').append(
-      '<div class="chat-container-flex">'+
+      '<div  class="chat-container-flex">'+
 
     '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
       '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'+
+      '<div class="chatFlexLeft" >'+
       '<div class="chatContainerLeft" >'+data.msgMsg+
-        '<div class="chatUserLeft">@'+data.msgUser+'</div></div></div>'
+        '<div class="chatUserLeft">@'+data.msgUser+'</div></div><div  class="chatTimeLeft">'+data.msgDate+'</div></div></div>'
 
       
-    )
+    )}
     }
       }
 }
@@ -202,9 +220,6 @@ success: function(response){
 
 }, 1000);
 
-window.addEventListener('load', function() {
-  $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 500);
-})
 
 function myFunction(x) {
   if (x.matches) { 
