@@ -1036,3 +1036,45 @@ def msgView(request,schoolname,batchurl):
         )
         z.append(a)
     return HttpResponse(json.dumps(data))
+
+# def tagUserChat(request):
+
+#     name = request.POST.get('msg')
+#     userdata = User.objects.filter(username__icontains=name).all()
+#     data =[]
+#     for i in userdata:
+#         username = i.username
+#         dataloop = {'name':username}
+#         data.append(dataloop)
+#     return HttpResponse(json.dumps(data))
+
+def updatchat(request,schoolName,batchurl,user,msgid):
+
+    getchat = request.POST.get('uchat')
+    if request.user.username == user:
+        skluser = User.objects.get(username=schoolName)
+        msgUser = User.objects.get(username=user)
+        skl = school.objects.get(user=skluser)
+        btch = batch.objects.get(school_reference=skl,batch_url=batchurl)
+        if ChatBatch.objects.filter(user=msgUser,school_reference_id_chat=skl,batch_reference_id_chat=btch,id=msgid).exists():
+            ChatBatch.objects.filter(user=msgUser,school_reference_id_chat=skl,batch_reference_id_chat=btch,id=msgid).update(chat=getchat,edited=True)
+            return HttpResponse(json.dumps('success'))
+        else:
+            return HttpResponse('nope')
+    else:
+        return HttpResponse('nope') 
+
+def deletechat(request,schoolName,batchurl,user,msgid):
+    
+    if request.user.username == user:
+        skluser = User.objects.get(username=schoolName)
+        msgUser = User.objects.get(username=user)
+        skl = school.objects.get(user=skluser)
+        btch = batch.objects.get(school_reference=skl,batch_url=batchurl)
+        if ChatBatch.objects.filter(user=msgUser,school_reference_id_chat=skl,batch_reference_id_chat=btch,id=msgid).exists():
+            ChatBatch.objects.filter(user=msgUser,school_reference_id_chat=skl,batch_reference_id_chat=btch,id=msgid).delete()
+            return HttpResponse(json.dumps('success'))
+        else:
+            return HttpResponse('nope')
+    else:
+        return HttpResponse('nope') 
