@@ -16,6 +16,9 @@ urlpatterns = [
     path('update/<int:userid>/<str:userurl>',views.updatepage),
     path('ajax/msg/<str:schoolname>/<str:batchurl>',views.batchMsg),
     path('ajax/showmsg/<str:schoolname>/<str:batchurl>',views.msgView),
+    path('ajax/updatemsg/<str:schoolName>/<str:batchurl>/<str:user>/<int:msgid>',views.updatchat),
+    path('ajax/deletemsg/<str:schoolName>/<str:batchurl>/<str:user>/<int:msgid>',views.deletechat),
+    # path('ajax/taguserchat',views.tagUserChat),
 
     path('passwordreset/<str:code>/<int:user>',views.passreset),
     # path('mailTest',views.mailTest),

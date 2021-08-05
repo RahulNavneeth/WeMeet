@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
+{% load static %}
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" type="image/png" href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
-
 
     <link href="{% static 'css/batch.css'%}" rel="stylesheet" type="text/css" />
     <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
     <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesheet" type="text/css" />
     <link href="{% static 'css/school.css'%}" rel="stylesheet" type="text/css" />
     <link href="{% static 'css/batch.css'%}" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{data.0.BATCH.0.School}} | {{data.0.BATCH.0.batch_year}}</title>
 </head>
@@ -99,12 +105,15 @@
        
         {% endfor %}
       </div> -->
+     
       <div class="mainMain">
         <div class="leftMain">
 
         </div>
 
         <div class="middleMain">
+          <form id="ajaxchatupdate" style="width:97%;" method="POST" >
+          </form>
           <div class="chats">
           </div>
           <form id='msgSend' style="width:100%" action="" method="POST" >
@@ -133,6 +142,8 @@
 
 window.addEventListener('load', function() {
   $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 500);
+  displaymsg()
+
 })
 
 // <=====================Msg Send=====================> //
@@ -155,9 +166,20 @@ success: function(response){
 e.preventDefault();
 });
 
+
+
+
+
+
 // <=====================Msg Display=====================> //
 
-setInterval(function(){
+let startint;
+console.log(startint)
+function displaymsg(){
+
+    startint = setInterval(function (){
+// console.log(startint)
+
 $.ajax({
 url: "/ajax/showmsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}",
 type: "GET",
@@ -171,16 +193,24 @@ success: function(response){
 
     for (const data of response.msgs.msgContent){
 
-
     if(data.msgUser=='{{request.user}}'){
+
+      // console.log('document.querySelector(".updatechat'+String(data.msgid)+'").style.display="block")')
+      var subs = "document.querySelector('#ajaxchatupdate').style.display='block';"
+      var subsoff = 'console.log("clicked");document.querySelector(".updatechat'+String(data.msgid)+'").style.display="none";'
     $('.chats').append(
       
 
     '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
         '<div class="chatFlex" >'+
-      '<div class="chatContainer" style="background:#0C1014;color:#ff002b;border:1px solid #ff002b;" >'+data.msgMsg+
-        '<div class="chatUser" style="color:#CC0022;">@'+data.msgUser+'</div></div><div  class="chatTime {{data.msgid}}date">'+data.msgDate+'</div></div>'+
+      "<div onclick='alterchat("+'"{{request.user}}",'+data.msgid+','+'"'+data.msgMsg+'"'+");' class='chatContainer' id='chatContainer' style='background:#0C1014;color:#ff002b;border:1px solid #ff002b;' >"+data.msgMsg+
+        '<div class="chatUser'+data.msgUser+'" style="display:block;color:#CC0022;">@'+data.msgUser+'</div>'+
+        '</div>'
+
+          
+        +'<div  class="chatTime {{data.msgid}}date">'+data.msgDate+'</div></div>'+
         '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img></div>'
+
 
       
     )
@@ -218,16 +248,95 @@ success: function(response){
 }
 });
 
-}, 1000);
+
+},1000);
 
 
+
+};
+function stopInt(){
+  clearInterval(startint)
+
+};
+
+
+function alterchat(user,msgid,msg){
+  console.log(user+' '+msgid)
+  document.querySelector("#ajaxchatupdate").innerHTML =''
+  $('#ajaxchatupdate').append(
+        '{% csrf_token %}'+
+        '<div  class="updatechat" style="    background: none;display: flex;align-items: center;">'+
+        '<input name="uchat" type="text" value="'+msg+'">'+
+       ' <div class="updatechatbtn">'+
+         ' <button onclick="updatemsg('+"'"+user+"',"+msgid+')" style="border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Fira Code;font-size: 13px;" id="updatebtn'+String(msgid)+'" value="->"><i class="material-icons">refresh</i></button>'+
+        "<button onclick='emptyAlter();return false;' class='closebtn' style='border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Montserrat;font-size: 15px;'>X</button>"+
+        '<button onclick="deletechat('+"'"+user+"',"+msgid+')"  class="closebtn" style="border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Montserrat;font-size: 15px;"><i class="material-icons">delete</i></button>'
+        +"</div></div>"
+  )
+}
+
+function updatemsg(user,msgid){
+  console.log('#ajaxchatupdate'+String(msgid))
+
+
+  
+$.ajax({
+url: "/ajax/updatemsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}/"+String(user)+"/"+String(msgid),
+type: "POST",
+dataType: 'json',
+data: $('#ajaxchatupdate').serialize(),
+async: true,
+success: function(response){
+  console.log(response)
+
+  console.log(startint)
+  emptyAlter()
+  
+}
+});
+
+event.preventDefault();
+
+
+
+}
+function deletechat(user,msgid){
+  console.log('#ajaxchatupdate'+String(msgid))
+$.ajax({
+url: "/ajax/deletemsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}/"+String(user)+"/"+String(msgid),
+type: "POST",
+dataType: 'json',
+data: $('#ajaxchatupdate').serialize(),
+async: true,
+success: function(response){
+  console.log(response)
+
+  console.log(startint)
+  emptyAlter()
+}
+});
+
+
+event.preventDefault();
+
+
+
+}
+
+function emptyAlter(){
+  return document.querySelector("#ajaxchatupdate").innerHTML =''
+}
 function myFunction(x) {
   if (x.matches) { 
-    document.querySelector('.msgsubmit').innerHTML="."
+    document.querySelector('.msgsubmit').innerHTML="->"
   } else {
     document.querySelector('.msgsubmit').innerHTML="Send"
   }
 }
+// function startintetval() {
+//   startinterval = setInterval(displayMsg, 1000);
+// }
+
 
 var x = window.matchMedia("(max-width: 618px)")
 myFunction(x) // Call listener function at run time
@@ -236,8 +345,4 @@ x.addListener(myFunction)
 </body>
 </html>
 
-<!-- <div class="chat-container">
-  <div class="chatContainer">{{i.msgMsg}}
-    <div class="chatUser">@{{i.msgUser}}</div>
-  </div>
-</div> -->
+
