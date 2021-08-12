@@ -76,3 +76,14 @@ class ChatBatch(models.Model):
     edited = models.BooleanField(default=False)
     def __str__(self):
         return 'user: '+ str(self.user.username) + ' chat: '+ str(self.chat) + ' school: '+ str(self.school_reference_id_chat.user.username) + ' batch: '+ str(self.batch_reference_id_chat.batch_year)
+
+
+class post(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name="postUser",on_delete=models.CASCADE)
+    media =models.FileField(upload_to='post/')
+    description = models.TextField(max_length=300)
+    date = models.DateTimeField(default=datetime.now)
+    likes = models.IntegerField()
+    
+
+

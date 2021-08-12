@@ -379,6 +379,7 @@ def batchView(request,schoolname,batchurl):
                             {'BATCH_ID':batchs.id,
                                 'BATCH':[{
                                         'school_profilePicture':skl.school_propic.url,
+                                        'School_description':skl.School_description,
                                         'School':request.user.username,
                                         'batch_url':batchs.batch_url,
                                         'batch_year':str(batchs.batch_year.year),
@@ -405,13 +406,13 @@ def batchView(request,schoolname,batchurl):
                                                         student_profilePicture=i.student_propic.url,
                                                         student_std=i.student_std,
                                                         student_address=dict(
-                                                                        address_state=i.student_address_state,
+                                                                         address_state=i.student_address_state,
                                                                         address_district=i.student_address_district,
                                                                         address_area=i.student_address_area,
                                                                         ),
                                                         student_description=i.student_description
                                                         )
-                                                        )
+                                                        )   
                             y.append(x)
                         for b in msgs:
                             a= dict(msgid=int(b.id),

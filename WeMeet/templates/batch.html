@@ -82,15 +82,22 @@
 
         <a href='/student/{{i.student_details.student_url}}'>
 
-          <img style="background:none;cursor:pointer;" onmouseenter='
+          <img style="background:none;cursor:pointer;"
+          
+          onmouseenter='
           
           document.querySelector(".showname").innerHTML = "{{i.student_details.student_aka_name}}"
+          document.querySelector(".showprofile").src = "{{i.student_details.student_profilePicture}}"
+          document.querySelector(".showdesc").innerHTML = "{{i.student_details.student_description}}"
           
           '
           onmouseleave='
-          document.querySelector(".showname").innerHTML = ""
+          document.querySelector(".showname").innerHTML = "{{data.0.BATCH.0.School}}"
+          document.querySelector(".showdesc").innerHTML = "{{data.0.BATCH.0.School_description}}"
+          document.querySelector(".showprofile").src = "{{data.0.BATCH.0.school_profilePicture}}"
 
-          ' src='{{i.student_details.student_profilePicture}}' value='{{i.student_details.student_name}}' class="studentprofilePicture {{i.student_details.student_name}}{{i.student_id}}">
+          '
+          src='{{i.student_details.student_profilePicture}}' value='{{i.student_details.student_name}}' class="studentprofilePicture {{i.student_details.student_name}}{{i.student_id}}">
         
         </a>
           {% endfor %}
@@ -108,6 +115,9 @@
      
       <div class="mainMain">
         <div class="leftMain">
+          <img class='welcome showprofile' src = '{{data.0.BATCH.0.school_profilePicture}}' style="padding:20px;width:200px;height:200px;font-size: 22px;border-radius:1000px;color:#FF002B">
+          <div class='welcome showname' style="padding: 5px;font-size: 22px;border-radius: 30px;width: 90%;height: 24px;background: #FF002B;color: #0c1014;">{{data.0.BATCH.0.School}}</div>
+          <div class='welcome showdesc' style="margin:10px;padding: 5px;font-size: 22px;border-radius: 30px;width: 90%;height: 24px;border:1px solid #ff002b;background: #0c1014;color: #ff002b;">{{data.0.BATCH.0.School_description}}</div>
 
         </div>
 
@@ -177,7 +187,7 @@ let startint;
 console.log(startint)
 function displaymsg(){
 
-    startint = setInterval(function (){
+    // startint = setInterval(function (){
 // console.log(startint)
 
 $.ajax({
@@ -194,7 +204,14 @@ success: function(response){
     for (const data of response.msgs.msgContent){
 
     if(data.msgUser=='{{request.user}}'){
-
+      DateNEdit=''
+        if(data.msgEdit == true){
+          DateNEdit = '<div  class="chatTime {{data.msgid}}date">'+data.msgDate+' Edited*</div></div>'
+        }
+        else{
+          DateNEdit = '<div  class="chatTime {{data.msgid}}date">'+data.msgDate+'</div></div>'
+          
+        }
       // console.log('document.querySelector(".updatechat'+String(data.msgid)+'").style.display="block")')
       var subs = "document.querySelector('#ajaxchatupdate').style.display='block';"
       var subsoff = 'console.log("clicked");document.querySelector(".updatechat'+String(data.msgid)+'").style.display="none";'
@@ -202,30 +219,46 @@ success: function(response){
       
 
     '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
-        '<div class="chatFlex" >'+
-      "<div onclick='alterchat("+'"{{request.user}}",'+data.msgid+','+'"'+data.msgMsg+'"'+");' class='chatContainer' id='chatContainer' style='background:#0C1014;color:#ff002b;border:1px solid #ff002b;' >"+data.msgMsg+
+        "<div onclick='alterchat("+'"{{request.user}}",'+data.msgid+','+'"'+data.msgMsg+'"'+");' class='chatFlex' >"+
+      "<div  class='chatContainer' id='chatContainer' style='background:#0C1014;color:#ff002b;border:1px solid #ff002b;' >"+data.msgMsg+
         '<div class="chatUser'+data.msgUser+'" style="display:block;color:#CC0022;">@'+data.msgUser+'</div>'+
         '</div>'
 
           
-        +'<div  class="chatTime {{data.msgid}}date">'+data.msgDate+'</div></div>'+
+        +DateNEdit+
         '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img></div>'
 
 
       
     )
     }else{
-
-      if(data.msgMsg.indexOf('@{{request.user.username}}') !== -1){
-
+      DateNEdit=''
+      isschool = ''
+        if(data.msgEdit == true){
+          DateNEdit = '<div  class="chatTimeLeft {{data.msgid}}date">*Edited '+data.msgDate+'</div></div>'
+        }
+        else{
+          DateNEdit = '<div  class="chatTimeLeft {{data.msgid}}date">'+data.msgDate+'</div></div>'
+          
+        }
+        // if('{{request.user.group.all.0.name}}'=='School'){
+        //   isschool='<img style="border-radius:100px;width:10px;height:10px;margin-top:30px;margin-right:60px;" src="{% static "IMAGE/LOGO/isschool.svg"%}"></img>'+'<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'
+        // }
+        // else{
+        //   isschool='<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'
+        // }
+      if(data.msgMsg.indexOf('@{{request.user.username}}') !== -1 || data.msgMsg.indexOf('@everyone') !== -1){
+        
   $('.chats').append(
         '<div style="border-radius:100px;width:100%;background:#13131C;"  class="chat-container-flex">'+
 
       '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
         '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'+
+        // '<img style="border-radius:100px;width:10px;height:10px;margin-top:30px;margin-right:60px;" src="{% static "IMAGE/LOGO/isschool.svg"%}"></img>'+
         '<div class="chatFlexLeft" >'+
       '<div class="chatContainerLeft"  >'+data.msgMsg+
-        '<div class="chatUserLeft">@'+data.msgUser+'</div></div><div  class="chatTimeLeft {{data.msgid}}date">'+data.msgDate+'</div></div></div>'
+        '<div class="chatUserLeft">@'+data.msgUser+'</div></div>'+
+        DateNEdit+'</div></div>'
 
         
       )
@@ -239,7 +272,8 @@ success: function(response){
       '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'+
       '<div class="chatFlexLeft" >'+
       '<div class="chatContainerLeft" >'+data.msgMsg+
-        '<div class="chatUserLeft">@'+data.msgUser+'</div></div><div  class="chatTimeLeft">'+data.msgDate+'</div></div></div>'
+        '<div class="chatUserLeft">@'+data.msgUser+'</div></div>'+
+        DateNEdit+'</div></div>'
 
       
     )}
@@ -249,7 +283,7 @@ success: function(response){
 });
 
 
-},1000);
+// },1000);
 
 
 

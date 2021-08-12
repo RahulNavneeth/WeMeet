@@ -1,0 +1,45 @@
+<html>
+
+    <head>
+        <title>LOGIN PAGE</title>   
+    </head>
+
+    <body>
+
+        <form action="/signup" method='POST'>
+            <p>Email:</p>
+            <p><input type="email"  name="email"></p>
+            <p>password:</p>
+            <p><input type="password"  name="pword"></p>
+            <input type="checkbox" onclick="myFunctiono()" id="TEACHERchk" name="t" value="Teacher">
+            <label for="TEACHER">TEACHER</label><br>
+            <input onclick="myFunctiont()" type="checkbox" id="STUDENTchk" name="s" value="Student">
+            <label for="STUDENT">STUDENT</label><br>
+            <p><input type="submit" value="submit"></p>
+        </form>
+
+    <script>
+
+function myFunctiono() {
+  var checkBox = document.getElementById("TEACHERchk");
+  var checkBoxt = document.getElementById("STUDENTchk");
+  if (checkBox.checked == true){
+    checkBoxt.disabled = true;
+  } else {
+    checkBoxt.disabled = false;
+  }
+}
+
+function myFunctiont() {
+  var checkBox = document.getElementById("TEACHERchk");
+  var checkBoxt = document.getElementById("STUDENTchk");
+  if (checkBoxt.checked == true){
+    checkBox.disabled = true;
+  } else {
+    checkBox.disabled = false;
+  }
+}
+    </script>
+    </body>
+
+</html>
