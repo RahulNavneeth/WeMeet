@@ -20,10 +20,32 @@ from django.core.mail import send_mail
 from .forms import *
 from django.utils.html import strip_tags
 from django.contrib.auth.models import Group
+import requests
 
 
 def HomePage(request):
-    return render(request,'home.html')
+    if request.user.is_authenticated:
+        url = ('https://api.adviceslip.com/advice')
+        response = requests.get(url)
+        data = {
+            'auth':True,
+            'response':{
+                'slip':{
+                'id':response.json()['slip']['id'],
+                'advice':response.json()['slip']['advice'],
+            }
+            }
+
+        }
+        # print(response.json()['slip']['advice'])
+        return render(request,'home.html',{'data':data})
+    else:
+        data = {
+            'auth':False,
+            'response':'NoResponse'
+
+        }
+        return render(request,'home.html',{'data':data})   
 
 def register_school_page(request):
     form=CustomRegFormSchool()
@@ -1079,3 +1101,76 @@ def deletechat(request,schoolName,batchurl,user,msgid):
             return HttpResponse('nope')
     else:
         return HttpResponse('nope') 
+
+
+def reactDataSchool(request,schoolId):
+    skl= school.objects.get(id=schoolId)
+    batchs= batch.objects.filter(school_reference=skl).all()
+
+    
+    y=[]
+
+    data=[
+    { 'School':skl.user.username,
+            'SCHOOL_ID':skl.id,
+            'SCHOOL':[{
+
+                    'school_url':skl.school_url,
+                    'School_ProfilePicture':skl.school_propic.url,
+                    'School_Description':skl.School_description,
+                    'School_Address':{
+                        'Address_State':skl.school_address_state,
+                        'Address_District':skl.school_address_district,
+                        'Address_Area':skl.school_address_area,
+                    },
+                    'No_Of_Batchs':skl.school_noof_batch,
+                    'BATCHS':y
+
+                }]
+        
+    }]
+
+    for i in batchs:
+        noofstud = len(student.objects.filter(batch_reference_id_student=i.id).all())
+
+        x = dict(Batch_id=i.id,
+                Batch_Details=dict(
+                                    Batch_url=i.batch_url,
+                                    batch_year=i.batch_year.year,
+                                    batch_std=i.batch_std,
+                                    batch_strength=i.batch_strength,
+                                    batch_description=i.batch_description,
+                                    No_of_students=noofstud,
+                                    ),
+                link = 'http://192.168.0.4:8000/admin/data/school/'+str(skl.id)+'/batch/'+str(i.id)
+
+                                    )
+        y.append(x)
+    s1 = json.dumps(data)
+            
+    json_object = json.loads(s1)
+
+    json_formatted_str = json.dumps(json_object, indent=2)
+
+    return HttpResponse(json_formatted_str, content_type="application/json")
+
+
+
+# def register(request):
+#     form=registerform()
+#     if request.method == 'POST':
+#         print('1')
+#         form=registerform()
+#         if form.is_valid():
+#             print('2')
+#             form.save()
+#             return redirect("/login")
+#         else:
+#             print('2no')
+#             print(form.errors)
+#             messages.info(request,'error'+str(form.errors))
+#             return redirect('/register')
+#     else:
+#         print('1no')
+#         context={'form':form}
+#         return render(request,'register.html',context)

@@ -293,9 +293,9 @@ textarea::placeholder{
     100% {visibility: hidden;}
 }
 
-/* a{
+a{
   text-decoration: none;
-} */
+}
 
 
 ::-webkit-scrollbar {
@@ -332,5 +332,6 @@ title{
 
 a{
   text-decoration:none;
+  color:none;
 }
 

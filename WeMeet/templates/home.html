@@ -88,7 +88,7 @@
 
 
   </div>
-  <div class="main__home" style='display: flex; flex-direction: column;'>
+  <div class="main__home" style='display: flex;    align-items: center; flex-direction: column;'>
     {% for message in messages %}
     <error class='error_auth'>{{message}}</error>
 
@@ -116,49 +116,16 @@
 <div class='buttonNameSchool'></div>
 <div class='buttonNameStudent'></div>
 </div>
-{% if request.user.is_authenticated %}
 
-<div class="main__">
-
-  <div class="schoolInfo">
-    <div class="heading_school">    <img style="z-index:100;margin-left: 50px;"src="/static/IMAGE/LOGO/School_title.svg" ></div>
-    <div class='hm' style="height: 0;z-index: 100;border-radius:30px;color:#FF002B">LogOut to Register!</div>
-    
-    <div class="description_school">Register to make your school public! </div>
-    <button disabled onclick="window.location.href='/register/school'; return false;" class="btn">REGISTER NOW<img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></button>
-  
-  </div>
-  <div class="studentInfo">
-    <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/Student_title.svg" ></div>
-  <div class='hm' style="height: 0;z-index: 100;border-radius:30px;color:#FF002B">LogOut to Register!</div>
-    
-    <div class="description_student">Register to Join your school!</div>
-    <button disabled onclick="window.location.href='/register/student'; return false;" class="btn">REGISTER NOW <img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/student.svg" ></button>
-  
-  </div>
-
-  <div style="width:90%" class="forgetPassBg">
-    <form style="width:100%" action="{% url 'mailacc' %}" method='POST'>
-      {% csrf_token %}  
-<div  id="mail" class='formmail'>
-  <input style="width:90%"  name='mail' type="email" class="enterEmail" placeholder='EMAIl'></input>
-  <button name="mailsubm" onclick='maill()' type="submit" style='    background: #0C1014; color: #ff002b;' class="submitEmail" >Submit</button>
+{% if data.auth == True %}
+<div style='border-radius: 100px;    display: flex;flex-direction: row;flex-wrap: wrap;background:#ff002b;width:90%;align-items: center;padding:30px;
+justify-content: center;' class="newsall">
+<div  class="news">
+  <!-- <div class='msgt {{data.response.slip.id}}' style="margin:20px;">{{data.response.slip.advice}} </div> -->
+  <div class='msg {{data.response.slip.id}}' style="margin:20px;">{{data.response.slip.advice}} </div>
 </div>
-
-  <div  id="code" class='formmail'> 
-<input style="width:90%" name='code' type="text" class="enterEmail" placeholder='CODE'></input>
-<button name='codesubm'type="submit" style='    background: #0C1014; color: #ff002b;' class="submitEmail" >Submit</button>
 </div>
-
-
-</form>
-</div>
-
-
-
-
-  </div>
-{% else %}
+{% elif data.auth == False %}
 <div class="main__">
 
   <div class="schoolInfo">
@@ -194,6 +161,7 @@
   </div>
 {% endif %}
 
+
 </div>
 
 </div>
@@ -204,7 +172,30 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>
 
+// newapikey -- 1210f38d3df848b5aabd5cece29b3afc 
+// api -- https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=1210f38d3df848b5aabd5cece29b3afc
 
+// $.ajax({
+// url: "https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=1210f38d3df848b5aabd5cece29b3afc",
+// type: "GET",
+// dataType: 'json',
+// // data: $('#msgSend').serialize(),
+// // async: true,
+// success: function(response){
+    
+//   console.log(response);
+
+// }
+// });
+// var url = 'https://newsapi.org/v2/top-headlines?country=us&category=entertainment&' +
+//           'apiKey=1210f38d3df848b5aabd5cece29b3afc';
+
+// var req = new Request(url);
+
+// fetch(req)
+//     .then(function(response) {
+//         console.log(response.json());
+//     })
   </script>
   </body>
 </html>

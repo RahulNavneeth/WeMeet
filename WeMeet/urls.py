@@ -31,5 +31,6 @@ urlpatterns = [
     path('admin/data/school/<int:schoolId>/batch/<int:batchId>',views.adminDataBatch),
     path('admin/data/school/<int:schoolId>',views.adminDataSchool),
     path('admin/data/school',views.adminDataAllSchool),
+    path('data/school/<int:schoolId>',views.reactDataSchool),
     path('u/student/<str:studentname>',views.studentUser),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

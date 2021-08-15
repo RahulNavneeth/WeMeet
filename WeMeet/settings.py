@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'WeMeet',
+    'corsheaders',
     'django_inlinecss',
     'channels',
     'cloudinary_storage',
@@ -38,6 +39,7 @@ ASGI_APPLICATION = "WeMeet.asgi.application"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -45,6 +47,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    'http://localhost:8000',
+]
 ROOT_URLCONF = 'WeMeet.urls'
 
 TEMPLATES = [
@@ -130,17 +140,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = str(os.path.join(BASE_DIR, 'WeMeet/static'),)
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'wemeetweb',
-    'API_KEY': '652496293865574',
-    'API_SECRET': 'ciUDj7hvzZpRHdF06WVjF6Z3w2E'
+    'CLOUD_NAME': 'wemeetcloudweb',
+    'API_KEY': '346766117525321',
+    'API_SECRET': 'CaLs0jV1Rr-orT0EE6JQL7OYUSw'
 }
 MEDIA_URL = '/media/ProfilePicture/'  # or any prefix you choose
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 import cloudinary
 
-cloudinary.config(cloud_name='wemeetweb',
-                  api_key='652496293865574',
-                  api_secret='ciUDj7hvzZpRHdF06WVjF6Z3w2E')
+cloudinary.config(cloud_name='wemeetcloudweb',
+                  api_key='346766117525321',
+                  api_secret='CaLs0jV1Rr-orT0EE6JQL7OYUSw')
 ##RahulNavneeth@12345 -- cloudinary
 
 
