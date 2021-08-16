@@ -1172,10 +1172,10 @@ def batchUpdate(request,schoolname,batchurl):
                     user = User.objects.get(username=schoolname)
                     skl= school.objects.get(user=user)
                     batchs= batch.objects.filter(school_reference=skl,batch_url=batchurl).delete()
-                    return redirect('/school/'+schoolname+'/batch/'+batchurl)         
+                    return redirect('/u/school/'+request.user.username)         
                 else:
                     messages.info(request,request.user.username+", Invalid Password")
-                    return redirect('/u/school/'+request.user.username) 
+                    return redirect('/batchupdate/'+schoolname+'/'+batchurl) 
             else:
                 user = User.objects.get(username=schoolname)
                 batchStrength = request.POST.get('batchStrength')
@@ -1191,7 +1191,7 @@ def batchUpdate(request,schoolname,batchurl):
                     return redirect('/school/'+schoolname+'/batch/'+batchurl)            
                 else:
                     messages.info(request,request.user.username+", Invalid Password")
-                    return redirect('/school/'+schoolname+'/batch/'+batchurl) 
+                    return redirect('/batchupdate/'+schoolname+'/'+batchurl) 
         else:
             return HttpResponse('You are not authorized')    
     else:
