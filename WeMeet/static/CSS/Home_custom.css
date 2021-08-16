@@ -78,7 +78,7 @@ body{
 .schoolInfo {
     /* height: 97%; */
     /* width: 24%; */
-    width: 445px;
+    /* width: 445px; */
     height: 533px;
     align-items: center;
     border-radius: 20px;
@@ -88,15 +88,16 @@ body{
     /* max-width: 100%; */
     background-clip: padding-box;
     display: -webkit-box;
+    margin: 10px;
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
     flex-direction: column;
     /* height: 18.375rem; */
     margin-bottom: 1.5rem;
-    margin-right: 1.5rem;
+    /* margin-right: 1.5rem; */
     overflow: hidden;
-    position: relative;
+    /* position: relative; */
     text-align: left;
     /* width: 445px;*/
 }
@@ -108,29 +109,30 @@ body{
 }
 
 .studentInfo {
-    /* height: 97%; */
-    /* width: 24%; */
-    width: 445px;
-    height: 533px;
-    border-radius: 20px;
-    /* padding-bottom: 31%; */
-    border: 1px var(--WeMeet-pri) solid;
-    /* max-width: 100%; */
-    background-clip: padding-box;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex;
-    align-items: center;
-    /* mix-blend-mode: difference; */
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    /* height: 18.375rem; */
-    margin-bottom: 1.5rem;
-    margin-right: 1.5rem;
-    overflow: hidden;
-    position: relative;
-    text-align: left;
-    /* width: 445px;*/
+        /* height: 97%; */
+        /* width: 24%; */
+        /* width: 445px; */
+        margin: 10px;
+        height: 533px;
+        border-radius: 20px;
+        /* padding-bottom: 31%; */
+        border: 1px var(--WeMeet-pri) solid;
+        /* max-width: 100%; */
+        background-clip: padding-box;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
+        /* mix-blend-mode: difference; */
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        /* height: 18.375rem; */
+        margin-bottom: 1.5rem;
+        /* margin-right: 1.5rem; */
+        overflow: hidden;
+        position: relative;
+        text-align: left;
+        /* width: 445px;*/
 }
 
 

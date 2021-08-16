@@ -129,7 +129,24 @@
     justify-content: center;
     align-items: center;
 }
-
+.text{
+    margin: 20px;
+    font-family: 'Montserrat';
+    font-size: 50px;
+    text-align: center;
+    text-shadow: -5px -5px #ff002b;
+    font-style: italic;
+    font-weight: 1000;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px #ff002b;
+    color: transparent;
+    letter-spacing: -3px;
+    font-size: 22px;
+    /* border-radius: 30px; */
+    font-family: 'Montserrat';
+    font-size: 50px;
+    /* color: #FF002B;*/
+}
 .m{
     background: #ff002b;
     z-index: 100;

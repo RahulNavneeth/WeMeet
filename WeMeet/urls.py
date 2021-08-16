@@ -19,7 +19,7 @@ urlpatterns = [
     path('ajax/updatemsg/<str:schoolName>/<str:batchurl>/<str:user>/<int:msgid>',views.updatchat),
     path('ajax/deletemsg/<str:schoolName>/<str:batchurl>/<str:user>/<int:msgid>',views.deletechat),
     # path('ajax/taguserchat',views.tagUserChat),
-
+    path('batchupdate/<str:schoolname>/<str:batchurl>',views.batchUpdate),
     path('passwordreset/<str:code>/<int:user>',views.passreset),
     # path('mailTest',views.mailTest),
     path('mailTest/acc',views.mailacc,name='mailacc'),

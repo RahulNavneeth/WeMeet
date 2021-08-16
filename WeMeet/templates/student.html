@@ -38,7 +38,7 @@
         <!-- <img style='width: 200px;margin-bottom:20px;' src="{% static 'IMAGE/LOGO/School_title.svg'%}"> -->
      
     <div  class="main">
-        <div class='welcome' style="border-radius:30px;color:#FF002B">{{request.user.user_student.student_aka_name}}</div>
+        <div class='text' >{{request.user.user_student.student_aka_name}}</div>
         <img style='border-radius:1000px;width: 150px;height: 150px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
         <div class='welcome' style="font-size: 16px;border-radius:30px;    margin-top: -16px;color:#404040">@{{request.user}}</div>
         

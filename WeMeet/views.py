@@ -1156,21 +1156,53 @@ def reactDataSchool(request,schoolId):
 
 
 
-# def register(request):
-#     form=registerform()
-#     if request.method == 'POST':
-#         print('1')
-#         form=registerform()
-#         if form.is_valid():
-#             print('2')
-#             form.save()
-#             return redirect("/login")
-#         else:
-#             print('2no')
-#             print(form.errors)
-#             messages.info(request,'error'+str(form.errors))
-#             return redirect('/register')
-#     else:
-#         print('1no')
-#         context={'form':form}
-#         return render(request,'register.html',context)
+
+
+
+def batchUpdate(request,schoolname,batchurl):
+    if request.method == 'POST':
+        # print(str(request.user) + '=='+ str(schoolname))
+        # print(request.user.username==schoolname)
+        if schoolname == request.user.username:
+            if 'delete' in request.POST:
+                user = User.objects.get(username=schoolname)
+                password = request.POST.get('password')
+                passchk = user.check_password(password)
+                if passchk:
+                    user = User.objects.get(username=schoolname)
+                    skl= school.objects.get(user=user)
+                    batchs= batch.objects.filter(school_reference=skl,batch_url=batchurl).delete()
+                    return redirect('/school/'+schoolname+'/batch/'+batchurl)         
+                else:
+                    messages.info(request,request.user.username+", Invalid Password")
+                    return redirect('/school/'+schoolname+'/batch/'+batchurl) 
+            else:
+                user = User.objects.get(username=schoolname)
+                batchStrength = request.POST.get('batchStrength')
+                batchDescription = request.POST.get('batchDescription')
+                batch_year = request.POST.get('batch_year')
+                password = request.POST.get('password')
+                passchk = user.check_password(password)
+                if passchk:
+                    user = User.objects.get(username=schoolname)
+                    skl= school.objects.get(user=user)
+                    btch = batch.objects.get(school_reference=skl,batch_url=batchurl)
+                    batchs= batch.objects.filter(school_reference=skl,batch_url=batchurl).update(batch_strength=batchStrength,batch_description=batchDescription,batch_year=str(batch_year)+'-'+str(btch.batch_year.month)+'-'+str(btch.batch_year.day))
+                    return redirect('/school/'+schoolname+'/batch/'+batchurl)            
+                else:
+                    messages.info(request,request.user.username+", Invalid Password")
+                    return redirect('/u/school/'+request.user.username)
+        else:
+            return HttpResponse('You are not authorized')    
+    else:
+        user = User.objects.get(username=schoolname)
+        skl= school.objects.get(user=user)
+        batchs= batch.objects.get(school_reference=skl,batch_url=batchurl)
+        data={
+            'batchStrength':batchs.batch_strength,
+            'batchDescription':batchs.batch_description,
+            'batch_year':batchs.batch_year.year,
+            'batch_url':batchs.batch_url,
+        }
+        print(batchs.batch_url)
+        return render(request, 'batchUpdate.html', {'data':data})

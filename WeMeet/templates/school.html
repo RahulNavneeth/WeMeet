@@ -41,7 +41,7 @@
         <!-- <img style='width: 200px;margin-bottom:20px;' src="{% static 'IMAGE/LOGO/School_title.svg'%}"> -->
      
     <div  class="main">
-        <div class='welcome' style="font-size: 22px;border-radius:30px;color:#FF002B">{{request.user }}</div>
+        <div class='text' >{{request.user }}</div>
         <img style='border-radius:1000px;width: 150px;height: 150px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
         <div class='welcome' style="font-size: 22px;border-radius:30px;color:#FF002B">{{request.user.user_school.school_address_state}}</div>
         <div class='sklurl'>

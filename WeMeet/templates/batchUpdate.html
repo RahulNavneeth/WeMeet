@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon"  href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
+    
+    <title>{{request.user}} | Profile Update</title>
+</head>
+<body style='margin: 0px;
+margin-top: 8px;'>
+    {% include "bgone.html" %}
+
+    <div class="navbar" style="z-index:100">
+
+      
+        <a class='logoflex' href="/" style="z-index:100">
+        <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    width: 60px;'>
+         
+        <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;    margin: 6px;'>
+        </a>
+      </div>
+      <div class="rightprofile">
+        
+        <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
+  
+        {% if request.user.groups.all.0.name  == "Student" %}
+        <a style='z-index: 100;' href="/u/student/{{request.user.username}}">
+  
+        
+  
+      <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
+        </a>  
+      {% elif request.user.groups.all.0.name  == "School" %}
+      <a style='z-index: 100;' href="/u/school/{{request.user.username}}">
+  
+      <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
+      </a> 
+      {% else %}
+  
+      <a style='z-index: 100;' href="/admin">
+  
+        <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
+        </a> 
+  
+      {% endif %}
+      </div>
+      <div class="flexbox">
+
+    <form  style="    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;"
+    method="POST" action="/batchupdate/{{request.user}}/{{data.batch_url}}" enctype="multipart/form-data">
+
+
+{% csrf_token %}  
+
+{% for message in messages %}
+<error style='width: 100%;' class='error_auth'>{{message}}</error>
+{% endfor %}
+    <button class='saveUpdt' onclick="
+    document.querySelector('.passwordVerify').style.display='flex';
+    document.querySelector('.input_inputt').readOnly = true;
+    document.querySelector('.delo').style.display = 'block';
+    document.querySelector('.del').style.display = 'none';
+    document.querySelector('.input_inputtdes').readOnly = true;
+    document.querySelector('.input_inputtDun').readOnly = true;
+    document.querySelector('.saveUpdt').disabled = true;
+        document.querySelector('.saveUpd').disabled = true;
+
+    return false;" value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' >Delete Batch</button>
+
+        <input class='input_inputt' type="text" name='batchStrength' value={{data.batchStrength}}>
+        <input class='input_inputtdes' type="text" name='batchDescription'value={{data.batchDescription}}>
+        <input class='input_inputtDun' type="text" name='batch_year' value={{data.batch_year}}>
+        
+        <button class='saveUpd' onclick="
+        document.querySelector('.passwordVerify').style.display='flex';
+        document.querySelector('.input_inputt').readOnly = true;
+        document.querySelector('.input_inputtdes').readOnly = true;
+        document.querySelector('.input_inputtDun').readOnly = true;
+        document.querySelector('.saveUpd').disabled = true;
+      
+      return false;" value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' >Save</button>
+                <div  class="passwordVerify">
+                    <div class='welcome upd ' style="background-color:#0F1418;border-radius:30px;color:#FF002B">PASSWORD</div>
+                    
+                    <input class="input_inputt tt"  type="password" name="password" value="">
+                    <input class='del' value='Submit'   style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
+                    <input class='delo' name='delete' value='Delete'   style='display:none;margin:10px;    width: 120px;    font-size: 12px;' type="submit">
+                    
+                </div>
+
+                  </form>
+</form>
+    </div>
+    <script src="{% static 'JS/updateprofile.js' %}"></script>
+</body>
+</html>
