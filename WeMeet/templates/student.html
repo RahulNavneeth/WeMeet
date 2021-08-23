@@ -15,6 +15,11 @@
     <link href="{% static 'css/Home_custom.css'%}" rel="stylesheet" type="text/css" />
 
 </head>
+<style>
+
+
+
+</style>
 <body style='margin:0px;' >
     {% include "bgone.html" %}
 
@@ -65,13 +70,227 @@
         </div> 
         
     </div>
-    <div class="Mbatch"></div> 
-    
+    <div class="Mbatch">
+      <div class='postContainer'>
+
+
+
+     </div> 
     </div> 
+
+
+    </div> 
+    <form id='post'  method="POST" enctype="multipart/form-data">
+  
+        {% csrf_token %}
+  
+<div id="dropContainer" class="postupload">
+    <span style='pointer-events: none;' class="postuploadtext">Drop file here or click to upload</span>
+    <input style='  display: none;    '  name='media' type="file" class="drop-zone__input">
+    <img style='border-radius:20px' class='none' src='' id='uploadedfile'>
+    <textarea name='desc' style='width: 410px;height: 490px;' id='uploadedfileDescrition'></textarea>
+    <input value='->' class='uploadBtn' type="submit" style='display:none;    padding: 15px;        width: 55px;        font-weight: 1000;        border-radius: 100px;        font-size: 15px;        height: 56px;        -webkit-text-stroke: transparent;        font-family: Fira Code;'>
+
+</div>
+  
+</form>
+
     </div>
     </div>
 
+    <!-- <button onclick='post("{{request.user}}")' class='uploadBtn'style='display:none;    padding: 15px;        width: 55px;        font-weight: 1000;        border-radius: 100px;        font-size: 15px;        height: 56px;        -webkit-text-stroke: transparent;        font-family: Fira Code;'>-></button> -->
+  
 
 
-    <script src="{% static 'JS/student.js'%}"></script></body>
+    <script src="{% static 'JS/student.js'%}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script>
+
+
+var diplaypostlive = setInterval(displayPost,1000)
+// displayPost()
+function displayPost(){
+
+
+    $.ajax({
+    url: "/ajax/displaypostStd",
+    type: "GET",
+    dataType: 'json',
+    processData: false,
+    contentType: false,
+    success: function(response){
+      // console.log(response)
+
+
+      if( response.bool == true){
+        document.querySelector(".postContainer").innerHTML = '';
+
+        $('.postContainer').append(
+        '<div class="btnBox">'+
+          "<button onclick='document.querySelector("+'"'+".postupload"+'"'+").style.display ="+'"'+"flex"+'"'+"' style='padding: 15px;    width: 35px;height: 35px;border-radius: 100px;font-size: 20px;font-family: courier;'>+</button>"    
+          +"</div>"
+        )
+
+
+        for (const data of response.post){
+
+          $('.postContainer').append(
+
+            
+              "<div  class='post'>"+
+                "<div class='ActualPost' style='background:url("+data.postMedia+");background-repeat: no-repeat;    background-size: 200px 290px;'  >"
+
+                  
+
+
+                +"</div>"
+              +"</div>"
+            
+
+          )
+
+
+
+        }
+
+
+
+
+
+
+
+      }else{
+        if(document.querySelector("postContainer") !== null){
+          document.querySelector(".Mbatch").innerHTML = '';
+
+          document.querySelector(".postContainer").remove();
+          $('.Mbatch').append(
+
+            "<div class='postContainerno'>"+
+              "<div class='text'>Everyone Is Going To Love Your POST....!</div>"+
+
+              "<button onclick='document.querySelector("+'"'+".postupload"+'"'+").style.display ="+'"'+"flex"+'"'+"' style='padding: 15px;    width: 35px;height: 35px;border-radius: 100px;font-size: 20px;font-family: courier;'>+</button>"
+              
+              +"</div>"
+            +"</div>"
+
+
+          )
+        
+        
+        }else{
+          document.querySelector(".Mbatch").innerHTML = '';
+
+      $('.Mbatch').append(
+
+        "<div class='postContainerno'>"+
+          "<div class='text'>Everyone Is Going To Love Your POST....!</div>"+
+
+          "<button onclick='document.querySelector("+'"'+".postupload"+'"'+").style.display ="+'"'+"flex"+'"'+"' style='padding: 15px;    width: 35px;height: 35px;border-radius: 100px;font-size: 20px;font-family: courier;'>+</button>"
+          
+          +"</div>"
+        +"</div>"
+
+
+      )
+        }
+      }
+    }
+    });
+}
+
+
+
+
+
+
+    document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+        const dropZoneElement = inputElement.closest(".postupload");
+      
+        // dropZoneElement.addEventListener("click", (e) => {
+        //   inputElement.click();
+        // });
+      
+        // inputElement.addEventListener("change", (e) => {
+        //   if (inputElement.files.length) {
+        //     // inputElement.files = e.dataTransfer.files;
+        //     updateThumbnail(inputElement.files);
+        //   }
+        // });
+      
+        dropZoneElement.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          document.getElementById('dropContainer').className="postuploadHover";
+        });
+      
+        ["dragleave", "dragend"].forEach((type) => {
+          dropZoneElement.addEventListener(type, (e) => {
+            document.getElementById('dropContainer').className="postupload";
+          });
+        });
+      
+        dropZoneElement.addEventListener("drop", (e) => {
+          e.preventDefault();
+      
+          if (e.dataTransfer.files.length) {
+            inputElement.files = e.dataTransfer.files;
+            updateThumbnail(e.dataTransfer.files);
+          }
+      
+          document.getElementById('dropContainer').className="postupload";
+        });
+      });
+      
+      /**
+       * Updates the thumbnail on a drop zone element.
+       *
+       * @param {HTMLElement} dropZoneElement
+       * @param {File} file
+       */
+      function updateThumbnail(files) {
+        for (var i = 0; i < files.length; i++) {
+
+        reader = new FileReader();
+        reader.onload = function(event) {
+        document.querySelector('.postuploadtext').innerHTML = '';
+        document.querySelector('.uploadBtn').style.display = 'block';
+        document.querySelector('#uploadedfile').style.width='410px';
+        document.querySelector('#uploadedfile').style.height='490px';
+        document.getElementById('uploadedfile').src = event.target.result;
+        document.getElementById('dropContainer').disabled = true;
+        document.querySelector('.none').className='uploadImageDisplay';
+        document.querySelector('#uploadedfileDescrition').style.display = 'block';
+        
+}
+reader.readAsDataURL(files[i]);
+
+}
+      };
+
+
+
+$("form#post").submit(function(e) {
+e.preventDefault();    
+var formData = new FormData(this);
+ 
+$.ajax({
+url: "/post/{{request.user}}",
+type: "POST",
+dataType: 'json',
+data:formData, 
+
+
+processData: false,
+contentType: false,
+success: function(response){
+  console.log(response)
+document.querySelector('.postupload').style.display = 'none';
+}
+});
+});
+
+
+    </script>
+</body>
 </html>

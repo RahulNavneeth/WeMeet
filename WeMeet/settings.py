@@ -11,9 +11,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$45r&4hj_$@u1vm&ts#itdgoln78rxf69c%7^j1-s3p)5b_*hy'
 
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['wemeet-web.herokuapp.com','*']
 
 
 # Application definition
@@ -160,3 +160,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'wemeetweb@gmail.com'
 EMAIL_HOST_PASSWORD ='RahulNavneeth.'
+
+
+##RahulNavneeth.13 -- Heroku

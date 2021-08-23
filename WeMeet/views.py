@@ -301,7 +301,34 @@ def schoolUser(request,schoolname):
 def studentUser(request,studentname):
     if User.objects.filter(username=studentname, groups__name='Student').exists():
         if request.user.username == studentname:
-            return render(request,'student.html')
+            from .models import post
+            # posts = post.objects.filter(user=request.user).exsist()
+            # print(posts)
+            if post.objects.filter(user=request.user).exists():
+                posts = post.objects.filter(user=request.user).all()
+
+                postAll=[]
+                postDict={
+                    'bool':True,
+                    'post':postAll
+                }
+                for i in posts:
+                    x=dict(id=i.id,
+                            user=i.user.username,
+                            media=i.media.url,
+                            description=i.description,
+                            date=str(i.date.hour)+':'+str(i.date.minute)+' '+str(i.date.date()),
+                            like=dict(count=i.likes.count()))
+                    postAll.append(x)  
+                return render(request,'student.html',{'post':postDict})
+            else:
+                postDict={
+                    'bool':False,
+                    'post':'Add One'
+                }
+                return render(request,'student.html',{'post':postDict})
+
+
         else:
             return HttpResponse("Your are Not authorized to this student")
     else:
@@ -550,6 +577,7 @@ def batchView(request,schoolname,batchurl):
         else:
             return HttpResponse("Your are Not authorized to this School and batch")
 
+@login_required(login_url='/')
 def studentView(request,studenturl):
     if request.user.is_authenticated:
         if request.user in User.objects.filter(groups__name='School').all():
@@ -607,7 +635,7 @@ def logoutUser(request):
 def NotFoundPage404(request):
     return render(request,'404.html')
 
-
+@login_required(login_url='/')
 def adminDataBatch(request,schoolId,batchId):
     if request.user in User.objects.filter(groups__name='Admin').all():
         skl= school.objects.get(id=schoolId)
@@ -678,7 +706,7 @@ def adminDataBatch(request,schoolId,batchId):
     else:
         return HttpResponse("This is only for admins")
 
-
+@login_required(login_url='/')
 def adminDataSchool(request,schoolId):
     if request.user in User.objects.filter(groups__name='Admin').all():
         skl= school.objects.get(id=schoolId)
@@ -735,7 +763,7 @@ def adminDataSchool(request,schoolId):
         return HttpResponse("This is only for admins") 
 
 
-
+@login_required(login_url='/')
 def adminDataAllSchool(request):
     if request.user in User.objects.filter(groups__name='Admin').all():
         skl= school.objects.filter().all()
@@ -897,7 +925,7 @@ def passreset(request,code,user):
 
 
 import cloudinary.uploader
-
+@login_required(login_url='/')
 def updatepage(request,userid,userurl):
     if request.user.id==userid:
         user = User.objects.get(id=userid)
@@ -1001,7 +1029,7 @@ def updatepage(request,userid,userurl):
                 }
                 return render(request,"profileupdate.html",{'data':data})
   
-    
+@login_required(login_url='/')    
 def batchMsg(request,schoolname,batchurl):
     if request.method == 'POST':
         schoolName = User.objects.get(username=schoolname)
@@ -1026,6 +1054,7 @@ def batchMsg(request,schoolname,batchurl):
         else:
             return HttpResponse(status=204)
 
+@login_required(login_url='/')
 def msgView(request,schoolname,batchurl):
     schoolName = User.objects.get(username=schoolname)
     skl = school.objects.get(user=schoolName)
@@ -1042,12 +1071,12 @@ def msgView(request,schoolname,batchurl):
                 }
         
 
-    for b in msgs:
+    for b in reversed(msgs):
         if b.user==schoolName:
             skl = school.objects.get(user=schoolName)
             propic = skl.school_propic.url
         else:
-            for i in std:
+            for i in reversed(std):
                 if i.user.username == b.user.username:
                     propic = i.student_propic.url
         a= dict(msgid=int(b.id),
@@ -1070,7 +1099,7 @@ def msgView(request,schoolname,batchurl):
 #         dataloop = {'name':username}
 #         data.append(dataloop)
 #     return HttpResponse(json.dumps(data))
-
+@login_required(login_url='/')
 def updatchat(request,schoolName,batchurl,user,msgid):
 
     getchat = request.POST.get('uchat')
@@ -1087,6 +1116,7 @@ def updatchat(request,schoolName,batchurl,user,msgid):
     else:
         return HttpResponse('nope') 
 
+@login_required(login_url='/')
 def deletechat(request,schoolName,batchurl,user,msgid):
     
     if request.user.username == user:
@@ -1158,7 +1188,7 @@ def reactDataSchool(request,schoolId):
 
 
 
-
+@login_required(login_url='/')
 def batchUpdate(request,schoolname,batchurl):
     if request.method == 'POST':
         # print(str(request.user) + '=='+ str(schoolname))
@@ -1198,6 +1228,7 @@ def batchUpdate(request,schoolname,batchurl):
         user = User.objects.get(username=schoolname)
         skl= school.objects.get(user=user)
         batchs= batch.objects.get(school_reference=skl,batch_url=batchurl)
+        print(batchs.batch_description)
         data={
             'batchStrength':batchs.batch_strength,
             'batchDescription':batchs.batch_description,
@@ -1206,3 +1237,53 @@ def batchUpdate(request,schoolname,batchurl):
         }
         print(batchs.batch_url)
         return render(request, 'batchUpdate.html', {'data':data})
+
+
+def DragNDrop(request):
+    return render(request,'dragNdrop.html')
+
+@login_required(login_url='/')
+def addPost(request,user):
+    if request.user.username == user:
+        media=request.FILES.get('media')
+        print(media)
+        desc=request.POST.get('desc')
+        postVar = post.objects.create(
+            user=request.user,
+            media=media,
+            description=desc,
+
+
+        )
+        postVar.save()
+        return HttpResponse(json.dumps('Success'))
+    else:
+        return HttpResponse(json.dumps('Your are not authorised'))
+
+@login_required(login_url='/')
+def displayPostStd(request):
+    if request.user.is_authenticated:
+        if post.objects.filter(user=request.user).exists():
+            posts = post.objects.filter(user=request.user).all()
+            postAll={'bool':True,
+                    'post':
+                    [{'postid':i.id,
+                    'postMedia':i.media.url,
+                    'postDescription':i.description,
+                    'postDate':str(i.date.hour)+':'+str(i.date.minute)+' '+str(i.date.date()),
+                    'likes':[{'user':j.username,
+                                'userProfilePic':j.user_student.student_propic.url
+                        }
+                    for j in i.likes.all()]
+            
+                    } for i in reversed(posts)]
+                    }
+        else:
+            postAll={'bool':False,
+                     'post':[]
+                    }
+
+        return HttpResponse(json.dumps(postAll))
+    
+
+        

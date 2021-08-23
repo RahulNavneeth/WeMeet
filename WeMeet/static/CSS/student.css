@@ -81,7 +81,9 @@
     flex-wrap: wrap;
 }
 
-
+.uploadedfile{
+    display:none;
+}
 @media screen and (max-width: 554px) {
     .navi{
         flex-direction: column;
@@ -147,6 +149,8 @@
     font-size: 50px;
     /* color: #FF002B;*/
 }
+
+
 .m{
     background: #ff002b;
     z-index: 100;

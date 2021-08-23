@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<head>
+    {% load static %}
+
+  <title>Drag and Drop File Upload</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="/assets/favicon.ico">
+  <!-- <link rel="stylesheet" href="./src/main.css"> -->
+  <link href="{% static 'css/school.css'%}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'css/overwrite_webkit.css'%}" rel="stylesstylesheet" type="text/css" />
+
+</head>
+<style>
+.drop-zone__input {
+  display: none;
+}
+
+
+</style>
+<body>
+<form action='post/{{request.user}}' method="POST" enctype="multipart/form-data">
+  
+        {% csrf_token %}
+  
+<div id="dropContainer" class="postupload">
+    <span class="postuploadtext">Drop file here or click to upload</span>
+    <input style='  display: none;    '  name='media' type="file" class="drop-zone__input">
+    <img style='border-radius:20px' class='none' src='' id='uploadedfile'>
+    <textarea name='desc' style='width: 410px;height: 490px;' id='uploadedfileDescrition'></textarea>
+
+</div>
+<input value='->' class='uploadBtn' type="submit" style='display:none;    padding: 15px;        width: 55px;        font-weight: 1000;        border-radius: 100px;        font-size: 15px;        height: 56px;        -webkit-text-stroke: transparent;        font-family: Fira Code;'>
+  
+</form>
+  <script>
+    document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+        const dropZoneElement = inputElement.closest(".postupload");
+      
+        dropZoneElement.addEventListener("click", (e) => {
+          inputElement.click();
+        });
+      
+        inputElement.addEventListener("change", (e) => {
+          if (inputElement.files.length) {
+            updateThumbnail(inputElement.files);
+          }
+        });
+      
+        dropZoneElement.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          document.getElementById('dropContainer').className="postuploadHover";
+        });
+      
+        ["dragleave", "dragend"].forEach((type) => {
+          dropZoneElement.addEventListener(type, (e) => {
+            document.getElementById('dropContainer').className="postupload";
+          });
+        });
+      
+        dropZoneElement.addEventListener("drop", (e) => {
+          e.preventDefault();
+      
+          if (e.dataTransfer.files.length) {
+            inputElement.files = e.dataTransfer.files;
+            updateThumbnail(e.dataTransfer.files);
+          }
+      
+          document.getElementById('dropContainer').className="postupload";
+        });
+      });
+      
+      /**
+       * Updates the thumbnail on a drop zone element.
+       *
+       * @param {HTMLElement} dropZoneElement
+       * @param {File} file
+       */
+      function updateThumbnail(files) {
+        for (var i = 0; i < files.length; i++) {
+
+        reader = new FileReader();
+        reader.onload = function(event) {
+        document.querySelector('.postuploadtext').innerHTML = '';
+        document.querySelector('.uploadBtn').style.display = 'block';
+        
+        document.querySelector('#uploadedfile').style.width='410px';
+        document.querySelector('#uploadedfile').style.height='490px';
+        document.getElementById('uploadedfile').src = event.target.result;
+
+        document.querySelector('.none').className='uploadImageDisplay';
+        document.querySelector('#uploadedfileDescrition').style.display = 'block';
+        
+}
+reader.readAsDataURL(files[i]);
+
+}
+      };
+      
+  </script>
+</body>

@@ -83,7 +83,10 @@ class post(models.Model):
     media =models.FileField(upload_to='post/')
     description = models.TextField(max_length=300)
     date = models.DateTimeField(default=datetime.now)
-    likes = models.IntegerField()
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL,blank=True)
+
+    def __str__(self):
+        return str(self.user.username)+' - '+str(self.description)
     
 
 

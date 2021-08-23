@@ -6,7 +6,9 @@ body{
   background-color:#0C1014;
 
 }
-
+.drop-zone__input{
+  display: none;
+}
 .copybtn{
   background: #0c1014;
   color: #ff002b;
@@ -139,6 +141,7 @@ error{
   text-align: center;
   z-index: 1;
   font-family: courier;
+      width: 100%;
   font-weight: 1000;
   font-size: 22px;
   color: #FF0009;

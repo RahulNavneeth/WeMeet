@@ -9,8 +9,8 @@ input_picture.addEventListener("change", function(){
         console.log(this);
         
         input_picture.style.background='url('+this.result+')';
-        input_picture.style.backgroundSize = "contain";
-        input_picture.style.backgroundRepeat = "round";
+        input_picture.style.backgroundSize = "200px 200px";
+        input_picture.style.backgroundRepeat = "no-repeat";
 
       });
   

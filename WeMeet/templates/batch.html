@@ -29,9 +29,13 @@
 
     <div class="container">
       <div class="container">
-        <div class="navi">
-            
-          <button style='margin-top: 21px;;' onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'">UPDATE</button>
+          {% if request.user.groups.all.0.name  == "School" %}
+          <div class="navi">
+
+          
+          
+          <button style='margin-top: 21px;' onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'">UPDATE</button>
+
 
             <div class="div-img" style="z-index:100;padding-top: 18px;">
                 <a class='logoflex' href="/" style="z-index:100">
@@ -39,21 +43,49 @@
                  <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
             </a>
           </div>
+          <div style='margin:0;' class="rightprofile">
+  
+            <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
+          
           <a style='z-index: 100;' href="/u/school/{{request.user.username}}">
-    
-            <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
-            </a> 
-           </div>
-        <div class="des">
-            <div class='welcome t' style="color:#0C1014;background: #ff002b;width: 95%;border-radius:30px">.{{data.0.BATCH.0.batch_description}}.</div>
+          
+          <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
+          </a> 
+          
+          
+          </div>
         </div>
-<!-- <div style='color:#fff;' class="datachk">{{data.0.BATCH}}</div> -->
-        
-    
+          {% elif request.user.groups.all.0.name  == "Student" %}
+          <div style='justify-content: center;' class="navi">
 
+          
+          <div class="div-img" style="z-index:100;padding-top: 18px;">
+            <a class='logoflex' href="/" style="z-index:100">
+                <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    width: 60px;'>
+             <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
+        </a>
       </div>
-        </div>
+      <div style='margin:0;' class="rightprofile">
 
+        <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user}}</div>
+      
+      <a style='z-index: 100;' href="/u/student/{{request.user.username}}">
+      
+      <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
+      </a> 
+      
+      
+      </div>
+    </div>
+
+    {% endif %}
+
+
+        
+
+        <div class="des">
+          <div class='welcome t' style="color:#0C1014;background: #ff002b;width: 95%;border-radius:30px">.{{data.0.BATCH.0.batch_description}}.</div>
+      </div>
         <div class="mainBatch">
 
         <img style='height: 115px;width: 115px;' class="batchProfilePicture" src= "{% static 'IMAGE/media/batchDefaults/'|add:data.0.BATCH.0.batch_year|add:'.png' %}">
@@ -108,7 +140,7 @@
         <div class="leftMain">
           <img class='welcome showprofile' src = '{{data.0.BATCH.0.school_profilePicture}}' style="padding:20px;width:200px;height:200px;font-size: 22px;border-radius:1000px;color:#FF002B">
           <div class='welcome showname' style="padding: 5px;font-size: 22px;border-radius: 30px;width: 90%;height: 24px;background: #FF002B;color: #0c1014;">{{data.0.BATCH.0.School}}</div>
-          <div class='welcome showdesc' style="margin:10px;padding: 5px;font-size: 22px;border-radius: 30px;width: 90%;height: 24px;border:1px solid #ff002b;background: #0c1014;color: #ff002b;">{{data.0.BATCH.0.School_description}}</div>
+          <div class='welcome showdesc' style="margin:10px;padding: 5px;font-size: 22px;border-radius: 30px;width: 90%;border:1px solid #ff002b;background: #0c1014;color: #ff002b;">{{data.0.BATCH.0.School_description}}</div>
 
         </div>
 
@@ -116,6 +148,7 @@
           <form id="ajaxchatupdate" style="width:97%;" method="POST" >
           </form>
           <div class="chats">
+
           </div>
           <form id='msgSend' style="width:100%" action="" method="POST" >
             {% csrf_token %}
@@ -199,7 +232,6 @@ async: true,
 success: function(response){
 
     document.querySelector(".chats").innerHTML=""
-    document.querySelector(".chats").innerHTML="<div class='chatinfoflex'><div class='Chatinfo'>---Welcome {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} Batch , Chat to Begin..!!---</div></div>"
     
 
     for (const data of response.msgs.msgContent){
@@ -222,7 +254,7 @@ success: function(response){
     '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
         "<div onclick='alterchat("+'"{{request.user}}",'+data.msgid+','+'"'+data.msgMsg+'"'+");' class='chatFlex' >"+
       "<div  class='chatContainer' id='chatContainer' style='background:#0C1014;color:#ff002b;border:1px solid #ff002b;' >"+data.msgMsg+
-        '<div class="chatUser'+data.msgUser+'" style="display:block;color:#CC0022;">@'+data.msgUser+'</div>'+
+        '<div class="chatUser '+data.msgUser+'" style="display:block;color:#CC0022;">@'+data.msgUser+'</div>'+
         '</div>'
 
           
@@ -280,6 +312,11 @@ success: function(response){
     )}
     }
       }
+      $('.chats').append(
+
+        "<div class='chatinfoflex'><div class='Chatinfo'>---Welcome {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} Batch , Chat to Begin..!!---</div></div>"
+
+      )
 }
 });
 

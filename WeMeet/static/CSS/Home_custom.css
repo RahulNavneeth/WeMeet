@@ -398,8 +398,15 @@ body{
   .forgetPassBg{
       width: 95%;
   }
+  /* .schoolInfo{
+          width: 84%;
+  }
+    .studentInfo{
+          width: 84%;
+  } */
   .main__{
       padding-left: 0;
+      width:100%;
   }
   .input_inputt{
       width:90%;
@@ -409,6 +416,10 @@ body{
 }
 .input_inputtDun{
     width:90%;
+}
+.msg{
+    font-size:42px;
+    margin-bottom:10px;
 }
 }
 
@@ -420,6 +431,10 @@ body{
     .logIn_email{
         width: 400px;
     } 
+    .msg{
+    font-size:42px;
+    margin-bottom:10px;
+}
   
 }
 /* .newsall{
