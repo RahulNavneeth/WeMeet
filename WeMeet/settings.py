@@ -2,6 +2,8 @@
 
 from pathlib import Path
 import os
+import django_heroku
+
 # import cloudinary_storage
 
 
@@ -164,3 +166,7 @@ EMAIL_HOST_PASSWORD ='RahulNavneeth.'
 
 
 ##RahulNavneeth.13 -- Heroku
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
