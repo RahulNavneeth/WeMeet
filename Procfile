@@ -1,2 +1,2 @@
-web: gunicorn WeMeet.wsgi 
+web: gunicorn WeMeet.asgi --log -
  
