@@ -13,7 +13,7 @@ SECRET_KEY = '$45r&4hj_$@u1vm&ts#itdgoln78rxf69c%7^j1-s3p)5b_*hy'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['wemeet-web.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -139,7 +139,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'WeMeet/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'wemeetcloudweb',
     'API_KEY': '346766117525321',

@@ -1,0 +1,311 @@
+body{
+    background-color:#0C1014;
+
+}
+@import 'overwrite_webkit.css';
+
+.navbar{
+    background: #e8e8e9;
+    flex: 25%;
+    max-width: 100%;
+    height: 101%;
+    display: flex;
+    
+    padding-bottom: 4rem;
+    /* border-radius: 20px; */
+    margin-top: -13px;
+    background: rgba(7, 10, 14, 0.75);
+    /* border: 0.82797px solid #D41341; */
+    box-sizing: border-box;
+    backdrop-filter: blur(5px);
+    margin-bottom: 10px;
+    z-index: 1;
+    max-width: 121%;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    /* padding: 9px; */
+    flex-wrap: nowrap;
+}
+.hm{
+    /* width: 100%; */
+    color: #FF002B;
+    font-family: courier;
+    text-align: center;
+    font-size: 22px;
+    height: 100%;
+    padding: 0%;
+    font-weight: 700;
+
+}
+
+.rightprofile{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -100px;
+    z-index: 100;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+
+.main__{
+    height: 100%;
+    /* flex: 149%; */
+    align-items: center;
+    justify-content: center;
+    display: -webkit-box;
+    /* margin-top: 10%; */
+    /* margin-bottom: 10%; */
+    /* position: sticky; */
+    /* padding: 11%; */
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 1.5rem;
+    padding-top: 7.5rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.schoolInfo {
+    /* height: 97%; */
+    /* width: 24%; */
+    width: 445px;
+    height: 533px;
+    align-items: center;
+    border-radius: 20px;
+    /* padding-bottom: 31%; */
+    /* mix-blend-mode: difference; */
+    border: 1px var(--WeMeet-pri) solid;
+    /* max-width: 100%; */
+    background-clip: padding-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    /* height: 18.375rem; */
+    margin-bottom: 1.5rem;
+    margin-right: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+    /* width: 445px;*/
+}
+
+.btn{
+    margin-top: 94px;
+    width: 210px;
+    height: 60px;
+}
+
+.studentInfo {
+    /* height: 97%; */
+    /* width: 24%; */
+    width: 445px;
+    height: 533px;
+    border-radius: 20px;
+    /* padding-bottom: 31%; */
+    border: 1px var(--WeMeet-pri) solid;
+    /* max-width: 100%; */
+    background-clip: padding-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    /* mix-blend-mode: difference; */
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    /* height: 18.375rem; */
+    margin-bottom: 1.5rem;
+    margin-right: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+    /* width: 445px;*/
+}
+
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+  
+  /* Track */
+  ::-webkit-scrollbar-thumb {
+    background: var(--WeMeet-pri);
+    border-radius: 31px;
+}
+   
+  /* Handle */
+  ::-webkit-scrollbar-track {
+    background: #706265;
+    /* box-shadow: inset 0 0 5px grey; */
+    border-radius: 10px;
+}
+  
+
+
+
+
+
+
+.bg1 img{
+    position: fixed;
+    /* width: 2.5%; */
+    /* height: 3.5%; */
+    /* width: 37px; */
+    /* height: 37px; */
+    top: -63px;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-50%,0%);
+    animation: bg1 110s infinite;    
+}
+@keyframes bg1{
+    
+    0%{
+        transform: translate(-50%,-32%)rotate(0deg);
+        /* transform: translate(-50%,0%); */
+
+    }
+    100%{
+        transform:translate(-50%,-32%) rotate(360deg);
+        /* transform: ; */
+
+    }
+}
+
+
+.buttonFlex{
+    flex: 25%;
+    max-width: 100%;
+    z-index: 100;
+    color: #ff002d;
+    height: 101%;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+    /* padding-bottom: 4rem; */
+    border-radius: 20px;
+    font-family: 'Montserrat';
+    margin-top: -9px;
+    max-width: 121%;
+    justify-content: center;
+    align-items: center;
+    /* padding-bottom: 5px; */
+    /* padding-top: 5px; */
+    flex-wrap: wrap;
+}
+.heading_school{
+    margin: 11px;
+}
+
+.description_school{
+
+    background: #080D12;
+    width: 304px;
+    font-family: cursive;
+    height: 96px;
+    font-weight: 1000;
+    text-align: center;
+    text-align: center;
+    padding-top: 34px;
+    padding-bottom: 9px;
+    margin: 41px;
+    color: #A9A9A9;
+    border-radius: 18px;
+    font-size: 24px;
+    align-content: center;
+    }
+    
+.description_student{
+
+    background: #080D12;
+    width: 304px;
+    font-family: cursive;
+    height: 96px;
+    font-weight: 1000;
+    text-align: center;
+    text-align: center;
+    padding-top: 34px;
+    padding-bottom: 9px;
+    margin: 41px;
+    color: #A9A9A9;
+    border-radius: 18px;
+    font-size: 24px;
+    align-content: center;
+        }
+
+
+
+
+
+
+
+@media screen and (max-width: 618px) {
+    .navbar {
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding-bottom: 70px;
+  }
+  .rightprofile{
+    display: flex;
+    justify-content: center;
+    margin-top: -94px;
+    z-index: 100;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+  }
+  
+}
+
+
+@media screen and (min-width:810px) {
+    .logIn_password{
+        width: 400px;
+    } 
+    .logIn_email{
+        width: 400px;
+    } 
+  
+}
+
+
+.buttonNameAdmin{
+    text-align: center;
+    z-index: 1;
+    font-family: montserrat;
+    transform: translate(-91px );
+    font-weight: 1000;
+    color: var(--WeMeet-pri);
+}
+.buttonNameSchool{
+    text-align: center;
+    z-index: 1;
+    font-family: montserrat;
+    transform: translate(2px);
+    font-weight: 1000;
+    color: var(--WeMeet-pri);
+}
+.buttonNameStudent{
+    text-align: center;
+    z-index: 1;
+    transform: translate(95px);
+    font-family: montserrat;
+    font-weight: 1000;
+    color: var(--WeMeet-pri);
+}
+
+.buttonName{
+    display: flex;
+    justify-content: center;
+}
