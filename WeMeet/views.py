@@ -103,7 +103,7 @@ def register_school_page(request):
 
                 schoolSave.save()
                 
-                my_group = Group.objects.get(name='school') 
+                my_group = Group.objects.get(name='School') 
                 my_group.user_set.add(profile)
                 
 
