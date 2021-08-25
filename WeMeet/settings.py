@@ -143,8 +143,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'),)
 
-STATIC_ROOT = os.path.join(BASE_DIR,'live-static-files','static-root')
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR,'live-static','static-root')
+MEDIA_ROOT = os.path.join(BASE_DIR,'live-static','media-root')
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 CLOUDINARY_STORAGE = {
@@ -153,6 +154,9 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'CaLs0jV1Rr-orT0EE6JQL7OYUSw'
 }
 MEDIA_URL = '/media/ProfilePicture/'  # or any prefix you choose
+
+
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 import cloudinary
 
