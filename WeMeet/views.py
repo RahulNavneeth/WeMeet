@@ -133,23 +133,23 @@ def register_school_page(request):
                 mail = request.POST.get('email')
                 u = User.objects.get(email=mail)
                 skl =  school.objects.get(user=u)
-                recipient_list = [mail]
-                data = {
-                    'username': user,
-                    'profilePicture': skl.school_propic.url,
-                }
+                # recipient_list = [mail]
+                # data = {
+                #     'username': user,
+                #     'profilePicture': skl.school_propic.url,
+                # }
 
-                msg_plain ='Test'
-                msg_html = render_to_string('Mail/RegisterSucess.html',{'data':data})
+                # msg_plain ='Test'
+                # msg_html = render_to_string('Mail/RegisterSucess.html',{'data':data})
 
-                email_from = settings.EMAIL_HOST_USER
-                send_mail(
-                    user+', Register Succesfull --WeMeet',
-                    msg_plain,
-                    email_from,
-                    recipient_list,
-                    html_message=msg_html,
-                )
+                # email_from = settings.EMAIL_HOST_USER
+                # send_mail(
+                #     user+', Register Succesfull --WeMeet',
+                #     msg_plain,
+                #     email_from,
+                #     recipient_list,
+                #     html_message=msg_html,
+                # )
                 messages.info(request,"Hey "+user+", Appreciate Your Registration, Now Please LOGIN To Continue")
                 
                 return redirect('/')
@@ -243,23 +243,23 @@ def register_student_page(request):
                             mail = request.POST.get('email')
                             u = User.objects.get(email=mail)
                             skl =  student.objects.get(user=u)
-                            recipient_list = [mail]
-                            data = {
-                                'username': user,
-                                'profilePicture': skl.student_propic.url,
-                            }
+                            # recipient_list = [mail]
+                            # data = {
+                            #     'username': user,
+                            #     'profilePicture': skl.student_propic.url,
+                            # }
 
-                            msg_plain ='Registration Successfull'
-                            msg_html = render_to_string('Mail/RegisterSucess.html',{'data':data})
+                            # msg_plain ='Registration Successfull'
+                            # msg_html = render_to_string('Mail/RegisterSucess.html',{'data':data})
 
-                            email_from = settings.EMAIL_HOST_USER
-                            send_mail(
-                                user+', Registered Succesfull --WeMeet',
-                                msg_plain,
-                                email_from,
-                                recipient_list,
-                                html_message=msg_html,
-                            )   
+                            # email_from = settings.EMAIL_HOST_USER
+                            # send_mail(
+                            #     user+', Registered Succesfull --WeMeet',
+                            #     msg_plain,
+                            #     email_from,
+                            #     recipient_list,
+                            #     html_message=msg_html,
+                            # )   
                             messages.info(request,"Hey "+user+", Appreciate Your Registration, Now Please LOGIN To Continue")
 
                             return redirect('/')
