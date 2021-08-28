@@ -110,6 +110,26 @@
     flex-direction: column;
     flex-wrap: nowrap;
 
+
+}
+.postuploadbtn{
+    font-family: Montserrat;
+    text-shadow: -4px -4px #0c1014;
+    -webkit-text-stroke: 1px #0c1014;
+    width: 500px;
+    text-align: center;
+    font-style: italic;
+    font-weight: 1000;
+    font-size: 50px;
+    justify-content: center;
+    font-family: 'Montserrat';
+    text-transform: uppercase;
+    
+    pointer-events: auto;
+}
+.postuploadbtn:hover{
+    text-shadow: -4px -4px #ff002b;
+    -webkit-text-stroke: 1px #ff002b;
 }
 .text{
     margin: 20px;
@@ -362,7 +382,7 @@
     /* backdrop-filter: blur(100px); */
     display: none;
     color: transparent;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     text-shadow: -5px -5px #0c1014;
     font-style: italic;

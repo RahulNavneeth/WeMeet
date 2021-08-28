@@ -32,6 +32,7 @@ urlpatterns = [
     path('school/<str:schoolname>/batch/<str:batchurl>',views.batchView),
     path('student/<str:studenturl>',views.studentView),
     path('admin/data/school/<int:schoolId>/batch/<int:batchId>',views.adminDataBatch),
+    path('admin/data',views.jsonAdmin),
     path('admin/data/school/<int:schoolId>',views.adminDataSchool),
     path('admin/data/school',views.adminDataAllSchool),
     path('data/school/<int:schoolId>',views.reactDataSchool),

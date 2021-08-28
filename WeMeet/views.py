@@ -10,10 +10,12 @@ from django.http import *
 from datetime import datetime
 from string import *
 from django.template.loader import render_to_string
-
+from django.core.files import File
+from urllib.request import urlopen
+from tempfile import NamedTemporaryFile
 from .models import *
 from django.core.mail import EmailMultiAlternatives
-
+import urllib
 import random
 from django.conf import settings
 from django.core.mail import send_mail
@@ -21,7 +23,7 @@ from .forms import *
 from django.utils.html import strip_tags
 from django.contrib.auth.models import Group
 import requests
-
+from django.core.files.base import ContentFile
 
 def HomePage(request):
     if request.user.is_authenticated:
@@ -45,6 +47,18 @@ def HomePage(request):
             'response':'NoResponse'
 
         }
+        url='https://api.kwelo.com/v1/media/identicon/hlo'
+        from PIL import Image
+        import requests
+        from io import BytesIO
+
+        response = requests.get(url)
+        img = Image.open(BytesIO(response.content))
+        print(img)
+        img.show()
+        # img=img.read()
+        # print(img)
+        # urllib.request.urlretrieve(url,'hi')
         return render(request,'home.html',{'data':data})   
 
 def register_school_page(request):
@@ -66,7 +80,7 @@ def register_school_page(request):
         batchStd                                    = request.POST.get('batchStd')
         batchDescription                            = request.POST.get('batchDescription')
 
-        if schoolState or schoolDistrict or schoolArea or schoolProfilePicture or yrsOfSchooling or yrStartes or noOfBatches or schoolDistrict or batchStrength or batchStd or batchDescription: 
+        if schoolState or schoolDistrict or schoolArea or yrsOfSchooling or yrStartes or noOfBatches or schoolDistrict or batchStrength or batchStd or batchDescription: 
 
             if form.is_valid():
                 form.save()
@@ -86,22 +100,55 @@ def register_school_page(request):
 
                 profile = User.objects.get(username=user)
                 print(profile.id)
-                
-                schoolSave = school.objects.create(
-                                                user=profile,
-                                                school_url=randomurl,
-                                                school_propic=schoolProfilePicture,
-                                                school_address_state=schoolState,
-                                                school_address_district=schoolDistrict,
-                                                school_address_area=schoolArea,
-                                                School_description=schoolDescription,
-                                                school_noof_batch=noOfBatches,
+
+
+                if schoolProfilePicture is None:
+                    from PIL import Image
+                    import requests
+                    from io import BytesIO
+                    url='https://api.kwelo.com/v1/media/identicon/'+user
+
+                    response = requests.get(url)
+                    img = Image.open(BytesIO(response.content))
+                    print(img)
+                    img.show()
+                    # img=img.read()
+                    # img=urllib.request.urlretrieve(url,user+'.png')
+                    print(ContentFile(response.content))
+                    schoolSave = school.objects.create(
+                                                    user=profile,
+                                                    school_url=randomurl,
+                                                    school_propic=response,
+                                                    school_address_state=schoolState,
+                                                    school_address_district=schoolDistrict,
+                                                    school_address_area=schoolArea,
+                                                    School_description=schoolDescription,
+                                                    school_noof_batch=noOfBatches,
 
 
 
-                )
+                    )
+                    schoolSave.save()
+                    # nullprofile = school.objects.get(user=profile)
+                    # nullprofile.school_propic.save(user, ContentFile(response.content), save=False)
 
-                schoolSave.save()
+
+                else:
+                    schoolSave = school.objects.create(
+                                                    user=profile,
+                                                    school_url=randomurl,
+                                                    school_propic=schoolProfilePicture,
+                                                    school_address_state=schoolState,
+                                                    school_address_district=schoolDistrict,
+                                                    school_address_area=schoolArea,
+                                                    School_description=schoolDescription,
+                                                    school_noof_batch=noOfBatches,
+
+
+
+                    )
+
+                    schoolSave.save()
                 
                 my_group = Group.objects.get(name='School') 
                 my_group.user_set.add(profile)
@@ -164,10 +211,16 @@ def register_school_page(request):
             return redirect('/register/school')
 
     else:
-        
-        context={'form':form}
+        if request.user.is_authenticated:
+            messages.info(request,'Please Logout to Register')
 
-        return render(request,'register_school.html',context)
+            return redirect('/')
+
+        else:
+
+            context={'form':form}
+
+            return render(request,'register_school.html',context)
 
 def register_student_page(request):
     form=CustomRegFormStudent()
@@ -280,9 +333,16 @@ def register_student_page(request):
             messages.info(request,'Make Sure You Fill Everything Out! :)')
             return redirect('/register/student')
     else:
-        context={'form':form}
+        if request.user.is_authenticated:
+            messages.info(request,'Please Logout to Register')
+            
+            return redirect('/')
+            
+        else:
+            context={'form':form}
 
-        return render(request,'register_student.html',context)
+            return render(request,'register_student.html',context)
+
 
 
 @login_required(login_url='/')
@@ -747,7 +807,7 @@ def adminDataSchool(request,schoolId):
                                         batch_description=i.batch_description,
                                         No_of_students=noofstud,
                                         ),
-                    link = 'http://192.168.0.3:8000/admin/data/school/'+str(skl.id)+'/batch/'+str(i.id)
+                    link = 'https://wemeet-web.herokuapp.com/admin/data/school/'+str(skl.id)+'/batch/'+str(i.id)
 
                                         )
             y.append(x)
@@ -792,7 +852,7 @@ def adminDataAllSchool(request):
                                             address_area=i.school_address_area,
                                             )
                                         ),
-                    link = 'http://192.168.0.3:8000/admin/data/school/'+str(i.id)
+                    link = 'https://wemeet-web.herokuapp.com/admin/data/school/'+str(i.id)
                                     
                                         )
             y.append(x)
@@ -1246,17 +1306,21 @@ def DragNDrop(request):
 def addPost(request,user):
     if request.user.username == user:
         media=request.FILES.get('media')
-        print(media)
-        desc=request.POST.get('desc')
-        postVar = post.objects.create(
-            user=request.user,
-            media=media,
-            description=desc,
+        if media is not None:
+            print(media)
+            desc=request.POST.get('desc')
+            postVar = post.objects.create(
+                user=request.user,
+                media=media,
+                description=desc,
 
 
-        )
-        postVar.save()
-        return HttpResponse(json.dumps('Success'))
+            )
+            postVar.save()
+            return HttpResponse(json.dumps('Success'))
+        else:
+            return HttpResponse(status=204)
+
     else:
         return HttpResponse(json.dumps('Your are not authorised'))
 
@@ -1284,6 +1348,30 @@ def displayPostStd(request):
                     }
 
         return HttpResponse(json.dumps(postAll))
+
+
+
+
+
+def jsonAdmin(request):
+    user = User.objects.get(id=request.user.id)
+    if user.groups.filter(name__in=['Admin']).exists():
+        data=[
+            {'adminlinks':[
+            {
+            'schools':'admin/data/school',
+            'school':'admin/data/school/int:schoolId',
+            'batch':'admin/data/school/int:schoolId/batch/int:batchId'
+        }
+        ]
+        }
+        ]
+        return HttpResponse(json.dumps(data))
+    else:
+        return HttpResponse('You Are Not Authorized')
+        
+
+
     
 
         
