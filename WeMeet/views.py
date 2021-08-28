@@ -48,14 +48,14 @@ def HomePage(request):
 
         }
         url='https://api.kwelo.com/v1/media/identicon/hlo'
-        from PIL import Image
-        import requests
-        from io import BytesIO
+        # from PIL import Image
+        # import requests
+        # from io import BytesIO
 
-        response = requests.get(url)
-        img = Image.open(BytesIO(response.content))
-        print(img)
-        img.show()
+        # response = requests.get(url)
+        # img = Image.open(BytesIO(response.content))
+        # print(img)
+        # img.show()
         # img=img.read()
         # print(img)
         # urllib.request.urlretrieve(url,'hi')
