@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School | {{request.user}}</title>
-    <link href="{% static 'CSS/overwrite_webkit.css'%}" rel="stylesstylesheet" type="text/css" />
+    <link href="{% static 'CSS/overwrite_webkit.css'%}" rel="stylesheet" type="text/css" />
     <link href="{% static 'CSS/school.css'%}" rel="stylesheet" type="text/css" />
     <link href="{% static 'CSS/Home_custom.css'%}" rel="stylesheet" type="text/css" />
 
@@ -78,13 +78,13 @@
         <div class='welcome tt btx' style="border-radius:30px;color:#FF002B">BATCH: {{ request.user.user_school.school_batch.count }}</div>
         <div style='    display: flex;        flex-direction: row;align-items: center;justify-content: center;        align-content: center;' class="batchCont">
         <div class='welcome tt btx'>.BATCHES.</div>
-        <button style='margin:0;border-radius:100px;width:25px;height:23px;font-weight: 600;font-family:Montserrat;font-size: 15px;'>+</button>
+        <button onclick='window.location.href="/addBatch/{{request.user.username}}"' style='margin:0;border-radius:100px;width:25px;height:23px;font-weight: 600;font-family:Montserrat;font-size: 15px;'>+</button>
     </div>
         <div class='welcome tt btx' style="border-radius:30px;color:#FF002B">STUDENTS: {{ request.user.user_school.student_school.count }}</div>
     </div>
 
     <div class="batch_containerOg">
-    {% for i in request.user.user_school.school_batch.all %}
+    {% for i in batch %}
     
 
     <a href=''></a>

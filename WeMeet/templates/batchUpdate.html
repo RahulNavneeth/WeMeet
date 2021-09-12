@@ -50,12 +50,7 @@ margin-top: 8px;'>
       </div>
       <div class="flexbox">
 
-    <form  style="    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    align-items: center;"
-    
+    <form method='POST' action='/batchupdate/{{request.user.username}}/{{data.batch_url}}'  style="    display: flex;    flex-direction: column;    align-content: center;    justify-content: center;    align-items: center;">    
 
 {% csrf_token %}  
 
@@ -70,7 +65,7 @@ margin-top: 8px;'>
     document.querySelector('.input_inputtdes').readOnly = true;
     document.querySelector('.input_inputtDun').readOnly = true;
     document.querySelector('.saveUpdt').disabled = true;
-        document.querySelector('.saveUpd').disabled = true;
+    document.querySelector('.saveUpd').disabled = true;
 
     return false;" value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' >Delete Batch</button>
 
@@ -86,16 +81,15 @@ margin-top: 8px;'>
         document.querySelector('.saveUpd').disabled = true;
       
       return false;" value='Save'  style='margin:10px;    width: 120px;    font-size: 12px;' >Save</button>
-                <div  class="passwordVerify">
-                    <div class='welcome upd ' style="background-color:#0F1418;border-radius:30px;color:#FF002B">PASSWORD</div>
-                    
-                    <input class="input_inputt tt"  type="password" name="password" value="">
-                    <input class='del' value='Submit'   style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
-                    <input class='delo' name='delete' value='Delete'   style='display:none;margin:10px;    width: 120px;    font-size: 12px;' type="submit">
-                    
-                </div>
+      <div  class="passwordVerify">
+          <div class='welcome upd ' style="background-color:#0F1418;border-radius:30px;color:#FF002B">PASSWORD</div>
+          
+          <input class="input_inputt tt"  type="password" name="password" value="">
+          <input class='del' value='Submit'   style='margin:10px;    width: 120px;    font-size: 12px;' type="submit">
+          <input class='delo' name='delete' value='Delete'   style='display:none;margin:10px;    width: 120px;    font-size: 12px;' type="submit">
+          
+      </div>
 
-                  </form>
 </form>
     </div>
     <script src="{% static 'JS/updateprofile.js' %}"></script>

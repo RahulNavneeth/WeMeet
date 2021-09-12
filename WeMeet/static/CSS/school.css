@@ -322,8 +322,8 @@
     overflow:auto;
     align-items: center;
     height: 100%;
-    justify-content: end;
-    flex-wrap: nowrap;
+    justify-content: flex-start;
+        flex-wrap: nowrap;
     align-items: center;
 }
 .postContainerno{
@@ -441,6 +441,23 @@
     text-transform: uppercase;
     color: transparent;
 }
+.fourofour{
+    text-align: center;
+    font-style: italic;
+    text-shadow: -15px -35px #ff002b;
+    font-style: italic;
+    font-weight: 1000;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px #ff002b;
+    font-weight: 1000;
+    /* color: #ff002b; */
+    font-size: 300px;
+    z-index: 1000;
+    justify-content: center;
+    font-family: 'Montserrat';
+    text-transform: uppercase;
+    color: transparent;
+}
 @media screen and (max-width: 610px) {
     .t {
         font-size:19px;
@@ -455,6 +472,7 @@
   }
   .postuploadtext{
       font-size:40px;
+      flex-direction: column;
   }
   /* .ActualPost{
     background-repeat:no-repeat;
@@ -463,6 +481,19 @@
     background-size: 140px 210px;
 
   } */
+  .fourofour {
+    font-size: 150px;
+    text-shadow: -5px -15px #ff002b;
+}
+.postupload{
+    flex-direction: column;
+}
+.postuploadbtn{
+    font-size:26px;
+    width:100%;
+    margin-left:0;
+
+}
 
 }
 

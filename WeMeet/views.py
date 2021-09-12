@@ -61,6 +61,9 @@ def HomePage(request):
         # urllib.request.urlretrieve(url,'hi')
         return render(request,'home.html',{'data':data})   
 
+
+
+
 def register_school_page(request):
     form=CustomRegFormSchool()
 
@@ -156,11 +159,11 @@ def register_school_page(request):
 
                 for batches in range(int(noOfBatches)):
                     skl=school.objects.get(user=profile.id)
-                    randomurl=""+str(batches)
+                    randomurl=""
                     
 
 
-                    urlsrandomschool = random.choices(url,k=29)
+                    urlsrandomschool = random.choices(url,k=30)
                     for randomurlloop in urlsrandomschool:
                         randomurl+=randomurlloop
 
@@ -349,7 +352,18 @@ def register_student_page(request):
 def schoolUser(request,schoolname):
     if User.objects.filter(username=schoolname, groups__name='School').exists():
         if request.user.username == schoolname:
-            return render(request,'school.html')
+            batch =[]
+            for i in reversed(request.user.user_school.school_batch.all().order_by('batch_year')):
+                batchin={
+                    'school':i.school_reference,
+                    'batch_year':i.batch_year,
+                    'batch_url':i.batch_url,
+                    'batch_strength':i.batch_strength,
+                    'batch_description':i.batch_description,
+
+                }
+                batch.append(batchin)
+            return render(request,'school.html',{'batch':batch})
         else:
             return HttpResponse("Your are Not authorized to this school")
     else:
@@ -1258,28 +1272,40 @@ def batchUpdate(request,schoolname,batchurl):
                 user = User.objects.get(username=schoolname)
                 password = request.POST.get('password')
                 passchk = user.check_password(password)
+                print('1')
                 if passchk:
                     user = User.objects.get(username=schoolname)
                     skl= school.objects.get(user=user)
                     batchs= batch.objects.filter(school_reference=skl,batch_url=batchurl).delete()
+                    print('2')
+
                     return redirect('/u/school/'+request.user.username)         
                 else:
+                    print('3')
+
                     messages.info(request,request.user.username+", Invalid Password")
                     return redirect('/batchupdate/'+schoolname+'/'+batchurl) 
             else:
+
                 user = User.objects.get(username=schoolname)
                 batchStrength = request.POST.get('batchStrength')
                 batchDescription = request.POST.get('batchDescription')
                 batch_year = request.POST.get('batch_year')
                 password = request.POST.get('password')
                 passchk = user.check_password(password)
+                print('4')
+
                 if passchk:
+                    
                     user = User.objects.get(username=schoolname)
                     skl= school.objects.get(user=user)
                     btch = batch.objects.get(school_reference=skl,batch_url=batchurl)
                     batchs= batch.objects.filter(school_reference=skl,batch_url=batchurl).update(batch_strength=batchStrength,batch_description=batchDescription,batch_year=str(batch_year)+'-'+str(btch.batch_year.month)+'-'+str(btch.batch_year.day))
+                    print('5')
                     return redirect('/school/'+schoolname+'/batch/'+batchurl)            
                 else:
+                    print('6')
+
                     messages.info(request,request.user.username+", Invalid Password")
                     return redirect('/batchupdate/'+schoolname+'/'+batchurl) 
         else:
@@ -1289,6 +1315,8 @@ def batchUpdate(request,schoolname,batchurl):
         skl= school.objects.get(user=user)
         batchs= batch.objects.get(school_reference=skl,batch_url=batchurl)
         print(batchs.batch_description)
+        print('7')
+
         data={
             'batchStrength':batchs.batch_strength,
             'batchDescription':batchs.batch_description,
@@ -1373,5 +1401,44 @@ def jsonAdmin(request):
 
 
     
+def addBatch(request,schoolname):
+    if request.user.username == schoolname:
+        if request.method == 'POST':
+            noofbatch =  request.POST.get('noofbatch')
+            std =  request.POST.get('std')
+            fromy =  request.POST.get('from')
+            Strength =  request.POST.get('Strength')
+            Description =  request.POST.get('Description')
+            # to =  request.POST.get('to')
+            if noofbatch != '' and std != '' and Strength != '' and Description != '' and fromy != '':
+                user = User.objects.get(username=request.user.username)
+                from .models import school
+                schoolget = school.objects.get(user=user)
+                for i in range(int(noofbatch)):
+                    url = ascii_uppercase+ascii_lowercase+'1234567890'
+                    
+                    randomurl=""
+                    
 
-        
+
+                    urlsrandomschool = random.choices(url,k=30)
+                    for randomurlloop in urlsrandomschool:
+                        randomurl+=randomurlloop
+                    batchadd = batch.objects.create(
+                        batch_year=str(int(fromy)+i)+'-06-14',
+                        batch_std=std,
+                        batch_url=randomurl,
+                        batch_strength=Strength,
+                        batch_description=Description,
+                        school_reference=schoolget
+
+                    )
+                    batchadd.save()
+                return redirect('/u/school/'+request.user.username)
+            else:
+                messages.info(request,'Please Fill The Form....!')
+                return redirect('/addBatch/'+request.user.username)
+        else:
+            return render(request,'addbatch.html')
+    else:
+        return HttpResponse('Not Authorized')

@@ -107,7 +107,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <script>
+function myFunction(x) {
+  if (x.matches) { 
+    document.querySelector('.postuploadtext').innerHTML=""
+    $('.postuploadtext').append(
 
+      "<button class='postuploadbtn' style='    color: transparent;height: 56px;margin: 0;margin-left: 10px;' onclick='return false;'>click to upload</button>"
+    )
+  } else {
+    document.querySelector('.postuploadtext').innerHTML=""
+
+    $('.postuploadtext').append(
+
+      "Drop file here or <button class='postuploadbtn' style='    color: transparent;height: 56px;margin: 0;margin-left: 10px;' onclick='return false;'>click to upload</button>"
+    )  }
+}
+var x = window.matchMedia("(max-width: 610px)")
+myFunction(x) // Call listener function at run time
+x.addListener(myFunction)
 
 var diplaypostlive = setInterval(displayPost,1000)
 // displayPost()
@@ -138,7 +155,7 @@ function displayPost(){
 
           $('.postContainer').append(
 
-            
+            "<a href='/post/"+data.postid+"'>"+
               "<div  class='post'>"+
                 "<div class='ActualPost' style='background:url("+data.postMedia+");background-repeat: no-repeat;    background-size: 200px 290px;'  >"
 
@@ -147,6 +164,7 @@ function displayPost(){
 
                 +"</div>"
               +"</div>"
+            +"</a>"
             
 
           )
@@ -228,13 +246,16 @@ function displayPost(){
       
         dropZoneElement.addEventListener("dragover", (e) => {
           e.preventDefault();
+          
           document.getElementById('dropContainer').className="postuploadHover";
+
           document.querySelector('.postuploadbtn').style['pointer-events'] = 'none';
           document.querySelector('.btnExitDrop').style['pointer-events'] = 'none';
         });
       
         ["dragleave", "dragend"].forEach((type) => {
           dropZoneElement.addEventListener(type, (e) => {
+
             document.getElementById('dropContainer').className="postupload";
             document.querySelector('.postuploadbtn').style['pointer-events'] = 'auto';
             document.querySelector('.btnExitDrop').style['pointer-events'] = 'auto';
@@ -287,7 +308,7 @@ e.preventDefault();
 var formData = new FormData(this);
  
 $.ajax({
-url: "/post/{{request.user}}",
+url: "/add/post/{{request.user}}",
 type: "POST",
 dataType: 'json',
 data:formData, 
@@ -302,6 +323,24 @@ document.querySelector('.postupload').style.display = 'none';
 });
 });
 
+function myFunction(x) {
+  if (x.matches) { 
+    document.querySelector('.postuploadtext').innerHTML=""
+    $('.postuploadtext').append(
+
+      "<button class='postuploadbtn' style='    color: transparent;height: 56px;margin: 0;margin-left: 10px;' onclick='return false;'>click to upload</button>"
+    )
+  } else {
+    document.querySelector('.postuploadtext').innerHTML=""
+
+    $('.postuploadtext').append(
+
+      "Drop file here or <button class='postuploadbtn' style='    color: transparent;height: 56px;margin: 0;margin-left: 10px;' onclick='return false;'>click to upload</button>"
+    )  }
+}
+var x = window.matchMedia("(max-width: 610px)")
+myFunction(x) // Call listener function at run time
+x.addListener(myFunction)
 
     </script>
 </body>

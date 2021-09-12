@@ -13,9 +13,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$45r&4hj_$@u1vm&ts#itdgoln78rxf69c%7^j1-s3p)5b_*hy'
 
 
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = ['wemeet-web.herokuapp.com','192.168.0.2']
+ALLOWED_HOSTS = ['wemeet-web.herokuapp.com','192.168.0.4']
 
 
 # Application definition
