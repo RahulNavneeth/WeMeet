@@ -42,7 +42,7 @@
       <a class='logoflex' href="/" style="z-index:100">
       <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    width: 60px;'>
        
-      <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;    margin: 6px;'>
+      <!-- <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;    margin: 6px;'> -->
       </a>
     </div>
     <div class="rightprofile">
@@ -74,13 +74,13 @@
     {% else %}
 
     <div class="navbar" style="z-index:100">
-    <input name="emailEmail" type="text" style="z-index: 1;"class="logIn_email" placeholder="USERNAME">
+    <input name="emailEmail" type="text" style="z-index: 1;width:50%;border-radius:10px;background:#ddd;border:4px solid #ff002b;"class="logIn_email" placeholder="USERNAME">
 
     <a class='logoflex' href="/" style="z-index:100">
       <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    margin-top: 10px;    width: 60px;'>
-      <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100'>
+      <!-- <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100'> -->
       </a>
-    <input name='password' class="logIn_password"style="z-index: 1;" type="password"  placeholder="PASSWORD">
+    <input name='password' class="logIn_password"style="z-index: 1;width:50%;border-radius:10px;background:#ddd;border:4px solid #ff002b;" type="password"  placeholder="PASSWORD">
 
     </div>
 
@@ -88,11 +88,11 @@
 
 
   </div>
-  <div class="main__home" style='display: flex;    align-items: center; flex-direction: column;'>
+  <div class="main__home" style='display: flex;    position: absolute;  width: 100%;    align-items: center; flex-direction: column;'>
     {% for message in messages %}
     <error class='error_auth'>{{message}}</error>
 
-      <div  onclick='forgetPassword()' style='cursor: pointer;font-family:courier;margin:4px;    font-size: 18px;font-weight: 1000;' class="buttonFlex">.FORGET PASSWORD?? .</div>
+      <div  onclick='forgetPassword()' style='    cursor: pointer;      width: 50%;      margin: 4px;      background: #ff002b;      font-size: 12px;      color: #101010;      font-family:"Montserrat";      font-weight: 1000;' class="buttonFlex">.FORGET PASSWORD?? .</div>
 
     {% endfor %}
 
@@ -102,9 +102,18 @@
 
 {% else %}
 <div id="btnlog" class="buttonFlex">
-  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnadmin" onclick="btnadminbtn()" onmouseenter="btnadminbtnEnter()" onmouseleave="btnadminbtnout()" name='btnadmin'><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/admin.svg" ></button> 
-  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnschool" onclick="btnschoolnbtn()" onmouseenter="btnschoolnbtnEnter()" onmouseleave="btnschoolnbtnout()" name='btnschool'><img style="z-index:100;    width: 24px;" src="/static/IMAGE/LOGO/school.svg" ></button> 
-  <button style='width: 73px; z-index: 1; margin: 10px; border-radius: 12px;height: 46px;' class="submit btnstudent" onclick="btnstudentbtn()" onmouseenter="btnstudentbtnEnter()" onmouseleave="btnstudentbtnout()" name='btnstudent'><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/student.svg" ></button> 
+  <div class="btns">
+  <button class='buttonNameAdminbtn' style=' z-index: 1; margin: 10px; border-radius: 5px;height: 46px;' class="submit btnadmin" onclick="btnadminbtn()" onmouseenter="btnadminbtnEnter()" onmouseleave="btnadminbtnout()" name='btnadmin'><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/admin.svg" ></button> 
+  <div  class='buttonNameAdmin'></div>
+  </div>
+  <div class="btns">
+  <button class='buttonNameSchoolbtn' style='z-index: 1; margin: 10px; border-radius: 5px;height: 46px;' class="submit btnschool" onclick="btnschoolnbtn()" onmouseenter="btnschoolnbtnEnter()" onmouseleave="btnschoolnbtnout()" name='btnschool'><img style="z-index:100;    width: 24px;" src="/static/IMAGE/LOGO/school.svg" ></button> 
+  <div  class='buttonNameSchool'></div>  
+  </div>
+  <div class="btns">
+  <button class='buttonNameStudentbtn' style=' z-index: 1; margin: 10px; border-radius: 5px;height: 46px;' class="submit btnstudent" onclick="btnstudentbtn()" onmouseenter="btnstudentbtnEnter()" onmouseleave="btnstudentbtnout()" name='btnstudent'><img style="z-index:100;width: 24px;" src="/static/IMAGE/LOGO/student.svg" ></button> 
+  <div  class='buttonNameStudent'></div>
+  </div>
   
 
 </div>
@@ -112,9 +121,7 @@
 
 </form>
 <div class="buttonName">
-<div class='buttonNameAdmin'></div>
-<div class='buttonNameSchool'></div>
-<div class='buttonNameStudent'></div>
+
 </div>
 
 {% if data.auth == True %}
@@ -128,14 +135,14 @@ justify-content: center;' class="newsall">
 {% elif data.auth == False %}
 <div class="main__">
 
-  <div class="schoolInfo">
-    <div class="heading_school">    <img style="z-index:100;margin-left: 50px;"src="/static/IMAGE/LOGO/School_title.svg" ></div>
-    <div class="description_school">Register to make your school public! </div>
+  <div class="Info">
+    <div class="heading">    <img style="z-index:100;margin-left:25px;width:150px;"src="/static/IMAGE/LOGO/School_title.svg" ></div>
+    <div class="description">REGISTER TO MAKE YOUR SCHOOL PUBLUC! </div>
     <button  onclick="window.location.href='/register/school'; return false;" class="btn">REGISTER NOW<img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/school.svg" ></button>
   </div>
-  <div class="studentInfo">
-    <div class="heading_school">    <img style="z-index:100"src="/static/IMAGE/LOGO/Student_title.svg" ></div>
-    <div class="description_student">Register to Join your school!</div>
+  <div class="Info">
+    <div class="heading">    <img style="z-index:100;width:150px;"src="/static/IMAGE/LOGO/Student_title.svg" ></div>
+    <div class="description">REGISTER TO MAKE YOURSELF PUBLIC!</div>
     <button  onclick="window.location.href='/register/student'; return false;" class="btn">REGISTER NOW <img style="z-index:100;    width: 24px;padding-top: 4px;" src="/static/IMAGE/LOGO/student.svg" ></button>
   </div>
   <div style="width:90%" class="forgetPassBg">
