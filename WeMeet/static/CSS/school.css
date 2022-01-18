@@ -19,6 +19,9 @@
     align-items: center;
     justify-content: center;
     align-content: center;
+    background:#e8e8e9;
+    padding-left:10px;
+    border-radius:5px;
   }
 .welcomee{
     width: 100%;
@@ -50,11 +53,11 @@
     margin-top: 22px;
     /* border: 1px #ff002b solid; */
     /* border-radius: 30px; */
-    border: 1px #ff002b solid;
+    border: none;
     border-radius: 30px;
     z-index: 100;
     margin:10px;
-    background: rgba(7, 10, 14, 0.75);
+    background:rgba(4, 7, 11, 0.75);
     /* border: 0.82797px solid #D41341; */
     box-sizing: border-box;
     backdrop-filter: blur(5px);
@@ -208,7 +211,7 @@
 }
 
 .batchstud{
-    background: #ff002b;
+    background:rgba(4, 7, 11, 0.75);
     z-index: 100;
     width: 302px;
     display: flex;
@@ -232,8 +235,8 @@
      width: 75%;
     margin: 20px;
     height: 23rem;
-    background: rgba(9, 12, 16, 0.66);
-    border: 1px solid #FF002B;
+    background:rgba(4, 7, 11, 0.75);
+    border: none;
     box-sizing: border-box;
     border-radius: 23px;
 }
@@ -317,6 +320,7 @@
     border:1px #ff002b solid;
 }
 .postContainer{
+
     display: flex;
     flex-direction: row;
     overflow:auto;

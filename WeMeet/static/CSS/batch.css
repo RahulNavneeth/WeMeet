@@ -49,12 +49,13 @@
 }
 
 .studentslist{
-    border: 1px #ff002b solid;
+    border: none;
     z-index: 100;
-    border-radius: 100px;
+    border-radius: 10px;
     /* display: flex; */
     /* position: fixed; */
     margin:10px;
+    background:rgba(7, 10, 14, 0.75);
     width: 97%;
     justify-content: center;
     align-items: center;
@@ -80,8 +81,8 @@
 
 
 .leftMain{
-    background: rgba(9, 12, 16, 0.66);
-    border: 1px solid #FF002B;
+    background:rgba(7, 10, 14, 0.75);
+    border: none;
     box-sizing: border-box;
     border-radius: 23px;
     width: 22%;
@@ -117,8 +118,8 @@
     border-radius: 10px;
 }
 .middleMain{
-    background: rgba(9, 12, 16, 0.66);
-    border: 1px solid #FF002B;
+    background:rgba(7, 10, 14, 0.75);
+    border: none;
     box-sizing: border-box;
     border-radius: 23px;
     /* width: 393px; */
@@ -145,8 +146,8 @@
     justify-content: center;
 }
 .rightMain{
-    background: rgba(9, 12, 16, 0.66);
-    border: 1px solid #FF002B;
+    background:rgba(7, 10, 14, 0.75);
+    border: none;
     box-sizing: border-box;
     border-radius: 23px;
     width: 22%;
