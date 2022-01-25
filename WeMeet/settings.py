@@ -1,11 +1,12 @@
 
 
+import cloudinary
+import dj_database_url
 from pathlib import Path
 import os
 # import django_heroku
 
 # import cloudinary_storage
-
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +17,7 @@ SECRET_KEY = '$45r&4hj_$@u1vm&ts#itdgoln78rxf69c%7^j1-s3p)5b_*hy'
 DEBUG = True
 # DEBUG = False
 
-ALLOWED_HOSTS = ['wemeet-web.herokuapp.com','192.168.0.4']
+ALLOWED_HOSTS = ['wemeet-web.herokuapp.com', '192.168.0.4', 'localhost']
 
 
 # Application definition
@@ -30,8 +31,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'WeMeet',
     'corsheaders',
-    'django_inlinecss',
-    'channels',
     'cloudinary_storage',
     'cloudinary',
 ]
@@ -51,11 +50,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+# If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
-] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
+]  # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://localhost:8000',
 ]
@@ -78,9 +78,6 @@ TEMPLATES = [
 ]
 
 
-
-
-
 WSGI_APPLICATION = 'WeMeet.wsgi.application'
 
 
@@ -91,9 +88,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'WeMeet',
-        'USER': 'WeMeet',
-        'PASSWORD': 'WeMeetWeMeetWeMeet',
-        'HOST':'127.0.0.1',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
 
         # 'OPTIONS': {
@@ -102,7 +99,6 @@ DATABASES = {
     },
 }
 
-import dj_database_url
 
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
@@ -148,8 +144,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIR = (os.path.join(BASE_DIR, 'static'),)
 
-STATIC_ROOT = os.path.join(BASE_DIR,'live-static','static-root')
-MEDIA_ROOT = os.path.join(BASE_DIR,'live-static','media-root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'live-static', 'static-root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'live-static', 'media-root')
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
@@ -161,9 +157,7 @@ CLOUDINARY_STORAGE = {
 MEDIA_URL = '/media/ProfilePicture/'  # or any prefix you choose
 
 
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-import cloudinary
 
 cloudinary.config(cloud_name='wemeetcloudweb',
                   api_key='346766117525321',
@@ -176,10 +170,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'wemeetweb@gmail.com'
-EMAIL_HOST_PASSWORD ='RahulNavneeth.'
+EMAIL_HOST_PASSWORD = 'RahulNavneeth.'
 
 
-##RahulNavneeth.13 -- Heroku
+# RahulNavneeth.13 -- Heroku
 
 
 # Activate Django-Heroku.
