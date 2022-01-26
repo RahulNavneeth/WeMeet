@@ -38,4 +38,5 @@ urlpatterns = [
     path('admin/data/school',views.adminDataAllSchool),
     path('data/school/<int:schoolId>',views.reactDataSchool),
     path('u/student/<str:studentname>',views.studentUser),
+    path('post/<int:postid>',views.postView),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

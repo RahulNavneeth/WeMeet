@@ -82,7 +82,7 @@ body {
   border-radius: 10px;
   background: rgba(7, 10, 14, 0.75);
   /* padding-bottom: 31%; */
-  border: 5px var(--WeMeet-pri) solid;
+  border: 3px var(--WeMeet-pri) solid;
   /* max-width: 100%; */
   background-clip: padding-box;
   display: -webkit-box;
@@ -200,7 +200,7 @@ body {
   max-width: 100%;
   z-index: 100;
   color: #ff002d;
-  width: 100%;
+  width: 30%;
   height: 101%;
   font-size: 20px;
   font-weight: 700;
@@ -218,12 +218,13 @@ body {
 }
 .heading {
   margin: 11px;
-  width: 100%;
+  width: 85%;
   display: flex;
   justify-content: center;
   background: #ff002b;
   padding-top: 10px;
   padding-bottom: 10px;
+  border-radius: 13px;
 }
 .upd {
   font-size: 12px;
@@ -426,6 +427,12 @@ body {
   .msg {
     font-size: 42px;
     margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .buttonFlex {
+    width: 100%;
   }
 }
 /* .newsall{
