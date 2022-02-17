@@ -597,6 +597,19 @@ def batchView(request, schoolname, batchurl):
                                 z = []
                                 stdCount = len(students)
                                 msgCount = len(msgs)
+
+                                batchPostData = []
+
+                                for i in students:
+                                    print(i)
+                                    
+                                    updata = student.objects.get(id=i.id)
+                                    udata = User.objects.get(id=updata.user.id)
+                                    postData = post.objects.filter(user=udata).all()
+                                    for j in postData:
+                                        pd = {"id": j.id , 'media': j.media }
+                                        batchPostData.append(pd)
+
                                 data = [
                                     {'BATCH_ID': batchs.id,
                                         'BATCH': [{
@@ -614,7 +627,8 @@ def batchView(request, schoolname, batchurl):
                                                 'msgCount': msgCount,
                                                 'msgContent': z,
                                             },
-                                        }]
+                                        }],
+                                        'post': batchPostData
 
                                      }]
                                 stdCount = Count(students)
@@ -643,12 +657,12 @@ def batchView(request, schoolname, batchurl):
                                              msgEdit=b.edited
                                              )
                                     z.append(a)
-                                s1 = json.dumps(data)
+                                # s1 = json.dumps(data)
 
-                                json_object = json.loads(s1)
+                                # json_object = json.loads(s1)
 
-                                json_formatted_str = json.dumps(
-                                    json_object, indent=2)
+                                # json_formatted_str = json.dumps(
+                                    # json_object, indent=2)
 
                                 return render(request, 'batch.html', {'data': data})
                                 # return HttpResponse(json_formatted_str, content_type="application/json")

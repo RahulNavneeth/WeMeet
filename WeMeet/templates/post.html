@@ -101,7 +101,7 @@
       {% if request.user.groups.all.0.name == "School" %}
       <div class="navi">
         <button
-          style="margin-top: 21px"
+          style="visibility: hidden; margin-top: 21px"
           onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'"
         >
           UPDATE
@@ -146,7 +146,14 @@
         </div>
       </div>
       {% elif request.user.groups.all.0.name == "Student" %}
-      <div style="justify-content: center" class="navi">
+      <div class="navi">
+        <button
+          style="visibility: hidden; margin-top: 21px"
+          onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'"
+        >
+          UPDATE
+        </button>
+
         <div class="div-img" style="z-index: 100; padding-top: 18px">
           <a class="logoflex" href="/" style="z-index: 100">
             <img
@@ -169,7 +176,7 @@
               color: #ff002b;
             "
           >
-            {{request.user}}
+            {{request.user }}
           </div>
 
           <a style="z-index: 100" href="/u/student/{{request.user.username}}">

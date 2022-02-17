@@ -31,7 +31,7 @@
   </head>
   <body style="margin: 0px">
     {% include "bgone.html" %}
-    <div class="container">
+    <div style="align-items: center" class="container">
       <div style="padding-top: 14px; justify-content: center" class="navi">
         <!-- <button style='margin-top: 21px;;' onclick="window.location.href='/update/{{request.user.id}}/{{request.user.user_school.school_url}}'">UPDATE</button> -->
 
@@ -60,7 +60,7 @@
       <error style="width: 100%" class="error_auth">{{message}}</error>
       {% endfor %}
 
-      <div class="inputs">
+      <div style="width: 50%" class="inputs">
         <form
           style="
             display: flex;

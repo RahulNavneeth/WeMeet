@@ -99,7 +99,14 @@
           </div>
         </div>
         {% elif request.user.groups.all.0.name == "Student" %}
-        <div style="justify-content: center" class="navi">
+        <div class="navi">
+          <button
+            style="visibility: hidden; margin-top: 21px"
+            onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'"
+          >
+            UPDATE
+          </button>
+
           <div class="div-img" style="z-index: 100; padding-top: 18px">
             <a class="logoflex" href="/" style="z-index: 100">
               <img
@@ -122,7 +129,7 @@
                 color: #ff002b;
               "
             >
-              {{request.user}}
+              {{request.user }}
             </div>
 
             <a style="z-index: 100" href="/u/student/{{request.user.username}}">
@@ -216,7 +223,7 @@
                 src="{{data.0.BATCH.0.school_profilePicture}}"
                 style="
                   padding: 20px;
-                  width: 200px;
+                  width: 120px;
                   height: 200px;
                   font-size: 22px;
                   border-radius: 1000px;
@@ -228,7 +235,7 @@
                 style="
                   padding: 5px;
                   font-size: 22px;
-                  border-radius: 30px;
+                  border-radius: 8px;
                   width: 90%;
                   height: 24px;
                   background: #ff002b;
@@ -240,14 +247,15 @@
               <div
                 class="welcome showdesc"
                 style="
-                  background: rgba(9, 12, 16, 0.75);
+                  background: rgba(225, 225, 225, 0.09);
                   margin: 10px;
                   padding: 5px;
                   font-size: 22px;
                   border-radius: 20px;
-                  width: 90%;
+                  width: 80%;
                   border: none;
                   color: #ff002b;
+                  padding: 24px;
                 "
               >
                 {{data.0.BATCH.0.School_description}}
@@ -300,9 +308,10 @@
                   overflow: auto;
                   flex-direction: column;
                   align-items: center;
+                  padding-top: 0;
                 "
               >
-                <div class="Postinfo">Catch your friends gallery ;)</div>
+                <div class="Postinfo">Catch your friends' gallery ;)</div>
                 <div class="postData">
                   {% for i in data.0.post %}
                   <a href="/post/{{i.id}}">
@@ -312,6 +321,18 @@
                       alt="{{i.id}}"
                     />
                   </a>
+                  {% empty %}
+                  <h1
+                    style="
+                      font-family: 'Montserrat';
+                      font-style: italic;
+                      font-size: 38px;
+                      font-weight: 500;
+                    "
+                  >
+                    PLS POST TO SHARE YOUR GALLERY <br />
+                    :)
+                  </h1>
                   {% endfor %}
                 </div>
               </div>
@@ -440,7 +461,7 @@
                     data.msgMsg.indexOf("@everyone") !== -1
                   ) {
                     $(".chats").append(
-                      '<div style="border-radius:100px;width:100%;background:#13131C;"  class="chat-container-flex">' +
+                      '<div style="width:100%;background:#13131C;"  class="chat-container-flex">' +
                         '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">' +
                         '<img style="border-radius:100px;width:45px;height:45px;" src="' +
                         data.msgUserPfp +
