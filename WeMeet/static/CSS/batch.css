@@ -1,365 +1,356 @@
-
-.mainBatch{
-
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+.mainBatch {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
-.batchProfilePicture{
-
-    border-radius: 100%;
-    background: #ff002b;
-    width: 113px;
-    margin: 10px;
-    height: 114px;
-    height: 113px;
-
-
+.batchProfilePicture {
+  border-radius: 100%;
+  background: #ff002b;
+  width: 113px;
+  margin: 10px;
+  height: 114px;
+  height: 113px;
 }
 
-
-.studentprofilePicture{
-
-    border-radius: 100px;
-    background:#ff002b;
-    width:45px;
-    transition: 0.2s all ;
-    margin: 10px;
-    height:45px;
-
+.batchImage {
+  width: 160px;
+  margin: 10px;
+  border-radius: 10px;
+}
+.Postinfo {
+  background: #ff002b;
+  color: #000;
+  width: 80%;
+  border-radius: 10px;
+  font-family: "Montserrat";
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 600;
+  padding: 10px;
+}
+.studentprofilePicture {
+  border-radius: 100px;
+  background: #ff002b;
+  width: 45px;
+  transition: 0.2s all;
+  margin: 10px;
+  height: 45px;
 }
 
-.studentprofilePicture:hover{
-    border-radius: 15px;
-
-
-
+.studentprofilePicture:hover {
+  border-radius: 15px;
 }
 
-.studentprofilePicture:focus{
-    border-radius: 15px;
-
-
-
+.studentprofilePicture:focus {
+  border-radius: 15px;
 }
 
-.studentslist{
-    border: none;
-    z-index: 100;
-    border-radius: 10px;
-    /* display: flex; */
-    /* position: fixed; */
-    margin:10px;
-    background:rgba(7, 10, 14, 0.75);
-    width: 97%;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-    white-space: nowrap;
+.studentslist {
+  border: none;
+  z-index: 100;
+  border-radius: 10px;
+  /* display: flex; */
+  /* position: fixed; */
+  margin: 10px;
+  background: rgba(7, 10, 14, 0.75);
+  width: 97%;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  white-space: nowrap;
 }
 
-.flexpropic{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+.flexpropic {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
-.sep{
-    color: #ff002b;
-    font-family: courier;
-    font-size: 40px;
+.sep {
+  color: #ff002b;
+  font-family: courier;
+  font-size: 40px;
 }
 
+.leftMain {
+  background: rgba(7, 10, 14, 0.75);
+  border: none;
+  box-sizing: border-box;
+  border-radius: 23px;
+  width: 22%;
+  margin: 10px;
+  height: 590px;
+  background-clip: padding-box;
 
-
-
-
-.leftMain{
-    background:rgba(7, 10, 14, 0.75);
-    border: none;
-    box-sizing: border-box;
-    border-radius: 23px;
-    width: 22%;
-    margin: 10px;
-    height: 590px;
-    background-clip: padding-box;
-
-    display: flex;
-    align-items: center;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    /* margin-bottom: 1.5rem; */
-    overflow: hidden;
-    position: relative;
-    text-align: left;
+  display: flex;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  /* margin-bottom: 1.5rem; */
+  overflow: hidden;
+  position: relative;
+  text-align: left;
 }
-.buttonsmallre{
-      /* width: 170px; */
-    height: 46.3px;
-    background: var(--WeMeet-pri);
-    border: none;
-    box-sizing: border-box;
-    border-radius: 6.8565px;
-    font-family: montserrat;
-    font-weight: 800;
-    padding: 4px;
-    color:#0C1014;
-    /* width: 73px; */
-    text-align: center;
-    z-index: 1;
-    margin: 10px;
-    height: 41px;
-    border-radius: 10px;
+.buttonsmallre {
+  /* width: 170px; */
+  height: 46.3px;
+  background: var(--WeMeet-pri);
+  border: none;
+  box-sizing: border-box;
+  border-radius: 6.8565px;
+  font-family: montserrat;
+  font-weight: 800;
+  padding: 4px;
+  color: #0c1014;
+  /* width: 73px; */
+  text-align: center;
+  z-index: 1;
+  margin: 10px;
+  height: 41px;
+  border-radius: 10px;
 }
-.middleMain{
-    background:rgba(7, 10, 14, 0.75);
-    border: none;
-    box-sizing: border-box;
-    border-radius: 23px;
-    /* width: 393px; */
-    height: 590px;
-    width: 50%;
-    margin: 10px;
-    background-clip: padding-box;
-    display: flex;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    /* margin-bottom: 1.5rem; */
-    overflow: hidden;
-    position: relative;
-    text-align: left;
-    justify-content: flex-end;
-    align-items: center;
+.middleMain {
+  background: rgba(7, 10, 14, 0.75);
+  border: none;
+  box-sizing: border-box;
+  border-radius: 23px;
+  /* width: 393px; */
+  height: 590px;
+  width: 50%;
+  margin: 10px;
+  background-clip: padding-box;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  /* margin-bottom: 1.5rem; */
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+  justify-content: flex-end;
+  align-items: center;
 }
-.middleMain-Chat{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
+.middleMain-Chat {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 }
-.rightMain{
-    background:rgba(7, 10, 14, 0.75);
-    border: none;
-    box-sizing: border-box;
-    border-radius: 23px;
-    width: 22%;
-    margin: 10px;
-    height: 590px;
-    background-clip: padding-box;
+.rightMain {
+  background: rgba(7, 10, 14, 0.75);
+  border: none;
+  box-sizing: border-box;
+  border-radius: 23px;
+  width: 22%;
+  margin: 10px;
+  height: 590px;
+  background-clip: padding-box;
 
-    display: flex;
-    align-items: center;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    /* margin-bottom: 1.5rem; */
-    overflow: hidden;
-    position: relative;
-    text-align: left;
+  display: flex;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  /* margin-bottom: 1.5rem; */
+  overflow: hidden;
+  position: relative;
+  text-align: left;
 }
 
-.msg-batch{
-    text-align: left;
-    font-family: montserrat;
-    width: 90%;
-    font-size: 17px;
-    letter-spacing: -1px;
-    padding-left: 20px;
+.msg-batch {
+  text-align: left;
+  font-family: montserrat;
+  width: 90%;
+  font-size: 17px;
+  letter-spacing: -1px;
+  padding-left: 20px;
 }
-.msg-batch::placeholder{
-    text-align: left;
-}
-
-.mainMain{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
+.msg-batch::placeholder {
+  text-align: left;
 }
 
-.msgsubmit{
-    font-size: 14px;
-    width: 100px;
-    border-radius: 100px;
-    height: 52px;
+.mainMain {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
-.chat-container-flex{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* align-content: center;
+.msgsubmit {
+  font-size: 14px;
+  width: 100px;
+  border-radius: 100px;
+  height: 52px;
+}
+
+.chat-container-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* align-content: center;
     overflow: auto; */
-    /* white-space: nowrap; */
-    justify-content: flex-end;
-    width: 100%;
-    /* height: 100%; */
+  /* white-space: nowrap; */
+  justify-content: flex-end;
+  width: 100%;
+  /* height: 100%; */
 }
-.chatContainer{
-    background: #ff002b;
-    margin: 10px;
-    text-align: right;
-    /* width: 100%; */
-    line-break: anywhere;
-    font-family: 'Montserrat';
-    padding: 14px;
-    font-weight: 600;
-    font-size: 15px;
-    border-radius: 20px;
+.chatContainer {
+  background: #ff002b;
+  margin: 10px;
+  text-align: right;
+  /* width: 100%; */
+  line-break: anywhere;
+  font-family: "Montserrat";
+  padding: 14px;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 20px;
 }
-.chatContainerLeft{
-    background: #ff002b;
-    margin: 10px;
-    text-align: left;
-    /* width: 100%; */
-    line-break: anywhere;
-    font-family: 'Montserrat';
-    padding: 14px;
-    font-weight: 600;
-    font-size: 15px;
-    border-radius: 20px;
+.chatContainerLeft {
+  background: #ff002b;
+  margin: 10px;
+  text-align: left;
+  /* width: 100%; */
+  line-break: anywhere;
+  font-family: "Montserrat";
+  padding: 14px;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 20px;
 }
-.chats{
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-end;
-    align-content: center;
-    overflow: auto;
-    /* white-space: nowrap; */
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
+.chats {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  align-content: center;
+  overflow: auto;
+  /* white-space: nowrap; */
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
 }
 /* .chats> :first-child { margin-top: -100% } */
-.chatFlex{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+.chatFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
-.chatFlexLeft{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.chatFlexLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
-.chatTime{
-    color: #404040;
-    font-family: 'Montserrat';
-    margin-top: -10px;
-    margin-right: 20px;
-    font-size: 10px;
-    
-    }
+.chatTime {
+  color: #404040;
+  font-family: "Montserrat";
+  margin-top: -10px;
+  margin-right: 20px;
+  font-size: 10px;
+}
 
-.chatTimeLeft{
-    color: #404040;
-    font-family: 'Montserrat';
-    margin-top: -10px;
-    margin-left: 20px;
-    font-size: 10px;
-    
-    }
+.chatTimeLeft {
+  color: #404040;
+  font-family: "Montserrat";
+  margin-top: -10px;
+  margin-left: 20px;
+  font-size: 10px;
+}
 
-.Chatinfo{
-    background: #ff002b;
-    margin: 10px;
-    text-align: center;
-    /* width: 100%; */
-    width: 96%;
-    line-break: anywhere;
-    font-family: 'Montserrat';
-    padding: 8px;
-    font-weight: 600;
-    font-size: 10px;
-    border-radius: 20px;
+.Chatinfo {
+  background: #ff002b;
+  margin: 10px;
+  text-align: center;
+  /* width: 100%; */
+  width: 96%;
+  line-break: anywhere;
+  font-family: "Montserrat";
+  padding: 8px;
+  font-weight: 600;
+  font-size: 10px;
+  border-radius: 20px;
 }
-.updatechatbtn{
-    display:flex;
+.updatechatbtn {
+  display: flex;
 }
-.chatinfoflex{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* align-content: center;*/
-   /* overflow: auto; */
-    /* white-space: nowrap; */
-    justify-content: flex-end;
-    width: 100%;
-    height: 100%;
+.chatinfoflex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* align-content: center;*/
+  /* overflow: auto; */
+  /* white-space: nowrap; */
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
 }
-.chatUser{
-    text-align: right;
-    font-size: 12px;
-    color: #151515;
+.chatUser {
+  text-align: right;
+  font-size: 12px;
+  color: #151515;
 }
-.chatUserLeft{
-    text-align: left;
-    font-size: 12px;
-    color: #151515;
+.chatUserLeft {
+  text-align: left;
+  font-size: 12px;
+  color: #151515;
 }
 @media screen and (max-width: 1004px) {
-
-    .mainMain{
-        flex-direction: column;
-    
-        }
-        .leftMain{
-            width: 90%;    }
-        .middleMain{
-            width: 90%;    }
-        .rightMain{
-            width: 90%;    }
-            ::-webkit-scrollbar {
-    
-                display: none;
-            }
-
-
+  .mainMain {
+    flex-direction: column;
+  }
+  .leftMain {
+    width: 90%;
+  }
+  .middleMain {
+    width: 90%;
+  }
+  .rightMain {
+    width: 90%;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 @media screen and (max-width: 618px) {
-    .batchProfilePicture{
-        width: 105px;
-        height: 105px;
-    }
-    .studentslist{
-        height: 45px;
-    }
-    .studentprofilePicture{
-        margin:0px;
-        width:33px;
-        height:33px;
+  .batchProfilePicture {
+    width: 105px;
+    height: 105px;
+  }
+  .studentslist {
+    height: 45px;
+  }
+  .studentprofilePicture {
+    margin: 0px;
+    width: 33px;
+    height: 33px;
 
-        margin-left: 10px;
-    }
-    .msg-batch{
-        height:40px;
-    }
-    .msgsubmit{
-        width:30px;
-        font-weight: 1000;
-        font-size: 9px;
-        height:26px;
-        font-family:Fira Code;
-
-    }
-    /* .Chatinfo{
+    margin-left: 10px;
+  }
+  .msg-batch {
+    height: 40px;
+  }
+  .msgsubmit {
+    width: 30px;
+    font-weight: 1000;
+    font-size: 9px;
+    height: 26px;
+    font-family: Fira Code;
+  }
+  /* .Chatinfo{
         width: 92%;
     } */
-    .chatinfoflex{
-        justify-content: center;
-        align-items: center;
-    }
-    .updatechat{
-        flex-direction: column;
-        justify-content: center;
-    }
+  .chatinfoflex {
+    justify-content: center;
+    align-items: center;
+  }
+  .updatechat {
+    flex-direction: column;
+    justify-content: center;
+  }
 }

@@ -290,8 +290,31 @@
             <div class="rightMain">
               <div
                 class="welcome showname"
-                style="font-size: 22px; border-radius: 30px; color: #ff002b"
-              ></div>
+                style="
+                  font-size: 22px;
+                  border-radius: 30px;
+                  color: #ff002b;
+                  padding: 30px;
+                  scroll-behavior: auto;
+                  display: flex;
+                  overflow: auto;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div class="Postinfo">Catch your friends gallery ;)</div>
+                <div class="postData">
+                  {% for i in data.0.post %}
+                  <a href="/post/{{i.id}}">
+                    <img
+                      class="batchImage"
+                      src="{{i.media.url}}"
+                      alt="{{i.id}}"
+                    />
+                  </a>
+                  {% endfor %}
+                </div>
+              </div>
             </div>
           </div>
         </div>
