@@ -55,12 +55,16 @@
 
     <div class="batch_container">
     <div class="batchstud">
-        <div class='welcome' style="font-size: 23px;border-radius:30px;color:#0C1014;"> {{request.user.user_student.school_reference_id_student.user.username}} </div>
-       <button class='redirectTop' onclick='window.location.href="/school/{{request.user.user_student.school_reference_id_student.user.username}}"' >REDIRECT</button>
+        <!-- <div class='welcome' style="font-size: 23px;border-radius:30px;color:#0C1014;"> {{request.user.user_student.school_reference_id_student.user.username}} </div> -->
+       <!-- <button class='redirectTop' onclick='window.location.href="/school/{{request.user.user_student.school_reference_id_student.user.username}}"' >REDIRECT</button> -->
 
         <div class="batchstudent" >
        
-        <div class='welcome' style=" margin-top:10px;   font-size: 23px;border-radius:30px;color:#ff002b;"> {{request.user.user_student.batch_reference_id_student.batch_year.year}} </div>
+        <div class='welcomeeo' style="    margin-top: 10px;
+        font-size: 23px;
+        border-radius: 30px;
+        color: #fff;
+        font-family: monospace;"> {{request.user.user_student.batch_reference_id_student.batch_year.year}} </div>
         
         <!-- <img class="batchProfilePicture" src= "{% static 'IMAGE/media/batchDefaults/2019.png' %}"> -->
         <img style='    border-radius: 1000px;width: 130px;height: 130px;margin: 20px;' class="batchProfilePicture" src='{{request.user.user_student.school_reference_id_student.school_propic.url}}'>
