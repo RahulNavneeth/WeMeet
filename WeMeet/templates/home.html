@@ -45,11 +45,12 @@
       <!-- <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;    margin: 6px;'> -->
       </a>
     </div>
-    <div class="rightprofile">
-      
-      <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
+
 
       {% if request.user.groups.all.0.name  == "Student" %}
+      <div style="margin-top: -83px;" class="rightprofile">
+      
+        <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
       <a style='z-index: 100;' href="u/student/{{request.user.username}}">
 
       
@@ -57,12 +58,17 @@
     <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
       </a>  
     {% elif request.user.groups.all.0.name  == "School" %}
+    <div  class="rightprofile">
+      
+      <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
     <a style='z-index: 100;' href="u/school/{{request.user.username}}">
 
     <img style='border-radius:1000px;width: 50px;height: 50px;margin:37px;'src={{request.user.user_school.school_propic.url}}>
     </a> 
     {% else %}
-
+    <div class="rightprofile">
+      
+      <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
     <a style='z-index: 100;' href="/admin">
 
       <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>

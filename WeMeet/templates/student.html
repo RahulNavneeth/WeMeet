@@ -89,7 +89,7 @@
         {% csrf_token %}
   
 <div id="dropContainer" class="postupload">
-    <span style='pointer-events: none;display:flex;' class="postuploadtext">Drop file here or <button class='postuploadbtn' style='    color: transparent;height: 56px;margin: 0;margin-left: 10px;' onclick="return false;">click to upload</button></span>
+    <span style='pointer-events: none;display:flex;' class="postuploadtext">Drop your media here!</span>
     <input style='  display: none;    '  name='media' type="file" class="drop-zone__input">
     <img style='border-radius:20px' class='none' src='' id='uploadedfile'>
     <textarea name='desc' style='width: 410px;height: 490px;' id='uploadedfileDescrition'></textarea>
@@ -130,8 +130,8 @@ var x = window.matchMedia("(max-width: 610px)")
 myFunction(x) // Call listener function at run time
 x.addListener(myFunction)
 
-// var diplaypostlive = setInterval(displayPost,1000)
-displayPost()
+var diplaypostlive = setInterval(displayPost,1000)
+// displayPost()
 function displayPost(){
 
 
