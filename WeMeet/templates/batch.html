@@ -1,420 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-{% load static %}
+  <head>
+    {% load static %}
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" type="image/png" href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'IMAGE/LOGO/LOGO.svg' %}"
+    />
 
     <link href="{% static 'CSS/batch.css'%}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'CSS/Home_custom.css'%}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'CSS/overwrite_webkit.css'%}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'CSS/school.css'%}" rel="stylesheet" type="text/css" />
+    <link
+      href="{% static 'CSS/Home_custom.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'CSS/overwrite_webkit.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'CSS/school.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link href="{% static 'CSS/batch.css'%}" rel="stylesheet" type="text/css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{data.0.BATCH.0.School}} | {{data.0.BATCH.0.batch_year}}</title>
-</head>
-<body style='margin:0px'>
-    
+  </head>
+  <body style="margin: 0px">
     {% include "bgone.html" %}
-
-
 
     <div class="container">
       <div class="container">
-          {% if request.user.groups.all.0.name  == "School" %}
-          <div class="navi">
+        {% if request.user.groups.all.0.name == "School" %}
+        <div class="navi">
+          <button
+            style="margin-top: 21px"
+            onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'"
+          >
+            UPDATE
+          </button>
 
-          
-          
-          <button style='margin-top: 21px;' onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'">UPDATE</button>
-
-
-            <div class="div-img" style="z-index:100;padding-top: 18px;">
-                <a class='logoflex' href="/" style="z-index:100">
-                    <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    width: 60px;'>
-                 <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
+          <div class="div-img" style="z-index: 100; padding-top: 18px">
+            <a class="logoflex" href="/" style="z-index: 100">
+              <img
+                src="{% static 'IMAGE/LOGO/LOGO.svg'%}"
+                style="z-index: 100; width: 60px"
+              />
+              <img
+                src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}"
+                style="z-index: 100"
+              />
             </a>
           </div>
-          <div style='margin:0;' class="rightprofile">
-  
-            <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
-          
-          <a style='z-index: 100;' href="/u/school/{{request.user.username}}">
-          
-          <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_school.school_propic.url}}>
-          </a> 
-          
-          
+          <div style="margin: 0" class="rightprofile">
+            <div
+              class="hm"
+              style="
+                margin: 10px;
+                z-index: 100;
+                border-radius: 30px;
+                color: #ff002b;
+              "
+            >
+              {{request.user }}
+            </div>
+
+            <a style="z-index: 100" href="/u/school/{{request.user.username}}">
+              <img
+                style="
+                  border-radius: 1000px;
+                  width: 50px;
+                  height: 50px;
+                  margin: 20px;
+                "
+                src="{{request.user.user_school.school_propic.url}}"
+              />
+            </a>
           </div>
         </div>
-          {% elif request.user.groups.all.0.name  == "Student" %}
-          <div style='justify-content: center'class="navi">
+        {% elif request.user.groups.all.0.name == "Student" %}
+        <div class="navi">
+          <button
+            style="margin-top: 21px; visibility: hidden"
+            onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'"
+          >
+            UPDATE
+          </button>
 
-          
-          <div class="div-img" style="z-index:100;padding-top: 18px;">
-            <a class='logoflex' href="/" style="z-index:100">
-                <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;    width: 60px;'>
-             <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
-        </a>
-      </div>
-      <div style='margin:0;' class="rightprofile">
+          <div class="div-img" style="z-index: 100; padding-top: 18px">
+            <a class="logoflex" href="/" style="z-index: 100">
+              <img
+                src="{% static 'IMAGE/LOGO/LOGO.svg'%}"
+                style="z-index: 100; width: 60px"
+              />
+              <img
+                src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}"
+                style="z-index: 100"
+              />
+            </a>
+          </div>
+          <div style="margin: 0" class="rightprofile">
+            <div
+              class="hm"
+              style="
+                margin: 10px;
+                z-index: 100;
+                border-radius: 30px;
+                color: #ff002b;
+              "
+            >
+              {{request.user}}
+            </div>
 
-        <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user}}</div>
-      
-      <a style='z-index: 100;' href="/u/student/{{request.user.username}}">
-      
-      <img style='border-radius:1000px;width: 50px;height: 50px;margin:20px;'src={{request.user.user_student.student_propic.url}}>
-      </a> 
-      
-      
-      </div>
-    </div>
+            <a style="z-index: 100" href="/u/student/{{request.user.username}}">
+              <img
+                style="
+                  border-radius: 1000px;
+                  width: 50px;
+                  height: 50px;
+                  margin: 20px;
+                "
+                src="{{request.user.user_student.student_propic.url}}"
+              />
+            </a>
+          </div>
+        </div>
 
-    {% endif %}
-
-
-        
+        {% endif %}
 
         <div class="des">
-          <div class='welcome t' style="color:#0C1014;background: #ff002b;width: 95%;border-radius:30px">.{{data.0.BATCH.0.batch_description}}.</div>
-      </div>
+          <div
+            class="welcome t"
+            style="
+              color: #0c1014;
+              background: #ff002b;
+              width: 95%;
+              border-radius: 30px;
+            "
+          >
+            .{{data.0.BATCH.0.batch_description}}.
+          </div>
+        </div>
         <div class="mainBatch">
+          <img
+            style="height: 115px; width: 115px"
+            class="batchProfilePicture"
+            src="{% static 'IMAGE/media/BatchDefaults/'|add:data.0.BATCH.0.batch_year|add:'.png' %}"
+          />
 
-        <img style='height: 115px;width: 115px;' class="batchProfilePicture" src= "{% static 'IMAGE/media/BatchDefaults/'|add:data.0.BATCH.0.batch_year|add:'.png' %}">
-        
+          <div class="studentslist">
+            <div class="flexpropic">
+              <a href="/school/{{data.0.BATCH.0.School}}">
+                <img
+                  style="background: none"
+                  class="studentprofilePicture"
+                  src="{{data.0.BATCH.0.school_profilePicture}}"
+                />
+              </a>
 
-        <div class="studentslist">
-          <div class="flexpropic">
+              <div class="sep">|</div>
+              {% for i in data.0.BATCH.0.students_set.students_all %}
 
-          <a href='/school/{{data.0.BATCH.0.School}}'>
-            <img style="background:none;" class="studentprofilePicture" src={{data.0.BATCH.0.school_profilePicture}}>
-
-          </a>
-
-            <div class="sep">|</div>
-        {% for i in data.0.BATCH.0.students_set.students_all %}
-
-        <!-- <a href='/student/{{i.student_details.student_url}}'> -->
-          <!-- <div class="innerImg"> -->
-          <img style="background:none;cursor:pointer;" 
-          
-          onmouseenter='
+              <!-- <a href='/student/{{i.student_details.student_url}}'> -->
+              <!-- <div class="innerImg"> -->
+              <img
+                style="background: none; cursor: pointer"
+                onmouseenter='
           
           document.querySelector(".showname").innerHTML = "{{i.student_details.student_aka_name}}"
           document.querySelector(".showprofile").src = "{{i.student_details.student_profilePicture}}"
           document.querySelector(".showdesc").innerHTML = "{{i.student_details.student_description}}"
           
           '
-          onmouseleave='
+                onmouseleave='
           document.querySelector(".showname").innerHTML = "{{data.0.BATCH.0.School}}"
           document.querySelector(".showdesc").innerHTML = "{{data.0.BATCH.0.School_description}}"
           document.querySelector(".showprofile").src = "{{data.0.BATCH.0.school_profilePicture}}"
 
           '
-          src='{{i.student_details.student_profilePicture}}' value='{{i.student_details.student_name}}' class="studentprofilePicture {{i.student_details.student_name}}{{i.student_id}}">
-        <!-- </div> -->
-        <!-- </a> -->
-      <!-- </div> -->
-          {% endfor %}
-      </div>
+                src="{{i.student_details.student_profilePicture}}"
+                value="{{i.student_details.student_name}}"
+                class="studentprofilePicture {{i.student_details.student_name}}{{i.student_id}}"
+              />
+              <!-- </div> -->
+              <!-- </a> -->
+              <!-- </div> -->
+              {% endfor %}
+            </div>
+          </div>
 
-        </div>
-
-        <!-- <div class='welcome tt btx'>
+          <!-- <div class='welcome tt btx'>
         {% for i in data.0.BATCH.0.students_set.students_all %}
         <div class="studname{{i.student_id}}"></div>
         .{{i.student_details.student_name}}.
        
         {% endfor %}
       </div> -->
-     
-      <div class="mainMain">
-        <div class="leftMain">
-          <img class='welcome showprofile' src = '{{data.0.BATCH.0.school_profilePicture}}' style="padding:20px;width:200px;height:200px;font-size: 22px;border-radius:1000px;color:#FF002B">
-          <div class='welcome showname' style="padding: 5px;font-size: 22px;border-radius: 30px;width: 90%;height: 24px;background: #FF002B;color: #0c1014;">{{data.0.BATCH.0.School}}</div>
-          <div class='welcome showdesc' style="background:rgba(9, 12, 16, 0.75);margin:10px;padding: 5px;font-size: 22px;border-radius: 20px;width: 90%;border:none;color: #ff002b;">{{data.0.BATCH.0.School_description}}</div>
 
-        </div>
+          <div class="mainMain">
+            <div class="leftMain">
+              <img
+                class="welcome showprofile"
+                src="{{data.0.BATCH.0.school_profilePicture}}"
+                style="
+                  padding: 20px;
+                  width: 200px;
+                  height: 200px;
+                  font-size: 22px;
+                  border-radius: 1000px;
+                  color: #ff002b;
+                "
+              />
+              <div
+                class="welcome showname"
+                style="
+                  padding: 5px;
+                  font-size: 22px;
+                  border-radius: 30px;
+                  width: 90%;
+                  height: 24px;
+                  background: #ff002b;
+                  color: #0c1014;
+                "
+              >
+                {{data.0.BATCH.0.School}}
+              </div>
+              <div
+                class="welcome showdesc"
+                style="
+                  background: rgba(9, 12, 16, 0.75);
+                  margin: 10px;
+                  padding: 5px;
+                  font-size: 22px;
+                  border-radius: 20px;
+                  width: 90%;
+                  border: none;
+                  color: #ff002b;
+                "
+              >
+                {{data.0.BATCH.0.School_description}}
+              </div>
+            </div>
 
-        <div class="middleMain">
-          <form id="ajaxchatupdate" style="width:97%;" method="POST" >
-          </form>
-          <div class="chats">
+            <div class="middleMain">
+              <form id="ajaxchatupdate" style="width: 97%" method="POST"></form>
+              <div class="chats"></div>
+              <form id="msgSend" style="width: 100%" action="" method="POST">
+                {% csrf_token %}
+                <div class="middleMain-Chat">
+                  <input
+                    placeholder="Message {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} "
+                    style="width: 90%"
+                    type="text"
+                    name="msg"
+                    class="msg-batch"
+                  />
+                  <button
+                    value="Send"
+                    type="submit"
+                    name="msg-submit"
+                    class="msgsubmit"
+                  >
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
 
+            <!-- </div> -->
+            <div class="rightMain">
+              <div
+                class="welcome showname"
+                style="font-size: 22px; border-radius: 30px; color: #ff002b"
+              ></div>
+            </div>
           </div>
-          <form id='msgSend' style="width:100%" action="" method="POST" >
-            {% csrf_token %}
-              <div class="middleMain-Chat">
-            <input placeholder='Message {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} ' style='width: 90%;' type="text" name="msg" class="msg-batch">
-            <button value='Send'  type="submit" name="msg-submit" class="msgsubmit">Send</button>
-          </div>
-        </form>
-          </div>
-          
-        <!-- </div> -->
-        <div class="rightMain">
-          <div class='welcome showname' style="font-size: 22px;border-radius:30px;color:#FF002B"></div>
         </div>
       </div>
-        </div>
-
-      </div>
-
-
     </div>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>
+      $(document).ready(function () {
+        $(".img").click(function () {
+          $("select").simulate("mousedown");
+        });
+      });
 
-$(document).ready(function(){
+      window.addEventListener("load", function () {
+        $(".chats")
+          .stop()
+          .animate({ scrollTop: $(".chats")[0].scrollHeight }, 500);
+        displaymsg();
+      });
 
-$(".img").click(function(){
+      // <=====================Msg Send=====================> //
 
-    $("select").simulate('mousedown');
+      $("#msgSend").submit(function (e) {
+        $.ajax({
+          url: "/ajax/msg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}",
+          type: "POST",
+          dataType: "json",
+          data: $("#msgSend").serialize(),
+          async: true,
+          success: function (response) {
+            document.querySelector(".msg-batch").value = "";
+            $(".chats")
+              .stop()
+              .animate({ scrollTop: $(".chats")[0].scrollHeight }, 1000);
+          },
+        });
+        e.preventDefault();
+      });
 
-});
+      // <=====================Msg Display=====================> //
 
-});
+      let startint;
+      console.log(startint);
+      function displaymsg() {
+        startint = setInterval(function () {
+          // console.log(startint)
 
-window.addEventListener('load', function() {
-  $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 500);
-  displaymsg()
+          $.ajax({
+            url: "/ajax/showmsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}",
+            type: "GET",
+            dataType: "json",
+            async: true,
+            success: function (response) {
+              document.querySelector(".chats").innerHTML = "";
 
-})
-
-// <=====================Msg Send=====================> //
-
-$('#msgSend').submit(function(e){
-
-$.ajax({
-url: "/ajax/msg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}",
-type: "POST",
-dataType: 'json',
-data: $('#msgSend').serialize(),
-async: true,
-success: function(response){
-    
-    document.querySelector(".msg-batch").value ='';
-    $(".chats").stop().animate({ scrollTop: $(".chats")[0].scrollHeight}, 1000);
-
-}
-});
-e.preventDefault();
-});
-
-
-
-
-
-
-// <=====================Msg Display=====================> //
-
-let startint;
-console.log(startint)
-function displaymsg(){
-
-    startint = setInterval(function (){
-// console.log(startint)
-
-$.ajax({
-url: "/ajax/showmsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}",
-type: "GET",
-dataType: 'json',
-async: true,
-success: function(response){
-
-    document.querySelector(".chats").innerHTML=""
-    
-
-    for (const data of response.msgs.msgContent){
-
-    if(data.msgUser=='{{request.user}}'){
-      DateNEdit=''
-        if(data.msgEdit == true){
-          DateNEdit = '<div  class="chatTime {{data.msgid}}date">'+data.msgDate+' Edited*</div></div>'
-        }
-        else{
-          DateNEdit = '<div  class="chatTime {{data.msgid}}date">'+data.msgDate+'</div></div>'
-          
-        }
-      // console.log('document.querySelector(".updatechat'+String(data.msgid)+'").style.display="block")')
-      var subs = "document.querySelector('#ajaxchatupdate').style.display='block';"
-      var subsoff = 'console.log("clicked");document.querySelector(".updatechat'+String(data.msgid)+'").style.display="none";'
-    $('.chats').append(
-      
-
-    '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
-        "<div onclick='alterchat("+'"{{request.user}}",'+data.msgid+','+'"'+data.msgMsg+'"'+");' class='chatFlex' >"+
-      "<div  class='chatContainer' id='chatContainer' style='background:#0C1014;color:#ff002b;border:1px solid #ff002b;' >"+data.msgMsg+
-        '<div class="chatUser '+data.msgUser+'" style="display:block;color:#CC0022;">@'+data.msgUser+'</div>'+
-        '</div>'
-
-          
-        +DateNEdit+
-        '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img></div>'
-
-
-      
-    )
-    }else{
-      DateNEdit=''
-      isschool = ''
-        if(data.msgEdit == true){
-          DateNEdit = '<div  class="chatTimeLeft {{data.msgid}}date">*Edited '+data.msgDate+'</div></div>'
-        }
-        else{
-          DateNEdit = '<div  class="chatTimeLeft {{data.msgid}}date">'+data.msgDate+'</div></div>'
-          
-        }
-        // if('{{request.user.group.all.0.name}}'=='School'){
-        //   isschool='<img style="border-radius:100px;width:10px;height:10px;margin-top:30px;margin-right:60px;" src="{% static "IMAGE/LOGO/isschool.svg"%}"></img>'+'<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'
-        // }
-        // else{
-        //   isschool='<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'
-        // }
-      if(data.msgMsg.indexOf('@{{request.user.username}}') !== -1 || data.msgMsg.indexOf('@everyone') !== -1){
-        
-  $('.chats').append(
-        '<div style="border-radius:100px;width:100%;background:#13131C;"  class="chat-container-flex">'+
-
-      '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
-        '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'+
-        // '<img style="border-radius:100px;width:10px;height:10px;margin-top:30px;margin-right:60px;" src="{% static "IMAGE/LOGO/isschool.svg"%}"></img>'+
-        '<div class="chatFlexLeft" >'+
-      '<div class="chatContainerLeft"  >'+data.msgMsg+
-        '<div class="chatUserLeft">@'+data.msgUser+'</div></div>'+
-        DateNEdit+'</div></div>'
-
-        
-      )
-
-
-      }else{
-      $('.chats').append(
-      '<div  class="chat-container-flex">'+
-
-    '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">'+
-      '<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'+
-      '<div class="chatFlexLeft" >'+
-      '<div class="chatContainerLeft" >'+data.msgMsg+
-        '<div class="chatUserLeft">@'+data.msgUser+'</div></div>'+
-        DateNEdit+'</div></div>'
-
-      
-    )}
-    }
+              for (const data of response.msgs.msgContent) {
+                if (data.msgUser == "{{request.user}}") {
+                  DateNEdit = "";
+                  if (data.msgEdit == true) {
+                    DateNEdit =
+                      '<div  class="chatTime {{data.msgid}}date">' +
+                      data.msgDate +
+                      " Edited*</div></div>";
+                  } else {
+                    DateNEdit =
+                      '<div  class="chatTime {{data.msgid}}date">' +
+                      data.msgDate +
+                      "</div></div>";
+                  }
+                  // console.log('document.querySelector(".updatechat'+String(data.msgid)+'").style.display="block")')
+                  var subs =
+                    "document.querySelector('#ajaxchatupdate').style.display='block';";
+                  var subsoff =
+                    'console.log("clicked");document.querySelector(".updatechat' +
+                    String(data.msgid) +
+                    '").style.display="none";';
+                  $(".chats").append(
+                    '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">' +
+                      "<div onclick='alterchat(" +
+                      '"{{request.user}}",' +
+                      data.msgid +
+                      "," +
+                      '"' +
+                      data.msgMsg +
+                      '"' +
+                      ");' class='chatFlex' >" +
+                      "<div  class='chatContainer' id='chatContainer' style='background:#0C1014;color:#ff002b;border:1px solid #ff002b;' >" +
+                      data.msgMsg +
+                      '<div class="chatUser ' +
+                      data.msgUser +
+                      '" style="display:block;color:#CC0022;">@' +
+                      data.msgUser +
+                      "</div>" +
+                      "</div>" +
+                      DateNEdit +
+                      '<img style="border-radius:100px;width:45px;height:45px;" src="' +
+                      data.msgUserPfp +
+                      '"></img></div>'
+                  );
+                } else {
+                  DateNEdit = "";
+                  isschool = "";
+                  if (data.msgEdit == true) {
+                    DateNEdit =
+                      '<div  class="chatTimeLeft {{data.msgid}}date">*Edited ' +
+                      data.msgDate +
+                      "</div></div>";
+                  } else {
+                    DateNEdit =
+                      '<div  class="chatTimeLeft {{data.msgid}}date">' +
+                      data.msgDate +
+                      "</div></div>";
+                  }
+                  // if('{{request.user.group.all.0.name}}'=='School'){
+                  //   isschool='<img style="border-radius:100px;width:10px;height:10px;margin-top:30px;margin-right:60px;" src="{% static "IMAGE/LOGO/isschool.svg"%}"></img>'+'<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'
+                  // }
+                  // else{
+                  //   isschool='<img style="border-radius:100px;width:45px;height:45px;" src="'+data.msgUserPfp+'"></img>'
+                  // }
+                  if (
+                    data.msgMsg.indexOf("@{{request.user.username}}") !== -1 ||
+                    data.msgMsg.indexOf("@everyone") !== -1
+                  ) {
+                    $(".chats").append(
+                      '<div style="border-radius:100px;width:100%;background:#13131C;"  class="chat-container-flex">' +
+                        '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">' +
+                        '<img style="border-radius:100px;width:45px;height:45px;" src="' +
+                        data.msgUserPfp +
+                        '"></img>' +
+                        // '<img style="border-radius:100px;width:10px;height:10px;margin-top:30px;margin-right:60px;" src="{% static "IMAGE/LOGO/isschool.svg"%}"></img>'+
+                        '<div class="chatFlexLeft" >' +
+                        '<div class="chatContainerLeft"  >' +
+                        data.msgMsg +
+                        '<div class="chatUserLeft">@' +
+                        data.msgUser +
+                        "</div></div>" +
+                        DateNEdit +
+                        "</div></div>"
+                    );
+                  } else {
+                    $(".chats").append(
+                      '<div  class="chat-container-flex">' +
+                        '<div style="margin:5px;display:flex;flex-direction: row;align-items: center;justify-content: center;" class="chat-container">' +
+                        '<img style="border-radius:100px;width:45px;height:45px;" src="' +
+                        data.msgUserPfp +
+                        '"></img>' +
+                        '<div class="chatFlexLeft" >' +
+                        '<div class="chatContainerLeft" >' +
+                        data.msgMsg +
+                        '<div class="chatUserLeft">@' +
+                        data.msgUser +
+                        "</div></div>" +
+                        DateNEdit +
+                        "</div></div>"
+                    );
+                  }
+                }
+              }
+              $(".chats").append(
+                "<div class='chatinfoflex'><div class='Chatinfo'>---Welcome {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} Batch , Chat to Begin..!!---</div></div>"
+              );
+            },
+          });
+        }, 1000);
       }
-      $('.chats').append(
+      function stopInt() {
+        clearInterval(startint);
+      }
 
-        "<div class='chatinfoflex'><div class='Chatinfo'>---Welcome {{data.0.BATCH.0.School}}-{{data.0.BATCH.0.batch_year}} Batch , Chat to Begin..!!---</div></div>"
+      function alterchat(user, msgid, msg) {
+        console.log(user + " " + msgid);
+        document.querySelector("#ajaxchatupdate").innerHTML = "";
+        $("#ajaxchatupdate").append(
+          "{% csrf_token %}" +
+            '<div  class="updatechat" style="    background: none;display: flex;align-items: center;">' +
+            '<input name="uchat" type="text" value="' +
+            msg +
+            '">' +
+            ' <div class="updatechatbtn">' +
+            ' <button onclick="updatemsg(' +
+            "'" +
+            user +
+            "'," +
+            msgid +
+            ')" style="border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Fira Code;font-size: 13px;" id="updatebtn' +
+            String(msgid) +
+            '" value="->"><i class="material-icons">refresh</i></button>' +
+            "<button onclick='emptyAlter();return false;' class='closebtn' style='border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Montserrat;font-size: 15px;'>X</button>" +
+            '<button onclick="deletechat(' +
+            "'" +
+            user +
+            "'," +
+            msgid +
+            ')"  class="closebtn" style="border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Montserrat;font-size: 15px;"><i class="material-icons">delete</i></button>' +
+            "</div></div>"
+        );
+      }
 
-      )
-}
-});
+      function updatemsg(user, msgid) {
+        console.log("#ajaxchatupdate" + String(msgid));
 
+        $.ajax({
+          url:
+            "/ajax/updatemsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}/" +
+            String(user) +
+            "/" +
+            String(msgid),
+          type: "POST",
+          dataType: "json",
+          data: $("#ajaxchatupdate").serialize(),
+          async: true,
+          success: function (response) {
+            console.log(response);
 
-},1000);
+            console.log(startint);
+            emptyAlter();
+          },
+        });
 
+        event.preventDefault();
+      }
+      function deletechat(user, msgid) {
+        console.log("#ajaxchatupdate" + String(msgid));
+        $.ajax({
+          url:
+            "/ajax/deletemsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}/" +
+            String(user) +
+            "/" +
+            String(msgid),
+          type: "POST",
+          dataType: "json",
+          data: $("#ajaxchatupdate").serialize(),
+          async: true,
+          success: function (response) {
+            console.log(response);
 
+            console.log(startint);
+            emptyAlter();
+          },
+        });
 
-};
-function stopInt(){
-  clearInterval(startint)
+        event.preventDefault();
+      }
 
-};
+      function emptyAlter() {
+        return (document.querySelector("#ajaxchatupdate").innerHTML = "");
+      }
+      function myFunction(x) {
+        if (x.matches) {
+          document.querySelector(".msgsubmit").innerHTML = "->";
+        } else {
+          document.querySelector(".msgsubmit").innerHTML = "Send";
+        }
+      }
+      // function startintetval() {
+      //   startinterval = setInterval(displayMsg, 1000);
+      // }
 
-
-function alterchat(user,msgid,msg){
-  console.log(user+' '+msgid)
-  document.querySelector("#ajaxchatupdate").innerHTML =''
-  $('#ajaxchatupdate').append(
-        '{% csrf_token %}'+
-        '<div  class="updatechat" style="    background: none;display: flex;align-items: center;">'+
-        '<input name="uchat" type="text" value="'+msg+'">'+
-       ' <div class="updatechatbtn">'+
-         ' <button onclick="updatemsg('+"'"+user+"',"+msgid+')" style="border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Fira Code;font-size: 13px;" id="updatebtn'+String(msgid)+'" value="->"><i class="material-icons">refresh</i></button>'+
-        "<button onclick='emptyAlter();return false;' class='closebtn' style='border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Montserrat;font-size: 15px;'>X</button>"+
-        '<button onclick="deletechat('+"'"+user+"',"+msgid+')"  class="closebtn" style="border-radius:100px;width:30px;height:30px;font-weight: 600;font-family:Montserrat;font-size: 15px;"><i class="material-icons">delete</i></button>'
-        +"</div></div>"
-  )
-}
-
-function updatemsg(user,msgid){
-  console.log('#ajaxchatupdate'+String(msgid))
-
-
-  
-$.ajax({
-url: "/ajax/updatemsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}/"+String(user)+"/"+String(msgid),
-type: "POST",
-dataType: 'json',
-data: $('#ajaxchatupdate').serialize(),
-async: true,
-success: function(response){
-  console.log(response)
-
-  console.log(startint)
-  emptyAlter()
-  
-}
-});
-
-event.preventDefault();
-
-
-
-}
-function deletechat(user,msgid){
-  console.log('#ajaxchatupdate'+String(msgid))
-$.ajax({
-url: "/ajax/deletemsg/{{data.0.BATCH.0.School}}/{{data.0.BATCH.0.batch_url}}/"+String(user)+"/"+String(msgid),
-type: "POST",
-dataType: 'json',
-data: $('#ajaxchatupdate').serialize(),
-async: true,
-success: function(response){
-  console.log(response)
-
-  console.log(startint)
-  emptyAlter()
-}
-});
-
-
-event.preventDefault();
-
-
-
-}
-
-function emptyAlter(){
-  return document.querySelector("#ajaxchatupdate").innerHTML =''
-}
-function myFunction(x) {
-  if (x.matches) { 
-    document.querySelector('.msgsubmit').innerHTML="->"
-  } else {
-    document.querySelector('.msgsubmit').innerHTML="Send"
-  }
-}
-// function startintetval() {
-//   startinterval = setInterval(displayMsg, 1000);
-// }
-
-
-var x = window.matchMedia("(max-width: 618px)")
-myFunction(x) // Call listener function at run time
-x.addListener(myFunction)
+      var x = window.matchMedia("(max-width: 618px)");
+      myFunction(x); // Call listener function at run time
+      x.addListener(myFunction);
     </script>
-</body>
+  </body>
 </html>
-
-

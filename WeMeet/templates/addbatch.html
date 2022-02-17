@@ -1,63 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     {% load static %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="{% static 'IMAGE/LOGO/LOGO.svg' %}">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'IMAGE/LOGO/LOGO.svg' %}"
+    />
 
-    <link href="{% static 'CSS/Home_custom.css'%}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'CSS/school.css'%}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'CSS/overwrite_webkit.css'%}" rel="stylesheet" type="text/css" />
+    <link
+      href="{% static 'CSS/Home_custom.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'CSS/school.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'CSS/overwrite_webkit.css'%}"
+      rel="stylesheet"
+      type="text/css"
+    />
 
     <title>Add Batch</title>
-</head>
-<body style='margin:0px;'>
+  </head>
+  <body style="margin: 0px">
     {% include "bgone.html" %}
     <div class="container">
+      <div style="padding-top: 14px; justify-content: center" class="navi">
+        <!-- <button style='margin-top: 21px;;' onclick="window.location.href='/update/{{request.user.id}}/{{request.user.user_school.school_url}}'">UPDATE</button> -->
 
-
-
-        <div style='padding-top:14px;justify-content: center;' class="navi">
-            
-            <!-- <button style='margin-top: 21px;;' onclick="window.location.href='/update/{{request.user.id}}/{{request.user.user_school.school_url}}'">UPDATE</button> -->
-
-
-
-
-            <div class="div-img" style="z-index:100;padding-top: 18px;">
-                <a class='logoflex' href="/" style="z-index:100">
-                    <img src="{% static 'IMAGE/LOGO/LOGO.svg'%}" style='z-index:100;     margin-top: -18px; margin-right: 12px;   width: 60px;'>
-                 <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100; margin-top:-18px;'>
-            </a>
-          </div>
-
-
-          <!-- <button style='margin-top: 21px;;'onclick="window.location.href='/logout'">LOGOUT</button> -->
+        <div class="div-img" style="z-index: 100; padding-top: 18px">
+          <a class="logoflex" href="/" style="z-index: 100">
+            <img
+              src="{% static 'IMAGE/LOGO/LOGO.svg'%}"
+              style="
+                z-index: 100;
+                margin-top: -18px;
+                margin-right: 12px;
+                width: 60px;
+              "
+            />
+            <img
+              src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}"
+              style="z-index: 100; margin-top: -18px"
+            />
+          </a>
         </div>
 
-        {% for message in messages %}
-        <error style='width: 100%;' class='error_auth'>{{message}}</error>
-        {% endfor %}
+        <!-- <button style='margin-top: 21px;;'onclick="window.location.href='/logout'">LOGOUT</button> -->
+      </div>
 
-        <div class="inputs">
+      {% for message in messages %}
+      <error style="width: 100%" class="error_auth">{{message}}</error>
+      {% endfor %}
 
-            <form style='display: flex;flex-direction: column;align-items: center;' action="/addBatch/{{request.user.username}}" method="POST">
-                {% csrf_token %}
-                <input type="text" name="noofbatch" placeholder="No.Of Batches" id="">
-                <input type="text" name="std" placeholder="STD" id="">
-                <input type="text" name="from" placeholder="From" id="">
-                <input type="text" name="Strength" placeholder="Strength" id="">
-                <input type="text" name="Description" placeholder="Description" id="">
-                <button type="submit" value="Add Batches">Add Batches</button>
-
-
-            </form>
-
-        </div>
-
-
+      <div class="inputs">
+        <form
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* border: 1px #ff002b solid; */
+            /* border-radius: 30px; */
+            border: none;
+            border-radius: 30px;
+            z-index: 100;
+            margin: 10px;
+            background: rgba(4, 7, 11, 0.25);
+            /* border: 0.82797px solid #D41341; */
+            box-sizing: border-box;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* transform: translate(0%, 169%); */
+            align-content: center;
+          "
+          action="/addBatch/{{request.user.username}}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <input
+            type="text"
+            name="noofbatch"
+            placeholder="No.Of Batches"
+            id=""
+          />
+          <input type="text" name="std" placeholder="STD" id="" />
+          <input type="text" name="from" placeholder="From" id="" />
+          <input type="text" name="Strength" placeholder="Strength" id="" />
+          <input
+            type="text"
+            name="Description"
+            placeholder="Description"
+            id=""
+          />
+          <button type="submit" value="Add Batches">Add Batches</button>
+        </form>
+      </div>
     </div>
-</body>
+  </body>
 </html>

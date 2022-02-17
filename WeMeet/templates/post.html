@@ -52,6 +52,28 @@
         position: absolute;
         left: 80%;
     }
+
+    @media screen and (max-width: 980px) {
+
+        .media{
+            width: 80%;
+        }
+        .mediacont{
+            flex-direction: column;
+        }
+        .medialikes{
+            margin-left: 0px;
+            margin-top: 15px;
+            width: 35px;
+            height: 35px;
+            line-height: 38px;
+            border-radius: 9px;
+        }
+        .mediadesc{
+            width: 90%;
+        }
+
+    }
 </style>
 <body>
 
@@ -71,7 +93,7 @@
            <img src="{% static 'IMAGE/LOGO/WeMeet_text_inverted.svg'%}" style='z-index:100;'>
       </a>
     </div>
-    <div style='margin:0;' class="rightprofile">
+    <div style='margin:0;' class="rightprofilepost">
 
       <div class='hm' style="margin: 10px;z-index: 100;border-radius:30px;color:#FF002B">{{request.user }}</div>
     
