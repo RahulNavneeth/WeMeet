@@ -99,14 +99,7 @@
           </div>
         </div>
         {% elif request.user.groups.all.0.name == "Student" %}
-        <div class="navi">
-          <button
-            style="margin-top: 21px; visibility: hidden"
-            onclick="window.location.href='/batchupdate/{{request.user}}/{{data.0.BATCH.0.batch_url}}'"
-          >
-            UPDATE
-          </button>
-
+        <div style="justify-content: center" class="navi">
           <div class="div-img" style="z-index: 100; padding-top: 18px">
             <a class="logoflex" href="/" style="z-index: 100">
               <img
@@ -196,7 +189,6 @@
           document.querySelector(".showname").innerHTML = "{{data.0.BATCH.0.School}}"
           document.querySelector(".showdesc").innerHTML = "{{data.0.BATCH.0.School_description}}"
           document.querySelector(".showprofile").src = "{{data.0.BATCH.0.school_profilePicture}}"
-
           '
                 src="{{i.student_details.student_profilePicture}}"
                 value="{{i.student_details.student_name}}"
@@ -263,7 +255,14 @@
             </div>
 
             <div class="middleMain">
-              <form id="ajaxchatupdate" style="width: 97%" method="POST"></form>
+              <form id="ajaxchatupdate" style="width: 97%" method="POST">
+                {% csrf_token %}
+                <div
+                  id="ajaxchatupdateCont"
+                  style="width: 97%"
+                  method="POST"
+                ></div>
+              </form>
               <div class="chats"></div>
               <form id="msgSend" style="width: 100%" action="" method="POST">
                 {% csrf_token %}
@@ -465,10 +464,9 @@
 
       function alterchat(user, msgid, msg) {
         console.log(user + " " + msgid);
-        document.querySelector("#ajaxchatupdate").innerHTML = "";
-        $("#ajaxchatupdate").append(
-          "{% csrf_token %}" +
-            '<div  class="updatechat" style="    background: none;display: flex;align-items: center;">' +
+        document.querySelector("#ajaxchatupdateCont").innerHTML = "";
+        $("#ajaxchatupdateCont").append(
+          '<div  class="updatechat" style="    background: none;display: flex;align-items: center;">' +
             '<input name="uchat" type="text" value="' +
             msg +
             '">' +
@@ -539,7 +537,7 @@
       }
 
       function emptyAlter() {
-        return (document.querySelector("#ajaxchatupdate").innerHTML = "");
+        return (document.querySelector("#ajaxchatupdateCont").innerHTML = "");
       }
       function myFunction(x) {
         if (x.matches) {
