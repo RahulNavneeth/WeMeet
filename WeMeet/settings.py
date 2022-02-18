@@ -17,7 +17,7 @@ SECRET_KEY = '$45r&4hj_$@u1vm&ts#itdgoln78rxf69c%7^j1-s3p)5b_*hy'
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['wemeet-app.herokuapp.com', '192.168.0.4', 'localhost']
+ALLOWED_HOSTS = ['wemeet-app.herokuapp.com','wemeet-web.herokuapp.com', '192.168.0.4', 'localhost']
 
 
 # Application definition
